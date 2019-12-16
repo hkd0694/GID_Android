@@ -4,9 +4,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="304dp"
+    android:background="#ffffff"
     android:layout_height="128dp"
+    android:orientation="vertical"
     tools:context=".activity.PopupActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="64dp">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue_grey"
+            android:text="지난 학습에 이어 학습 하시겠어요?"
+            />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/cancel_light"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/popup_cancel"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <Button
+            android:layout_width="176dp"
+            android:layout_height="64dp"
+            android:text="처음부터 다시 풀기"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:background="#ffffff"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue_grey"
+            android:id="@+id/popup_reset"
+            />
+
+        <Button
+            android:layout_width="128dp"
+            android:layout_height="64dp"
+            android:text="이어서 풀기"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:background="#ffffff"
+            android:textColor="#008994"
+            android:id="@+id/popup_ing"
+            />
+
+    </LinearLayout>
 
 
 </LinearLayout>

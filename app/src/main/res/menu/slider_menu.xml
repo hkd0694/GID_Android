@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+        <item
+            android:id="@+id/script"
+            android:icon="@drawable/star_filled"
+            android:title="스트랩한 문제 보기"></item>
+        <item
+            android:id="@+id/middle"
+            android:icon="@drawable/document_filled"
+            android:title="중간정리 보기"></item>
+
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/pencil"
+            android:title="시험일정 세팅하기"></item>
+        <item
+            android:id="@+id/start"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="문제 초기화 하기"></item>
+</menu>

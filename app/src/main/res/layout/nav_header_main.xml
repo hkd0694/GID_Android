@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="311dp"
+    android:layout_margin="4dp"
+    android:layout_height="56dp">
+
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:src="@drawable/cancel"
+        />
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:src="@drawable/home"
+        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:layout_height="48dp" />
+
+</LinearLayout>
