@@ -1,4 +1,4 @@
-package com.example.goindol_java.Activity;
+package com.example.goindol_java.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.example.goindol_java.MainActivity;
 import com.example.goindol_java.R;
 
 public class SplashActivity extends Activity {

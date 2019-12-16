@@ -1,18 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/light_blue_grey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="296dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="14dp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/dark_blue_grey"
+        android:lineSpacingExtra="3sp"
+        android:text="한국사능력검정시험을 공부합니다.
+        어느 시대를 공부할까요?"
+        android:textSize="18dp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="34dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="기원과 형성"
+            android:id="@+id/origin_formation"
+            />
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="고대사회"
+            android:id="@+id/ancient_society"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="34dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="고려시대"
+            android:id="@+id/goryeo_dynasty"
+            />
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="조선전기"
+            android:id="@+id/joseon_before"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="34dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="조선후기"
+            android:id="@+id/joseon_after"
+            />
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="근대 개화"
+            android:id="@+id/modern"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="34dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="일제 강점기"
+            android:id="@+id/occupation_period"
+            />
+
+        <Button
+            android:layout_width="123dp"
+            android:layout_height="69dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_green_blue"
+            android:text="현대"
+                android:id="@+id/modern_times"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="69dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="34dp"
+        android:text="랜덤"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/dark_green_blue"
+        android:id="@+id/random"
+        />
+
+</LinearLayout>
