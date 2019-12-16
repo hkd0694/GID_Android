@@ -9,23 +9,39 @@
     android:id="@+id/toolbar">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         >
+
+        <ImageButton
+            android:id="@+id/toolbar_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_gravity="left"
+            android:background="@color/light_blue_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginTop="17dp"
             android:layout_marginBottom="17dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="73dp"
+            android:layout_gravity="center"
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
             android:textColor="@color/pastel_red"
             android:gravity="center_horizontal"
-            android:text="시험 2019년 12월 21일"
+            android:text="시험 일정을 기록해 보세요."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,32 +49,17 @@
 
         <ImageButton
             android:id="@+id/navibutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="24dp"
+            android:layout_height="56dp"
+            android:layout_gravity="right"
             android:background="@color/light_blue_grey"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu" />
 
-        <ImageButton
-            android:id="@+id/toolbar_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/light_blue_grey"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </androidx.appcompat.widget.Toolbar>

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="304dp"
-    android:background="#ffffff"
     android:layout_height="128dp"
-    android:orientation="vertical"
-    tools:context=".activity.PopupActivity">
+    android:background="@drawable/button_radius"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,8 +41,8 @@
             android:layout_height="64dp"
             android:text="처음부터 다시 풀기"
             android:textSize="16sp"
+            android:background="@drawable/button_radius"
             android:fontFamily="sans-serif"
-            android:background="#ffffff"
             android:textStyle="normal"
             android:textColor="@color/dark_blue_grey"
             android:id="@+id/popup_reset"
@@ -54,11 +51,11 @@
         <Button
             android:layout_width="128dp"
             android:layout_height="64dp"
-            android:text="이어서 풀기"
+            android:text="이어서 진행"
             android:textSize="16sp"
+            android:background="@drawable/button_radius"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
-            android:background="#ffffff"
             android:textColor="#008994"
             android:id="@+id/popup_ing"
             />

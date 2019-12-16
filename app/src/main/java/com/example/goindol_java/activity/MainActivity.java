@@ -10,11 +10,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.Period;
@@ -28,6 +28,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String period_data = "PERIOD";
+
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton btnShowNavigationDrawer;
     private ImageButton navi_cancel;
     private ImageButton navi_home;
+    private ImageButton toolbar_cancel;
+
+    private TextView text;
 
     private Button origin_formation;
     private Button ancient_society;
@@ -49,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
     private List<Period> list = new ArrayList<>();
     private SharedPreferences prefs;
     private Gson gson = new Gson();
+    private Period period;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        text = findViewById(R.id.text_area);
+        text.setText("한국사능력검정시험을 공부합니다.\n" + "어느 시대를 공부할까요?");
         settingapp_bar();
         navi_header_click();
         init();
@@ -63,17 +71,13 @@ public class MainActivity extends AppCompatActivity {
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         // 변환
         list = gson.fromJson(data, listType);
-        /*for(Period period : list){
-            Log.e("Start",period.getPeriodic() + " : " + period.getPeriod_data().size());
-        }*/
     }
 
     private void settingapp_bar(){
         toolbar = findViewById(R.id.toolbarInclude);
         setSupportActionBar(toolbar);
-        //여기서 setContentView로 설정되어있는건 activity_main이므로
-        //toolbar에 구현해둔 컴포넌트를 findViewById로 가져오기위해
-        //toolbar.findViewById로 찾아준다
+        toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
+        toolbar_cancel.setVisibility(View.GONE);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -151,71 +155,93 @@ public class MainActivity extends AppCompatActivity {
         occupation_period = findViewById(R.id.occupation_period);
     }
 
+    //여기만 수정하면 댐;
+    private void shared_check(String name){
+        int index = 0;
+        switch (name) {
+            case "기원과 형성":     period = list.get(0); index = 0; break;
+            case "고대사회":        period = list.get(1); index = 1; break;
+            case "고려시대":        period = list.get(2); index = 2; break;
+            case "조선전기":        period = list.get(3); index = 3; break;
+            case "조선후기":        period = list.get(4); index = 4; break;
+            case "근대 개화":       period = list.get(5); index = 5; break;
+            case "일제 강점기":     period = list.get(6); index = 6;break;
+            case "현대":            period = list.get(7); index = 7; break;
+            case "랜덤":            period = list.get(8); index = 8; break;
+        }
+        Intent intent;
+        if(period.getPeriod_data().size() == 0) {
+            intent = new Intent(getApplicationContext(),LearnActivity.class);
+        } else {
+            intent = new Intent(getApplicationContext(),PopupActivity.class);
+        }
+        intent.putExtra(period_data,period.getPeriodic() + " " + index);
+        startActivity(intent);
+    }
+
     //시대별 버튼 클릭시 발생하는 리스너들
     private void click_event(){
 
         origin_formation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),PopupActivity.class);
-                intent.putExtra("name",origin_formation.getText().toString());
-                startActivity(intent);
+                shared_check(origin_formation.getText().toString());
             }
         });
 
         ancient_society.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(ancient_society.getText().toString());
             }
         });
 
         goryeo_dynasty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(goryeo_dynasty.getText().toString());
             }
         });
 
         joseon_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(joseon_before.getText().toString());
             }
         });
 
         joseon_after.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(joseon_after.getText().toString());
             }
         });
 
         modern.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(modern.getText().toString());
             }
         });
 
         occupation_period.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(occupation_period.getText().toString());
             }
         });
 
         modern_times.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(modern_times.getText().toString());
             }
         });
 
         random.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                shared_check(random.getText().toString());
             }
         });
     }
