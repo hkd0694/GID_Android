@@ -16,6 +16,7 @@ public class PopupActivity extends Activity {
     private ImageView imageView;
     private Button popup_reset;
     private Button popup_ing;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class PopupActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_popup);
+        name = getIntent().getStringExtra("name");
 
         imageView = findViewById(R.id.popup_cancel);
         popup_reset = findViewById(R.id.popup_reset);
@@ -39,6 +41,7 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),LearnActivity.class);
+                intent.putExtra("name",name);
                 startActivity(intent);
                 finish();
             }

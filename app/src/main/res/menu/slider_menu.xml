@@ -16,7 +16,7 @@
             android:icon="@drawable/pencil"
             android:title="시험일정 세팅하기"></item>
         <item
-            android:id="@+id/start"
+                    android:id="@+id/initial"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="문제 초기화 하기"></item>
 </menu>

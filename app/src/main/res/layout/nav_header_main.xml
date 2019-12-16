@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="311dp"
+    android:background="#ffffff"
     android:layout_margin="4dp"
     android:layout_height="56dp">
 
@@ -10,6 +11,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="#ffffff"
+        android:id="@+id/navi_cancel"
         android:layout_gravity="center"
         android:src="@drawable/cancel"
         />
@@ -19,6 +21,7 @@
         android:src="@drawable/home"
         android:background="#ffffff"
         android:layout_gravity="center"
+        android:id="@+id/navi_home"
         android:layout_height="48dp" />
 
 </LinearLayout>
