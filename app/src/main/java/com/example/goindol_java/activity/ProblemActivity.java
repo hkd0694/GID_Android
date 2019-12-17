@@ -31,7 +31,7 @@ public class ProblemActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
     private ImageButton btnShowNavigationDrawer;
-    
+
     private ImageButton navi_cancel;
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
@@ -113,13 +113,13 @@ public class ProblemActivity extends AppCompatActivity {
 
     private void setUpDrawerContent(NavigationView navi){
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            switch (item.getItemId()){
-                                case R.id.script :
-                                    break;
-                                case R.id.setting:
-                                    break;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.script :
+                        break;
+                    case R.id.setting:
+                        break;
                     case R.id.middle:
                         break;
                     case R.id.initial:
