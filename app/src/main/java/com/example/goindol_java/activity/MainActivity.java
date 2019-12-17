@@ -1,6 +1,7 @@
 package com.example.goindol_java.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +23,14 @@ import com.example.goindol_java.data.Period;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
 
     public static final String period_data = "PERIOD";
 
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private Gson gson = new Gson();
     private Period period;
+    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,27 +71,52 @@ public class MainActivity extends AppCompatActivity {
         navi_header_click();
         init();
         click_event();
+        AutoPermissions.Companion.loadAllPermissions(this, 101);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this,requestCode,permissions,this);
+    }
+
+    @Override
+    public void onGranted(int i, String[] strings) {
+
+    }
+
+    @Override
+    public void onDenied(int i, String[] strings) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e("Start","resume()");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        String data = prefs.getString(SplashActivity.SETTINGS_PLAYER,null);
+        data = prefs.getString(SplashActivity.SETTINGS_PLAYER,null);
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         // 변환
         list = gson.fromJson(data, listType);
+        super.onResume();
     }
 
+    //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.toolbarInclude);
+        toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.GONE);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.main_drawerlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.design_navigation_view);
+        navigationView = findViewById(R.id.main_navigation);
         setUpDrawerContent(navigationView);
     }
 
+    //Navigation 버튼 클릭시 발생하는 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -98,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
     private void navi_header_click(){
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
@@ -119,8 +150,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setUpDrawerContent(NavigationView navigationView){
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+    //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
+    private void setUpDrawerContent(NavigationView navi){
+        navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
@@ -175,13 +207,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             intent = new Intent(getApplicationContext(),PopupActivity.class);
         }
-        intent.putExtra(period_data,period.getPeriodic() + " " + index);
+        intent.putExtra(period_data,period.getPeriodic() + "," + index);
         startActivity(intent);
     }
 
     //시대별 버튼 클릭시 발생하는 리스너들
     private void click_event(){
-
         origin_formation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,6 +276,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //뒤로 가기 버튼 막음
 
     @Override
     public void onBackPressed() {

@@ -1,5 +1,12 @@
 package com.example.goindol_java.activity;
 
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,18 +14,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
 import com.example.goindol_java.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class LearnActivity extends AppCompatActivity {
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+public class ProblemActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -29,53 +35,38 @@ public class LearnActivity extends AppCompatActivity {
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
-    private String name;
-    private TextView textView;
-    private Button learn_cancel;
-    private Button learn_start;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
+        setContentView(R.layout.activity_problem);
         settingapp_bar();
         navi_header_click();
-        name = getIntent().getStringExtra(MainActivity.period_data);
-        textView = findViewById(R.id.learn_text);
-        learn_cancel = findViewById(R.id.learn_cancel);
-        learn_start = findViewById(R.id.learn_start);
-
-        textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
-
-        learn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        learn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //학습 시작.
-                Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        Log.e("Start","Activitiy 호출()");
+        try {
+            InputStream is;
+            AssetManager assetManager = getAssets();
+            is = assetManager.open("goindol.xls");
+            POIFSFileSystem poif = new POIFSFileSystem(is);
+            HSSFWorkbook hss = new HSSFWorkbook(poif);
+            HSSFSheet sh = hss.getSheetAt(0);
+            Log.e("Start",sh.getSheetName() + " 시트 이름");
+            Log.e("Start","여기 안와");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.learn_toolbar);
+        toolbar = findViewById(R.id.pro_toolbar);
         setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.learn_drawerlayout);
+        drawerLayout = findViewById(R.id.pro_drawlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.learn_navigation);
+        navigationView = findViewById(R.id.pro_navigation);
         setUpDrawerContent(navigationView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
@@ -121,13 +112,13 @@ public class LearnActivity extends AppCompatActivity {
 
     private void setUpDrawerContent(NavigationView navi){
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.script :
-                        break;
-                    case R.id.setting:
-                        break;
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            switch (item.getItemId()){
+                                case R.id.script :
+                                    break;
+                                case R.id.setting:
+                                    break;
                     case R.id.middle:
                         break;
                     case R.id.initial:
@@ -140,10 +131,5 @@ public class LearnActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle setUpActionBarToggle(){
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
-    }
-
-    @Override
-    public void onBackPressed() {
-        return;
     }
 }

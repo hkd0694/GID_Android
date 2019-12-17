@@ -56,6 +56,7 @@ public class PopupActivity extends Activity {
         popup_reset = findViewById(R.id.popup_reset);
         popup_ing = findViewById(R.id.popup_ing);
 
+        //X 표시를 누를 시 popupActivity 종료
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,10 +64,11 @@ public class PopupActivity extends Activity {
             }
         });
 
+        //popup중 처음부터 다시 풀기 누를 시 저장되어 있는 문제들 초기화 해서 LearnActivity로 넘겨줌 (처음 문제 풀 때랑 동일하게)
         popup_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.get(Integer.parseInt(intent_name.split(" ")[1])).setPeriod_data(excelProblems);
+                list.get(Integer.parseInt(intent_name.split(",")[1])).setPeriod_data(excelProblems);
                 Gson gson1  = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -75,13 +77,16 @@ public class PopupActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(),LearnActivity.class);
                 intent.putExtra(period_data,intent_name);
                 startActivity(intent);
+                finish();
             }
         });
 
+        //popup중 이어서 진행버튼을 누를 시 발생하는 리스너, 마지막 문제를 기억하여 그 문제를 보여주면 됨!!!
         popup_ing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //마지막으로 진행한 문제!!
+
             }
         });
 

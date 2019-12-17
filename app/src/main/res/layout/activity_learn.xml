@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
+    android:id="@+id/learn_drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -11,39 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_blue_grey"
-        android:id="@+id/linearlayout"
         android:orientation="vertical"
         >
 
         <include
             layout="@layout/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbarInclude" />
+            android:layout_height="56dp"
+            android:id="@+id/learn_toolbar" />
 
         <TextView
-            android:layout_width="296dp"
+            android:layout_width="350dp"
             android:layout_height="56dp"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/learn_text"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginBottom="14dp"
+            android:textSize="18sp"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
             android:textColor="@color/dark_blue_grey"
             android:lineSpacingExtra="3sp"
-            android:textSize="18dp"
             />
 
         <LinearLayout
-            android:layout_width="314dp"
-            android:layout_height="276dp"
-            android:layout_marginLeft="24dp"
-            android:background="#ffffff"
-            android:layout_marginRight="22dp"
+            android:layout_width="361dp"
+            android:layout_height="337dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="27.6dp"
+            android:background="@drawable/button_radius"
+            android:layout_marginRight="25.4dp"
             android:orientation="vertical"
             >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/learn_image"
+                />
 
         </LinearLayout>
 
@@ -60,30 +65,46 @@
                 android:textSize="16sp"
                 android:id="@+id/learn_cancel"
                 android:textColor="@color/dark_blue_grey"
-                android:background="#e8e8e8"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="12dp"
-                android:text="뒤로가기"
+                android:background="@drawable/back"
+                android:layout_marginLeft="35.6dp"
+                android:layout_marginRight="36.4dp"
                 />
 
             <Button
                 android:layout_width="196dp"
                 android:layout_height="48dp"
+                android:layout_marginRight="40dp"
                 android:textSize="16sp"
                 android:id="@+id/learn_start"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="normal"
-                android:background="@color/dark_green_blue"
                 android:textColor="@color/white"
-                android:text="학습 시작하기"
+                android:background="@drawable/confirm_android"
                 />
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/android"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/design_navigation_view"
+        android:id="@+id/learn_navigation"
         android:layout_gravity="end"
         android:background="#ffffff"
         android:fitsSystemWindows="true"
