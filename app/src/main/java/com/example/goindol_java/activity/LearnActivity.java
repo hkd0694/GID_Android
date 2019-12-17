@@ -59,6 +59,7 @@ public class LearnActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //학습 시작.
                 Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
+                intent.putExtra(MainActivity.period_data,name);
                 startActivity(intent);
                 finish();
             }

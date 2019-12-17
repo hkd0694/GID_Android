@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     >
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:orientation="vertical"
             >
 
@@ -71,7 +68,7 @@
                     
                 </LinearLayout>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -89,13 +86,14 @@
                         android:lineSpacingExtra="7sp"
                         />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:gravity="center"
                     >
 
@@ -125,6 +123,8 @@
                     android:layout_width="379dp"
                     android:layout_height="29dp"
                     android:layout_marginBottom="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_blue_grey"
                     android:id="@+id/pro_radio1"
                     android:background="@drawable/button_radius"
                     />
@@ -133,6 +133,8 @@
                     android:layout_width="379dp"
                     android:layout_height="29dp"
                     android:layout_marginBottom="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_blue_grey"
                     android:id="@+id/pro_radio2"
                     android:background="@drawable/button_radius"
                     />
@@ -141,6 +143,8 @@
                     android:layout_width="379dp"
                     android:layout_height="29dp"
                     android:layout_marginBottom="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_blue_grey"
                     android:id="@+id/pro_radio3"
                     android:background="@drawable/button_radius"
                     />
@@ -149,6 +153,8 @@
                     android:layout_width="379dp"
                     android:layout_height="29dp"
                     android:layout_marginBottom="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_blue_grey"
                     android:id="@+id/pro_radio4"
                     android:background="@drawable/button_radius"
                     />
@@ -156,6 +162,8 @@
                 <RadioButton
                     android:layout_width="379dp"
                     android:layout_height="29dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_blue_grey"
                     android:layout_marginBottom="12dp"
                     android:id="@+id/pro_radio5"
                     android:background="@drawable/button_radius"

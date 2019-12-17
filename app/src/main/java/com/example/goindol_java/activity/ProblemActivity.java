@@ -1,13 +1,19 @@
 package com.example.goindol_java.activity;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +23,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.goindol_java.R;
 import com.google.android.material.navigation.NavigationView;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -36,25 +44,92 @@ public class ProblemActivity extends AppCompatActivity {
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
+    private TextView pro_text;
+    private TextView pro_no;
+    private Button pro_script;
+    private TextView pro_problem;
+    private TextView pro_content;
+    private RadioGroup pro_radiogroup;
+    private RadioButton pro_radio1,pro_radio2,pro_radio3,pro_radio4,pro_radio5;
+    private Button pro_answer;
+
+    private String name;
+    private int index;
+    private int rows;
+    private int cells;
+
+    private HSSFWorkbook hss;
+    private HSSFSheet sh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem);
+        init();
         settingapp_bar();
         navi_header_click();
-        Log.e("Start","Activitiy 호출()");
+        name = getIntent().getStringExtra(MainActivity.period_data).split(",")[0];
+        index = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[1]);
+        pro_text.setText("한국사능력검정시험 " + name);
         try {
             InputStream is;
             AssetManager assetManager = getAssets();
             is = assetManager.open("goindol.xls");
             POIFSFileSystem poif = new POIFSFileSystem(is);
-            HSSFWorkbook hss = new HSSFWorkbook(poif);
-            HSSFSheet sh = hss.getSheetAt(0);
-            Log.e("Start",sh.getSheetName() + " 시트 이름");
-            Log.e("Start","여기 안와");
+            hss = new HSSFWorkbook(poif);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        sh = hss.getSheetAt(index);
+        HSSFRow row = sh.getRow(8);
+        if(row != null){
+            cells = row.getPhysicalNumberOfCells();
+            for(int i=1;i<=10;i++) {
+                HSSFCell cell = row.getCell(i);
+                switch (i){
+                    case 1: pro_no.setText(String.valueOf(cell.getNumericCellValue())); break;
+                    case 3: pro_content.setText(cell.getStringCellValue()); break;
+                    case 4: pro_radio1.setText(cell.getStringCellValue()); break;
+                    case 5: pro_radio2.setText(cell.getStringCellValue()); break;
+                    case 6: pro_radio3.setText(cell.getStringCellValue()); break;
+                    case 7: pro_radio4.setText(cell.getStringCellValue()); break;
+                    case 8: pro_radio5.setText(cell.getStringCellValue()); break;
+                }
+            }
+        }
+        super.onResume();
+    }
+
+    //onActivityResult가 불리고 난 후에 onResume() 이 불림!!
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //팝업 액티비티에서 다음 문제로 넘어갈 경우에 rows를 증가!!
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    //초기화 하는 부분
+    private void init(){
+        pro_text = findViewById(R.id.pro_text);
+        pro_no = findViewById(R.id.pro_no);
+        pro_script = findViewById(R.id.pro_script);
+        //pro_problem = findViewById(R.id.pro_problem);
+        pro_content = findViewById(R.id.pro_content);
+        pro_radiogroup = findViewById(R.id.pro_radiogroup);
+        pro_radio1 = findViewById(R.id.pro_radio1);
+        pro_radio2 = findViewById(R.id.pro_radio2);
+        pro_radio3 = findViewById(R.id.pro_radio3);
+        pro_radio4 = findViewById(R.id.pro_radio4);
+        pro_radio5 = findViewById(R.id.pro_radio5);
+        pro_answer = findViewById(R.id.pro_answer);
     }
 
     private void settingapp_bar(){

@@ -56,7 +56,6 @@ public class SplashActivity extends Activity {
         arrayList.add(new Period("근대 개화",list));
         arrayList.add(new Period("일제 강점기",list));
         arrayList.add(new Period("현대",list));
-        list1.add(new ExcelProblem("ㅐㅏㅐㅏ",1));
         arrayList.add(new Period("랜덤",list1));
         Log.e("Start","init() 함수 들어옴" + arrayList.size());
         Gson gson  = new GsonBuilder().create();
