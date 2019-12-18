@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
 import com.google.gson.Gson;
@@ -38,6 +39,7 @@ public class PopupActivity extends Activity {
     private Gson gson = new Gson();
     private List<Period> list = new ArrayList<>();
     private List<ExcelProblem> excelProblems = new ArrayList<>();
+    private List<ArrangeData> arrangeData = new ArrayList<>();
     private Type listType;
 
     @Override
@@ -47,15 +49,9 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.activity_popup);
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
         intent_name = getIntent().getStringExtra(period_data);
-        prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
-        list = gson.fromJson(name, listType);
-
         imageView = findViewById(R.id.popup_cancel);
         popup_reset = findViewById(R.id.popup_reset);
         popup_ing = findViewById(R.id.popup_ing);
-
         //X 표시를 누를 시 popupActivity 종료
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +65,8 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 list.get(Integer.parseInt(intent_name.split(",")[1])).setPeriod_data(excelProblems);
+                list.get(Integer.parseInt(intent_name.split(",")[1])).setIndex(2);
+                list.get(Integer.parseInt(intent_name.split(",")[1])).setArrangeData(arrangeData);
                 Gson gson1  = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -92,6 +90,15 @@ public class PopupActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        prefs = getSharedPreferences("shared", MODE_PRIVATE);
+        name = prefs.getString(SETTINGS_PLAYER,null);
+        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        list = gson.fromJson(name, listType);
+        super.onResume();
     }
 
     //바깥 레이아웃 눌러도 닫히지 않게 하기.

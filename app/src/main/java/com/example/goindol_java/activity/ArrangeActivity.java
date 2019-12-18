@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -80,39 +81,35 @@ public class ArrangeActivity extends AppCompatActivity {
 
         // 저장되어 있는 값을 가져옴..
         arrangeData = list.get(sheet_number).getArrangeData();
-
+        Log.e("Start", arrangeData.size() + " 사이즈 몇개");
         recycler_adapter(arrangeData);
 
-        arr_text.setText(list.get(sheet_number).getPeriodic());
+        arr_text.setText("한국사능력검정시험 " + list.get(sheet_number).getPeriodic());
 
         arr_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
     }
 
     private void recycler_adapter(List<ArrangeData> arr){
-
-        switch (page){
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
+        int recy_index = (page * 10) - 10;
+        for(int i=recy_index; i< recy_index+10;i++) {
+            recycler.add(arr.get(i));
         }
+        Log.e("Start", recycler.size() + " 사이즈??");
         ArrangeAdapter adapter = new ArrangeAdapter(this,recycler);
         LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         arr_recyclerview.setLayoutManager(linearLayout);
         arr_recyclerview.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStop() {
+        recycler.clear();
+        super.onStop();
     }
 
     private void init(){

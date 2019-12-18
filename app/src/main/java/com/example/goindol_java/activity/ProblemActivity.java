@@ -134,26 +134,26 @@ public class ProblemActivity extends AppCompatActivity {
             }
         });
 
-        prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
-        list = gson.fromJson(name, listType);
+
 /*        //sharedPreferences에 저장되어 있는 ExcelProblem 가져오기.
         excelProblems = list.get(sheet_index).getPeriod_data();*/
         //sharedPreferences에 저장되어 있는 마지막 번호를 기억하여 가져오기
         //만약 처음 세팅한 값이 2 가 아니라면 저장 되어 있기 때문에 저장되어 있는 번호를 가져온다.
+
+    }
+
+    @Override
+    protected void onResume() {
+        prefs = getSharedPreferences("shared", MODE_PRIVATE);
+        name = prefs.getString(SETTINGS_PLAYER,null);
+        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        list = gson.fromJson(name, listType);
         Log.e("Start",list.get(sheet_index).getPeriodic() + " : " + list.get(sheet_index).getIndex());
         if(list.get(sheet_index).getIndex() != 2) {
             row_first = list.get(sheet_index).getIndex();
         } else{
             row_first = 2;
         }
-    }
-
-    //처음 Activity에 불렸을 경우 저장되어 있는 row_first를 체크하여 해당 행을 불러온다.
-    //onActivityResult()를 통해 왔다면 row_first만 1 증가하고 onResume() 함수를 호출한다.
-    @Override
-    protected void onResume() {
         sh = hss.getSheetAt(sheet_index);
         row = sh.getRow(row_first);
         Log.e("Start",row_first + " ok");
@@ -183,7 +183,7 @@ public class ProblemActivity extends AppCompatActivity {
         if(requestCode == 101) {
             if(resultCode == -1) {
                 //마지막 번호 기억하기
-                row_first = list.get(sheet_index).getIndex();
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

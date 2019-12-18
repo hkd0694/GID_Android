@@ -5,14 +5,13 @@ import java.io.Serializable;
 public class ArrangeData implements Serializable {
 
     private String number;
-    private boolean check;
+    private String check;
     private String summary;
 
     public ArrangeData(){
-
     }
 
-    public ArrangeData(String number, boolean check, String summary) {
+    public ArrangeData(String number, String check, String summary) {
         this.number = number;
         this.check = check;
         this.summary = summary;
@@ -26,11 +25,11 @@ public class ArrangeData implements Serializable {
         this.number = number;
     }
 
-    public boolean isCheck() {
+    public String getCheck() {
         return check;
     }
 
-    public void setCheck(boolean check) {
+    public void setCheck(String check) {
         this.check = check;
     }
 

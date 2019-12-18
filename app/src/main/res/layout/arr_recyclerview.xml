@@ -8,7 +8,6 @@
         android:layout_width="40dp"
         android:layout_height="32dp"
         android:id="@+id/recyclerview_image"
-        android:src="@drawable/icon_answer_wrong"
         />
 
     <TextView

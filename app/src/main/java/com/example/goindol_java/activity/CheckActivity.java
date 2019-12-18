@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -151,9 +152,10 @@ public class CheckActivity extends Activity {
     private ArrangeData saveArrangeData(){
         ArrangeData arrangeData = new ArrangeData();
         arrangeData.setNumber(String.valueOf((int)row.getCell(1).getNumericCellValue()));
+        Log.e("Start", String.valueOf((int)row.getCell(1).getNumericCellValue()) + " ㅜㅕ");
         if(check.equals("정답")) {
-            arrangeData.setCheck(true);
-        } else arrangeData.setCheck(false);
+            arrangeData.setCheck("정답");
+        } else arrangeData.setCheck("오답");
         //Excel 에 요약 정보 추가되면 그에 맞는 인덱스 넣어줘야함 지금은 보기 5번으로 고정 시킴.
         arrangeData.setSummary(row.getCell(8).getStringCellValue());
         return arrangeData;
