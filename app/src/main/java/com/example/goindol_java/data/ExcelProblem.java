@@ -25,9 +25,7 @@ public class ExcelProblem {
     private String solution;
     // 정리
     private String summary;
-
     //여기까진 엑셀에 있는 내용들..!!
-
     // 정답 여부 확인
     private String exam_check;
     // 스크랩 체크 여부

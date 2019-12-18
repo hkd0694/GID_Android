@@ -55,7 +55,8 @@
                         android:id="@+id/pro_no"
                         android:text="17"
                         android:textSize="19.2sp"
-                        android:layout_marginRight="310dp"
+                        android:layout_marginRight="300dp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="@color/dark_blue_grey"
                         />
                     

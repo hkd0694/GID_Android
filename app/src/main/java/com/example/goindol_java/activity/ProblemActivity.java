@@ -54,12 +54,16 @@ public class ProblemActivity extends AppCompatActivity {
     private Button pro_answer;
 
     private String name;
-    private int index;
-    private int rows;
-    private int cells;
+    private int sheet_index;
+    //내가 선택한 번호
+    private int seleted;
+    //처음 여길로 올 때 번호
+    private int row_first = 2;
 
     private HSSFWorkbook hss;
     private HSSFSheet sh;
+    private HSSFRow row;
+    private HSSFCell cell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,7 @@ public class ProblemActivity extends AppCompatActivity {
         settingapp_bar();
         navi_header_click();
         name = getIntent().getStringExtra(MainActivity.period_data).split(",")[0];
-        index = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[1]);
+        sheet_index = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[1]);
         pro_text.setText("한국사능력검정시험 " + name);
         try {
             InputStream is;
@@ -80,16 +84,48 @@ public class ProblemActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        pro_answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int answer = (int)row.getCell(9).getNumericCellValue();
+                String ck;
+                if(answer == seleted) {
+                    Log.e("Start","정답입니다.");
+                    ck = "정답";
+                } else{
+                    Log.e("Start", "틀렸습니다.");
+                    ck = "오답";
+                }
+                Intent intent = new Intent(getApplicationContext(),CheckActivity.class);
+                intent.putExtra("select",ck);
+                intent.putExtra("sheet_index",sheet_index);
+                intent.putExtra("row_first",row_first);
+                startActivityForResult(intent,101);
+            }
+        });
+
+        pro_radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.pro_radio1: seleted = 1; break;
+                    case R.id.pro_radio2: seleted = 2; break;
+                    case R.id.pro_radio3: seleted = 3; break;
+                    case R.id.pro_radio4: seleted = 4; break;
+                    case R.id.pro_radio5: seleted = 5; break;
+                }
+            }
+        });
     }
 
     @Override
     protected void onResume() {
-        sh = hss.getSheetAt(index);
-        HSSFRow row = sh.getRow(8);
+        sh = hss.getSheetAt(sheet_index);
+        row = sh.getRow(row_first);
         if(row != null){
-            cells = row.getPhysicalNumberOfCells();
             for(int i=1;i<=10;i++) {
-                HSSFCell cell = row.getCell(i);
+                cell = row.getCell(i);
                 switch (i){
                     case 1: pro_no.setText(String.valueOf(cell.getNumericCellValue())); break;
                     case 3: pro_content.setText(cell.getStringCellValue()); break;
@@ -108,6 +144,12 @@ public class ProblemActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //팝업 액티비티에서 다음 문제로 넘어갈 경우에 rows를 증가!!
+        Log.e("Start", requestCode + " : " + resultCode);
+        if(requestCode == 101) {
+            if(resultCode == -1) {
+                row_first++;
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -121,7 +163,6 @@ public class ProblemActivity extends AppCompatActivity {
         pro_text = findViewById(R.id.pro_text);
         pro_no = findViewById(R.id.pro_no);
         pro_script = findViewById(R.id.pro_script);
-        //pro_problem = findViewById(R.id.pro_problem);
         pro_content = findViewById(R.id.pro_content);
         pro_radiogroup = findViewById(R.id.pro_radiogroup);
         pro_radio1 = findViewById(R.id.pro_radio1);

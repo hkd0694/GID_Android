@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="304dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_radius"
+    android:orientation="vertical"
+    tools:context=".activity.CheckActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/check_script"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/star_active_darkblue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="39dp"
+            android:layout_height="57dp"
+            android:id="@+id/check_image"
+            android:src="@drawable/good"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:id="@+id/check_answer"
+            android:textSize="18sp"
+            android:textColor="@color/dark_blue_grey"
+            android:text="정답을 맞췄습니다!"
+            />
+        
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:visibility="gone"
+            android:id="@+id/check_cry"
+            android:src="@drawable/crying"
+            android:layout_marginLeft="3dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/check_explanation"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:text="'쌍기','시험하여 진사를 뽑게 하였다' 에서 과거제 실시임을 알 수 있다.
+과거제는 광종 때 실시되었으며, 광종은 왕권강화를 위해 노비안검법과 칭제건원, 관리들의 공복을 정했다."
+            android:textColor="@color/dark_blue_grey"
+            android:lineSpacingExtra="2sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="56dp"
+            android:id="@+id/check_back"
+            android:background="@drawable/invalid_name"
+            />
+
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="56dp"
+            android:id="@+id/check_next"
+            android:background="@drawable/next_name"
+            />
+        
+    </LinearLayout>
+
+
+</LinearLayout>
