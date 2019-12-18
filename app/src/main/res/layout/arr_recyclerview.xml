@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="322dp"
+    android:layout_height="32dp">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="32dp"
+        android:id="@+id/recyclerview_image"
+        android:src="@drawable/icon_answer_wrong"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerview_number"
+        android:layout_alignBottom="@id/recyclerview_image"
+        android:layout_alignTop="@id/recyclerview_image"
+        android:layout_alignRight="@id/recyclerview_image"
+        android:layout_alignLeft="@id/recyclerview_image"
+        android:gravity="center"
+        android:text="10"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerview_arrange"
+                android:textSize="16sp"
+                android:textColor="@color/dark_blue_grey"
+                android:text="아 이게 뭐야"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="normal"
+                />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -138,8 +138,8 @@ public class ProblemActivity extends AppCompatActivity {
         name = prefs.getString(SETTINGS_PLAYER,null);
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
-        //sharedPreferences에 저장되어 있는 ExcelProblem 가져오기.
-        excelProblems = list.get(sheet_index).getPeriod_data();
+/*        //sharedPreferences에 저장되어 있는 ExcelProblem 가져오기.
+        excelProblems = list.get(sheet_index).getPeriod_data();*/
         //sharedPreferences에 저장되어 있는 마지막 번호를 기억하여 가져오기
         //만약 처음 세팅한 값이 2 가 아니라면 저장 되어 있기 때문에 저장되어 있는 번호를 가져온다.
         Log.e("Start",list.get(sheet_index).getPeriodic() + " : " + list.get(sheet_index).getIndex());
@@ -175,7 +175,6 @@ public class ProblemActivity extends AppCompatActivity {
     }
 
     //onActivityResult가 불리고 난 후에 onResume() 이 불림!!
-    //CheckActivity에서 다음문제를 클릭시 resultCode에 -1이 들어와 sharedPreferences에 해당 시대의 문제를 저장
     //저장 후에 row_first를 1 증가시켜서 onResume() 함수를 부른다.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -183,29 +182,8 @@ public class ProblemActivity extends AppCompatActivity {
         Log.e("Start", requestCode + " : " + resultCode);
         if(requestCode == 101) {
             if(resultCode == -1) {
-                ExcelProblem problem = new ExcelProblem();
-                problem.setExcel_no((int)row.getCell(1).getNumericCellValue());
-                problem.setEra(row.getCell(2).getStringCellValue());
-                problem.setProblem(row.getCell(3).getStringCellValue());
-                problem.setExam_1(row.getCell(4).getStringCellValue());
-                problem.setExam_2(row.getCell(5).getStringCellValue());
-                problem.setExam_3(row.getCell(6).getStringCellValue());
-                problem.setExam_4(row.getCell(7).getStringCellValue());
-                problem.setExam_5(row.getCell(8).getStringCellValue());
-                problem.setAnswer((int)row.getCell(9).getNumericCellValue());
-                problem.setSolution(row.getCell(10).getStringCellValue());
-                //중복이 있을 수 있음...;; 특히 스크랩 문제를 풀 때나 수정 필요함...
-                excelProblems.add(problem);
-                //문제 ArrayList로 add 하여 저장
-                list.get(sheet_index).setPeriod_data(excelProblems);
-                //현재 푼 문제가 아닌 다음 번호를 기억해 저장
-                row_first++;
-                list.get(sheet_index).setIndex(row_first);
-                gson  = new GsonBuilder().create();
-                String json = gson.toJson(list, listType);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(SETTINGS_PLAYER, json);
-                editor.commit();
+                //마지막 번호 기억하기
+                row_first = list.get(sheet_index).getIndex();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -278,7 +256,9 @@ public class ProblemActivity extends AppCompatActivity {
         navi_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

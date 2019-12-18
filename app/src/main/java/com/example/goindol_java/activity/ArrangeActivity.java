@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +18,22 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.goindol_java.Adapter.ArrangeAdapter;
 import com.example.goindol_java.R;
+import com.example.goindol_java.data.ArrangeData;
+import com.example.goindol_java.data.ExcelProblem;
+import com.example.goindol_java.data.Period;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-public class LearnActivity extends AppCompatActivity {
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
+
+public class ArrangeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -29,54 +44,95 @@ public class LearnActivity extends AppCompatActivity {
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
+    private TextView arr_text;
+    private TextView arr_middle;
+    private Button arr_button;
+    private RecyclerView arr_recyclerview;
+
+    private Intent intent;
+    private int page;
+    private int sheet_number;
+
+    private SharedPreferences prefs;
+    private Gson gson = new Gson();
+    private List<Period> list = new ArrayList<>();
+    private List<ArrangeData> arrangeData = new ArrayList<>();
+    private List<ArrangeData> recycler = new ArrayList<>();
+    private Type listType;
     private String name;
-    private TextView textView;
-    private Button learn_cancel;
-    private Button learn_start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
+        setContentView(R.layout.activity_arrange);
         settingapp_bar();
         navi_header_click();
-        name = getIntent().getStringExtra(MainActivity.period_data);
-        textView = findViewById(R.id.learn_text);
-        learn_cancel = findViewById(R.id.learn_cancel);
-        learn_start = findViewById(R.id.learn_start);
+        init();
+        intent = getIntent();
+        page = intent.getIntExtra("page",1);
+        sheet_number = intent.getIntExtra("sheet",1);
+        arr_middle.setText("중간정리 " + page + "번째");
 
-        textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
+        prefs = getSharedPreferences("shared", MODE_PRIVATE);
+        name = prefs.getString(SETTINGS_PLAYER,null);
+        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        list = gson.fromJson(name, listType);
 
-        learn_cancel.setOnClickListener(new View.OnClickListener() {
+        // 저장되어 있는 값을 가져옴..
+        arrangeData = list.get(sheet_number).getArrangeData();
+
+        recycler_adapter(arrangeData);
+
+        arr_text.setText(list.get(sheet_number).getPeriodic());
+
+        arr_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
-        });
 
-        learn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //학습 시작.
-                Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
-                intent.putExtra(MainActivity.period_data,name);
-                startActivity(intent);
-                finish();
             }
         });
     }
 
+    private void recycler_adapter(List<ArrangeData> arr){
+
+        switch (page){
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+        }
+        ArrangeAdapter adapter = new ArrangeAdapter(this,recycler);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        arr_recyclerview.setLayoutManager(linearLayout);
+        arr_recyclerview.setAdapter(adapter);
+    }
+
+    private void init(){
+        arr_text = findViewById(R.id.arr_text);
+        arr_middle = findViewById(R.id.arr_middle);
+        arr_button = findViewById(R.id.arr_button);
+        arr_recyclerview = findViewById(R.id.arr_recyclerview);
+    }
+
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.learn_toolbar);
+        toolbar = findViewById(R.id.arr_toolbar);
         setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.learn_drawerlayout);
+        drawerLayout = findViewById(R.id.arr_drawerlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.learn_navigation);
+        navigationView = findViewById(R.id.arr_navigation);
         setUpDrawerContent(navigationView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
@@ -145,8 +201,4 @@ public class LearnActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
-    @Override
-    public void onBackPressed() {
-        return;
-    }
 }

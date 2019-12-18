@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.goindol_java.R;
+import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
 import com.google.gson.Gson;
@@ -28,6 +28,7 @@ public class SplashActivity extends Activity {
     private ImageView imageView;
     private List<Period> arrayList = new ArrayList<>();
     private List<ExcelProblem> list = new ArrayList<>();
+    private List<ArrangeData> arrange = new ArrayList<>();
     private SharedPreferences prefs;
 
     @Override
@@ -46,15 +47,15 @@ public class SplashActivity extends Activity {
     }
 
     private void init(){
-        arrayList.add(new Period("기원과 형성",list));
-        arrayList.add(new Period("고대사회",list));
-        arrayList.add(new Period("고려시대",list));
-        arrayList.add(new Period("조선전기",list));
-        arrayList.add(new Period("조선후기",list));
-        arrayList.add(new Period("근대 개화",list));
-        arrayList.add(new Period("일제 강점기",list));
-        arrayList.add(new Period("현대",list));
-        arrayList.add(new Period("랜덤",list));
+        arrayList.add(new Period("기원과 형성",list,arrange));
+        arrayList.add(new Period("고대사회",list,arrange));
+        arrayList.add(new Period("고려시대",list,arrange));
+        arrayList.add(new Period("조선전기",list,arrange));
+        arrayList.add(new Period("조선후기",list,arrange));
+        arrayList.add(new Period("근대 개화",list,arrange));
+        arrayList.add(new Period("일제 강점기",list,arrange));
+        arrayList.add(new Period("현대",list,arrange));
+        arrayList.add(new Period("랜덤",list,arrange));
         Gson gson  = new GsonBuilder().create();
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         String json = gson.toJson(arrayList, listType);

@@ -23,11 +23,6 @@ public class ExcelProblem {
     private int answer;
     // 해설
     private String solution;
-    // 정리
-    private String summary;
-    //여기까진 엑셀에 있는 내용들..!!
-    // 정답 여부 확인
-    private String exam_check;
 
     /*// 스크랩 체크 여부
     private boolean script_check;
@@ -37,7 +32,7 @@ public class ExcelProblem {
     public ExcelProblem() {
     }
 
-    public ExcelProblem(int excel_no, String era, String problem, String exam_1, String exam_2, String exam_3, String exam_4, String exam_5, int answer, String solution, String summary, String exam_check) {
+    public ExcelProblem(int excel_no, String era, String problem, String exam_1, String exam_2, String exam_3, String exam_4, String exam_5, int answer, String solution) {
         this.excel_no = excel_no;
         this.era = era;
         this.problem = problem;
@@ -48,8 +43,6 @@ public class ExcelProblem {
         this.exam_5 = exam_5;
         this.answer = answer;
         this.solution = solution;
-        this.summary = summary;
-        this.exam_check = exam_check;
     }
 
     public int getExcel_no() {
@@ -130,22 +123,6 @@ public class ExcelProblem {
 
     public void setSolution(String solution) {
         this.solution = solution;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getExam_check() {
-        return exam_check;
-    }
-
-    public void setExam_check(String exam_check) {
-        this.exam_check = exam_check;
     }
 
 }
