@@ -28,15 +28,16 @@ public class ExcelProblem {
     //여기까진 엑셀에 있는 내용들..!!
     // 정답 여부 확인
     private String exam_check;
-    // 스크랩 체크 여부
+
+    /*// 스크랩 체크 여부
     private boolean script_check;
     // 시간 체크
-    private Date date;
+    private Date date;*/
 
     public ExcelProblem() {
     }
 
-    public ExcelProblem(int excel_no, String era, String problem, String exam_1, String exam_2, String exam_3, String exam_4, String exam_5, int answer, String solution, String summary, String exam_check, boolean script_check, Date date) {
+    public ExcelProblem(int excel_no, String era, String problem, String exam_1, String exam_2, String exam_3, String exam_4, String exam_5, int answer, String solution, String summary, String exam_check) {
         this.excel_no = excel_no;
         this.era = era;
         this.problem = problem;
@@ -49,8 +50,6 @@ public class ExcelProblem {
         this.solution = solution;
         this.summary = summary;
         this.exam_check = exam_check;
-        this.script_check = script_check;
-        this.date = date;
     }
 
     public int getExcel_no() {
@@ -149,19 +148,4 @@ public class ExcelProblem {
         this.exam_check = exam_check;
     }
 
-    public boolean isScript_check() {
-        return script_check;
-    }
-
-    public void setScript_check(boolean script_check) {
-        this.script_check = script_check;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

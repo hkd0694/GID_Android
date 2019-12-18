@@ -6,7 +6,6 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -60,7 +59,6 @@ public class CheckActivity extends Activity {
         sheet_indexs = intent.getIntExtra("sheet_index",2);
         // 행 번호
         row_number = intent.getIntExtra("row_first",1);
-
         try {
             InputStream is;
             AssetManager assetManager = getAssets();
@@ -70,12 +68,10 @@ public class CheckActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         sh = hss.getSheetAt(sheet_indexs);
         row = sh.getRow(row_number);
         //시트 번호에서 해설 부분 가져오기
         cell = row.getCell(10);
-
         if(check.equals("정답")){
             check_image.setImageResource(R.drawable.good);
             check_answer.setText("정답을 맞췄습니다!");
@@ -91,7 +87,6 @@ public class CheckActivity extends Activity {
                 finish();
             }
         });
-
         check_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,9 +94,7 @@ public class CheckActivity extends Activity {
                 finish();
             }
         });
-
     }
-
     private void init(){
         check_script = findViewById(R.id.check_script);
         check_answer = findViewById(R.id.check_answer);
@@ -111,7 +104,6 @@ public class CheckActivity extends Activity {
         check_next = findViewById(R.id.check_next);
         check_image = findViewById(R.id.check_image);
     }
-
     //바깥 레이아웃 눌러도 닫히지 않게 하기.
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -121,7 +113,6 @@ public class CheckActivity extends Activity {
         }
         return true;
     }
-
     //뒤로가기 버튼 막음
     @Override
     public void onBackPressed() {

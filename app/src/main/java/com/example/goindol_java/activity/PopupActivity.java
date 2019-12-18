@@ -86,10 +86,12 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //마지막으로 진행한 문제!!
-
+                Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
+                intent.putExtra(period_data,intent_name);
+                startActivity(intent);
+                finish();
             }
         });
-
     }
 
     //바깥 레이아웃 눌러도 닫히지 않게 하기.

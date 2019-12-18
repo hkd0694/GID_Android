@@ -28,7 +28,6 @@ public class SplashActivity extends Activity {
     private ImageView imageView;
     private List<Period> arrayList = new ArrayList<>();
     private List<ExcelProblem> list = new ArrayList<>();
-    private List<ExcelProblem> list1 = new ArrayList<>();
     private SharedPreferences prefs;
 
     @Override
@@ -38,7 +37,6 @@ public class SplashActivity extends Activity {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         String data = prefs.getString(SETTINGS_PLAYER, null);
         if(data == null) {
-            Log.e("Start","어플 처음 깔때만 들어옴!");
             init();
         }
         imageView = findViewById(R.id.imageView);
@@ -56,8 +54,7 @@ public class SplashActivity extends Activity {
         arrayList.add(new Period("근대 개화",list));
         arrayList.add(new Period("일제 강점기",list));
         arrayList.add(new Period("현대",list));
-        arrayList.add(new Period("랜덤",list1));
-        Log.e("Start","init() 함수 들어옴" + arrayList.size());
+        arrayList.add(new Period("랜덤",list));
         Gson gson  = new GsonBuilder().create();
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         String json = gson.toJson(arrayList, listType);
