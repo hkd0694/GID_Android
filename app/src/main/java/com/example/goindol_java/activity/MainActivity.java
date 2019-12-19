@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     @Override
     protected void onResume() {
-        Log.e("Start","resume()");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         data = prefs.getString(SplashActivity.SETTINGS_PLAYER,null);
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();

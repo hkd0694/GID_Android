@@ -152,7 +152,6 @@ public class CheckActivity extends Activity {
     private ArrangeData saveArrangeData(){
         ArrangeData arrangeData = new ArrangeData();
         arrangeData.setNumber(String.valueOf((int)row.getCell(1).getNumericCellValue()));
-        Log.e("Start", String.valueOf((int)row.getCell(1).getNumericCellValue()) + " ㅜㅕ");
         if(check.equals("정답")) {
             arrangeData.setCheck("정답");
         } else arrangeData.setCheck("오답");

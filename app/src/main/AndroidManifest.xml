@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ArrangeActivity"></activity>
+        <activity android:name=".activity.EndActivity"></activity>
+        <activity android:name=".activity.ArrangeActivity" />
         <activity
             android:name=".activity.CheckActivity"
             android:theme="@android:style/Theme.Dialog" />

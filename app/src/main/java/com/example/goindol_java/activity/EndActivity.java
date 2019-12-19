@@ -6,35 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.goindol_java.Adapter.ArrangeAdapter;
 import com.example.goindol_java.R;
-import com.example.goindol_java.data.ArrangeData;
-import com.example.goindol_java.data.ExcelProblem;
-import com.example.goindol_java.data.Period;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
-
-public class ArrangeActivity extends AppCompatActivity {
+public class EndActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -45,97 +30,59 @@ public class ArrangeActivity extends AppCompatActivity {
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
-    private TextView arr_text;
-    private TextView arr_middle;
-    private Button arr_button;
-    private RecyclerView arr_recyclerview;
+    private TextView end_text;
+    private Button end_button;
+    private ImageView end_image;
 
-    private Intent intent;
-    private int page;
-    private int sheet_number;
-
-    private SharedPreferences prefs;
-    private Gson gson = new Gson();
-    private List<Period> list = new ArrayList<>();
-    private List<ArrangeData> arrangeData = new ArrayList<>();
-    private List<ArrangeData> recycler = new ArrayList<>();
-    private Type listType;
     private String name;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_arrange);
-        settingapp_bar();
-        navi_header_click();
+        setContentView(R.layout.activity_end);
         init();
         intent = getIntent();
-        page = intent.getIntExtra("page",1);
-        sheet_number = intent.getIntExtra("sheet",1);
-        arr_middle.setText("중간정리 " + page + "번째");
+        name = intent.getStringExtra("name");
+        end_text.setText(name + " 모든 문제를 풀었습니다!\n" + "메인화면으로 돌아가서\n" + "다른 시대를 선택해주세요.");
+        //시대 마다 사진 다르게 해ㅈ줘야함!!
+        if(name.equals("고려시대")) {
+            //end_image.setImageResource(R.drawable.wrong);
+        } else if(name.equals("고대사회")) {
+            //end_image.setImageResource(R.drawable.wrong);
+        } else{
+            //end_image.setImageResource(R.drawable.wrong);
+        }
 
-        prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
-        list = gson.fromJson(name, listType);
-
-        // 저장되어 있는 값을 가져옴..
-        arrangeData = list.get(sheet_number).getArrangeData();
-        Log.e("Start", arrangeData.size() + " 사이즈 몇개");
-        recycler_adapter(arrangeData);
-
-        arr_text.setText("한국사능력검정시험 " + list.get(sheet_number).getPeriodic());
-
-        arr_button.setOnClickListener(new View.OnClickListener() {
+        end_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(arrangeData.get(arrangeData.size()-1).getNumber().equals("40")) {
-                    //문제가 다 끝났으므로 시대별 종료 화면으로 넘어감...!!!!
-                    intent = new Intent(getApplicationContext(),EndActivity.class);
-                    intent.putExtra("name",list.get(sheet_number).getPeriodic());
-                    startActivity(intent);
-                }
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
             }
         });
-    }
 
-    private void recycler_adapter(List<ArrangeData> arr){
-        int recy_index = (page * 10) - 10;
-        for(int i=recy_index; i< recy_index+10;i++) {
-            recycler.add(arr.get(i));
-        }
-        Log.e("Start", recycler.size() + " 사이즈??");
-        ArrangeAdapter adapter = new ArrangeAdapter(this,recycler);
-        LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        arr_recyclerview.setLayoutManager(linearLayout);
-        arr_recyclerview.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onStop() {
-        recycler.clear();
-        super.onStop();
     }
 
     private void init(){
-        arr_text = findViewById(R.id.arr_text);
-        arr_middle = findViewById(R.id.arr_middle);
-        arr_button = findViewById(R.id.arr_button);
-        arr_recyclerview = findViewById(R.id.arr_recyclerview);
+        end_text = findViewById(R.id.end_textview);
+        end_button = findViewById(R.id.end_button);
+        end_image = findViewById(R.id.end_imageview);
     }
 
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.arr_toolbar);
+        toolbar = findViewById(R.id.end_toolbar);
         setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.arr_drawerlayout);
+        drawerLayout = findViewById(R.id.end_drawerlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.arr_navigation);
+        navigationView = findViewById(R.id.end_navigation);
         setUpDrawerContent(navigationView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
@@ -204,8 +151,4 @@ public class ArrangeActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
-    @Override
-    public void onBackPressed() {
-        return;
-    }
 }

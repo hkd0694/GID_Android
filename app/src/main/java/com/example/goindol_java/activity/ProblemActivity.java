@@ -134,12 +134,6 @@ public class ProblemActivity extends AppCompatActivity {
             }
         });
 
-
-/*        //sharedPreferences에 저장되어 있는 ExcelProblem 가져오기.
-        excelProblems = list.get(sheet_index).getPeriod_data();*/
-        //sharedPreferences에 저장되어 있는 마지막 번호를 기억하여 가져오기
-        //만약 처음 세팅한 값이 2 가 아니라면 저장 되어 있기 때문에 저장되어 있는 번호를 가져온다.
-
     }
 
     @Override
@@ -148,7 +142,6 @@ public class ProblemActivity extends AppCompatActivity {
         name = prefs.getString(SETTINGS_PLAYER,null);
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
-        Log.e("Start",list.get(sheet_index).getPeriodic() + " : " + list.get(sheet_index).getIndex());
         if(list.get(sheet_index).getIndex() != 2) {
             row_first = list.get(sheet_index).getIndex();
         } else{
@@ -179,11 +172,9 @@ public class ProblemActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //팝업 액티비티에서 다음 문제로 넘어갈 경우에 rows를 증가!!
-        Log.e("Start", requestCode + " : " + resultCode);
         if(requestCode == 101) {
             if(resultCode == -1) {
                 //마지막 번호 기억하기
-
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

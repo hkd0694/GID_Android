@@ -42,6 +42,8 @@ public class PopupActivity extends Activity {
     private List<ArrangeData> arrangeData = new ArrayList<>();
     private Type listType;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +86,14 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //마지막으로 진행한 문제!!
-                Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
-                intent.putExtra(period_data,intent_name);
+                //만약 문제를 모두 다 풀었을 경우 체크하여 바로 EndActivity로 넘겨준다..!!;;
+                if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() < list.get(Integer.parseInt(intent_name.split(",")[1])).getIndex()) {
+                    intent = new Intent(getApplicationContext(),EndActivity.class);
+                    intent.putExtra("name",intent_name.split(",")[0]);
+                } else {
+                    intent = new Intent(getApplicationContext(),ProblemActivity.class);
+                    intent.putExtra(period_data,intent_name);
+                }
                 startActivity(intent);
                 finish();
             }
