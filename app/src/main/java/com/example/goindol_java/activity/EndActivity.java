@@ -42,36 +42,40 @@ public class EndActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
         init();
+        settingapp_bar();
+        navi_header_click();
         intent = getIntent();
         name = intent.getStringExtra("name");
         end_text.setText(name + " 모든 문제를 풀었습니다!\n" + "메인화면으로 돌아가서\n" + "다른 시대를 선택해주세요.");
-        //시대 마다 사진 다르게 해ㅈ줘야함!!
+        //시대 마다 end_image 화면을 다르게 해줘야함!
         if(name.equals("고려시대")) {
-            //end_image.setImageResource(R.drawable.wrong);
+            end_image.setImageResource(R.drawable.goryeo);
         } else if(name.equals("고대사회")) {
-            //end_image.setImageResource(R.drawable.wrong);
+            end_image.setImageResource(R.drawable.godae_image);
         } else{
-            //end_image.setImageResource(R.drawable.wrong);
+            end_image.setImageResource(R.drawable.area_image);
         }
-
+        //메인화면 돌아가기 버튼을 클릭 시 발생하는 리스너로
+        //Activitiy Stack 안에 있는 MainActivity 위에 있는 Activity를 모두 없애고 MainActivity를 다시 불러서 재사용 한다.
         end_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
             }
         });
-
     }
 
+    //해당 Activity xml 에 있는 데이터들 초기화 해주는 함수
     private void init(){
         end_text = findViewById(R.id.end_textview);
         end_button = findViewById(R.id.end_button);
         end_image = findViewById(R.id.end_imageview);
     }
 
+    //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
         toolbar = findViewById(R.id.end_toolbar);
         setSupportActionBar(toolbar);
@@ -94,6 +98,7 @@ public class EndActivity extends AppCompatActivity {
 
     }
 
+    //Navigation 버튼 클릭시 발생하는 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -105,6 +110,7 @@ public class EndActivity extends AppCompatActivity {
         }
     };
 
+    //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
     private void navi_header_click(){
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
@@ -125,9 +131,9 @@ public class EndActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
     private void setUpDrawerContent(NavigationView navi){
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -151,4 +157,9 @@ public class EndActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
+    //뒤로가기 버튼 막음
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

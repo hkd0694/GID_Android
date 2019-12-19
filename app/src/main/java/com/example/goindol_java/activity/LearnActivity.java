@@ -47,6 +47,7 @@ public class LearnActivity extends AppCompatActivity {
 
         textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
 
+        //뒤로가기 버튼을 누를 시 해당 Activity를 종료하고 MainActivity로 넘어간다.
         learn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +55,8 @@ public class LearnActivity extends AppCompatActivity {
             }
         });
 
+        //학습 시작 버튼을 누를시 발생하는 리스너
+        //해당 시대 데이터를 넘겨 주면서 ProblemActivity로 넘어간다.
         learn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +69,7 @@ public class LearnActivity extends AppCompatActivity {
         });
     }
 
+    //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
         toolbar = findViewById(R.id.learn_toolbar);
         setSupportActionBar(toolbar);
@@ -88,6 +92,7 @@ public class LearnActivity extends AppCompatActivity {
 
     }
 
+    //Navigation 버튼 클릭시 발생하는 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -99,6 +104,7 @@ public class LearnActivity extends AppCompatActivity {
         }
     };
 
+    //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
     private void navi_header_click(){
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
@@ -122,6 +128,7 @@ public class LearnActivity extends AppCompatActivity {
 
     }
 
+    //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
     private void setUpDrawerContent(NavigationView navi){
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -142,10 +149,10 @@ public class LearnActivity extends AppCompatActivity {
     }
 
     private ActionBarDrawerToggle setUpActionBarToggle(){
-
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
+    //뒤로가기 버튼 막음
     @Override
     public void onBackPressed() {
         return;

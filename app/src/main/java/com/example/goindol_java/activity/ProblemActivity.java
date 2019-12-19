@@ -103,6 +103,8 @@ public class ProblemActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //정답 확인하기 버튼 누를 시 발생하는 리스너
+        //
         pro_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +123,7 @@ public class ProblemActivity extends AppCompatActivity {
             }
         });
 
+        //radiobutton을 누를 시 계속해서 발생하는 리스너 어떤 버튼을 눌렀는지 계속해서 기억하여 정답과 비교해야한다.
         pro_radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -137,11 +140,14 @@ public class ProblemActivity extends AppCompatActivity {
     }
 
     @Override
+    //CheckActivity 액티비티가 종료되면 onResume()함수가 다시 불리므로
+    //SharedPreferences 데이터를 다시 불러와 다음 문제를 보여주기 위해 데이터를 불러온다.
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER,null);
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
+        //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다
         if(list.get(sheet_index).getIndex() != 2) {
             row_first = list.get(sheet_index).getIndex();
         } else{
@@ -151,6 +157,7 @@ public class ProblemActivity extends AppCompatActivity {
         row = sh.getRow(row_first);
         Log.e("Start",row_first + " ok");
         if(row != null){
+            //Excel 데이터를 불러와 화면에 맞게 계속해서 불러온다.
             for(int i=1;i<=10;i++) {
                 cell = row.getCell(i);
                 switch (i){
@@ -164,6 +171,9 @@ public class ProblemActivity extends AppCompatActivity {
                 }
             }
         }
+        pro_radio1.setSelected(false); pro_radio2.setSelected(false);
+        pro_radio3.setSelected(false); pro_radio4.setSelected(false);
+        pro_radio5.setSelected(false);
         super.onResume();
     }
 
@@ -180,12 +190,7 @@ public class ProblemActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    //초기화 하는 부분
+    //해당 Activity xml 데이터 초기화 하는 함수
     private void init(){
         pro_text = findViewById(R.id.pro_text);
         pro_no = findViewById(R.id.pro_no);
@@ -200,6 +205,7 @@ public class ProblemActivity extends AppCompatActivity {
         pro_answer = findViewById(R.id.pro_answer);
     }
 
+    //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
         toolbar = findViewById(R.id.pro_toolbar);
         setSupportActionBar(toolbar);
@@ -221,6 +227,7 @@ public class ProblemActivity extends AppCompatActivity {
         });
     }
 
+    //Navigation 버튼 클릭시 발생하는 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -232,6 +239,7 @@ public class ProblemActivity extends AppCompatActivity {
         }
     };
 
+    //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
     private void navi_header_click(){
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
@@ -255,6 +263,7 @@ public class ProblemActivity extends AppCompatActivity {
 
     }
 
+    //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
     private void setUpDrawerContent(NavigationView navi){
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -279,6 +288,7 @@ public class ProblemActivity extends AppCompatActivity {
     }
 
     @Override
+    //뒤로 가기 버튼 막음
     public void onBackPressed() {
         return;
     }

@@ -27,6 +27,7 @@ import java.util.List;
 import static com.example.goindol_java.activity.MainActivity.period_data;
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
+//Popup으로 띄울 시 AppCompatActivity가 아닌 Activity를 상속 받아야 한다.
 public class PopupActivity extends Activity {
 
     private ImageView imageView;
@@ -49,12 +50,14 @@ public class PopupActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_popup);
+        //팝업 화면를 제외한 바깥 부분의 색을 투명하게 해주는 함수
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
+
         intent_name = getIntent().getStringExtra(period_data);
         imageView = findViewById(R.id.popup_cancel);
         popup_reset = findViewById(R.id.popup_reset);
         popup_ing = findViewById(R.id.popup_ing);
-        //X 표시를 누를 시 popupActivity 종료
+        //X 표시를 누를 시 popupActivity 종료되면서 MainActivity로 넘어감
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +84,9 @@ public class PopupActivity extends Activity {
             }
         });
 
-        //popup중 이어서 진행버튼을 누를 시 발생하는 리스너, 마지막 문제를 기억하여 그 문제를 보여주면 됨!!!
+        //이어서 진행하기 버튼을 누를 시 발생하는 리스너
+        //만약 사용자가 Excel 안에 주어진 문제들을 모두 풀었을 경우 ProblemActivity가 아닌 EndActivity로 바로 넘겨준다.
+        //사용자가 Excel 안에 주어진 문제들을 다 못풀었을 경우 사용자가 마지막에 풀었던 문제를 기억하여 그 데이터와 함께 ProblemActivity로 넘겨준다.
         popup_ing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +106,7 @@ public class PopupActivity extends Activity {
     }
 
     @Override
+    //MainActivity와 동일하게 계속해서 sharedpreferences안에 저장되어 있는 값들을 불러와야한다.
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER,null);

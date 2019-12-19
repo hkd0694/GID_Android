@@ -86,6 +86,9 @@ public class ArrangeActivity extends AppCompatActivity {
 
         arr_text.setText("한국사능력검정시험 " + list.get(sheet_number).getPeriodic());
 
+        //계속 진행하기 버튼을 누를 시 발생하는 리스너로
+        //만약 마지막 페이지인 4번째 중간정리가 나오게 되면 더이상 풀 문제가 없으므로 EndActivity로 넘어가게 된다.
+        //4번째 중간정리가 나오기 전까진 해당 Activity를 종료만 시킨다.
         arr_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,12 +103,10 @@ public class ArrangeActivity extends AppCompatActivity {
         });
     }
 
+    //Recyclerview 데이터를 10개씩 추가하여 Adapter에 붙여주는 함수
     private void recycler_adapter(List<ArrangeData> arr){
         int recy_index = (page * 10) - 10;
-        for(int i=recy_index; i< recy_index+10;i++) {
-            recycler.add(arr.get(i));
-        }
-        Log.e("Start", recycler.size() + " 사이즈??");
+        for(int i=recy_index; i< recy_index+10;i++) recycler.add(arr.get(i));
         ArrangeAdapter adapter = new ArrangeAdapter(this,recycler);
         LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         arr_recyclerview.setLayoutManager(linearLayout);
@@ -113,11 +114,13 @@ public class ArrangeActivity extends AppCompatActivity {
     }
 
     @Override
+    //10개씩 데이터를 보여주기 때문에 해당 activity가 없어질 때 arraylist도 clear를 통해 초기화 해준다.
     protected void onStop() {
         recycler.clear();
         super.onStop();
     }
 
+    //해당 Activity xml 에 있는 데이터들 초기화 해주는 함수
     private void init(){
         arr_text = findViewById(R.id.arr_text);
         arr_middle = findViewById(R.id.arr_middle);
@@ -125,6 +128,7 @@ public class ArrangeActivity extends AppCompatActivity {
         arr_recyclerview = findViewById(R.id.arr_recyclerview);
     }
 
+    //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
         toolbar = findViewById(R.id.arr_toolbar);
         setSupportActionBar(toolbar);
@@ -147,6 +151,7 @@ public class ArrangeActivity extends AppCompatActivity {
 
     }
 
+    //Navigation 버튼 클릭시 발생하는 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -158,6 +163,7 @@ public class ArrangeActivity extends AppCompatActivity {
         }
     };
 
+    //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
     private void navi_header_click(){
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
@@ -181,6 +187,7 @@ public class ArrangeActivity extends AppCompatActivity {
 
     }
 
+    //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
     private void setUpDrawerContent(NavigationView navi){
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -205,6 +212,7 @@ public class ArrangeActivity extends AppCompatActivity {
     }
 
     @Override
+    //뒤로가기 버튼 막음
     public void onBackPressed() {
         return;
     }

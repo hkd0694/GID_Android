@@ -35,17 +35,20 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        //앱을 키자마자 만약 사용자가 이용하고 있는 데이터가 있을 경우 data 변수에 값이 들어온다.
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         String data = prefs.getString(SETTINGS_PLAYER, null);
         if(data == null) {
             init();
         }
         imageView = findViewById(R.id.imageView);
+        //Glide를 통해 gif를 로딩한다. 이미지 라이브러리 중 Glide 와 Picasso가 있지만 gif를 지원하는 Glide사용!
         GlideDrawableImageViewTarget gifImage = new GlideDrawableImageViewTarget(imageView);
         Glide.with(this).load(R.raw.splash).into(gifImage);
         startLoading();
     }
 
+    //만약 앱을 처음 설치하고 처음 실행시에 시대 별로 데이터를 보관해야 하기 때문에 초기화 진행
     private void init(){
         arrayList.add(new Period("기원과 형성",list,arrange));
         arrayList.add(new Period("고대사회",list,arrange));
@@ -64,6 +67,7 @@ public class SplashActivity extends Activity {
         editor.commit(); //완료한다.
     }
 
+    //MainThread 에서 진행을 하게 되면 오류가 나기 때문에 Handler를 통하여 thread를 진행 3초뒤에 MainActivity로 넘어간다.
     private void startLoading() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

@@ -38,6 +38,7 @@ import java.util.List;
 
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
+//Popup식으로 화면에 띄우기 때문에 Activity를 상속한다.
 public class CheckActivity extends Activity {
 
     private ImageButton check_script;
@@ -89,6 +90,7 @@ public class CheckActivity extends Activity {
         excelProblems = list.get(sheet_indexs).getPeriod_data();
         arrangeData = list.get(sheet_indexs).getArrangeData();
 
+        //엑셀 파일 불러와 데이터 저장
         try {
             InputStream is;
             AssetManager assetManager = getAssets();
@@ -111,12 +113,17 @@ public class CheckActivity extends Activity {
             check_answer.setText("틀렸습니다.");
         }
         check_explanation.setText(cell.getStringCellValue());
+
+        //문제로 돌아가기 버튼을 누를 시 발생하는 리스너
+        //정답인지 오답인지만 보여주고, SharedPreferences에다가 저장은 하지 않고 Activity 종료
         check_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        //다음 문제 버튼를 누를 시 발생하는 리스너
         check_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,19 +143,21 @@ public class CheckActivity extends Activity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
                 editor.commit();
+                // 사용자가 10문제를 풀 때마다 중간정리를 보여주기 위해 ArrangeActivity로 넘어간다.
+                //만약 아직 10문제를 못 풀었으면 setResult를 통해 전 액티비티로 돌아간다.
                 if(pro.getExcel_no() % 10 == 0) {
                     intent = new Intent(getApplicationContext(),ArrangeActivity.class);
                     int page = pro.getExcel_no() / 10;
                     intent.putExtra("page",page);
                     intent.putExtra("sheet",sheet_indexs);
                     startActivity(intent);
-                    //startActivityForResult(intent, 105);
                 } else setResult(RESULT_OK);
                 finish();
             }
         });
     }
 
+    //SharedPreferences 에다가 저장하기 위해 ArrangeData class에 데이터 넣는 함수
     private ArrangeData saveArrangeData(){
         ArrangeData arrangeData = new ArrangeData();
         arrangeData.setNumber(String.valueOf((int)row.getCell(1).getNumericCellValue()));
@@ -176,6 +185,7 @@ public class CheckActivity extends Activity {
         return problem;
     }
 
+    //해당 Activity xml 데이터 초기화 하는 함수
     private void init(){
         check_script = findViewById(R.id.check_script);
         check_answer = findViewById(R.id.check_answer);
@@ -185,8 +195,9 @@ public class CheckActivity extends Activity {
         check_next = findViewById(R.id.check_next);
         check_image = findViewById(R.id.check_image);
     }
-    //바깥 레이아웃 눌러도 닫히지 않게 하기.
+
     @Override
+    //바깥 레이아웃 눌러도 닫히지 않게 하기.
     public boolean onTouchEvent(MotionEvent event) {
         //바깥레이어 클릭시 안닫히게
         if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
@@ -194,8 +205,9 @@ public class CheckActivity extends Activity {
         }
         return true;
     }
-    //뒤로가기 버튼 막음
+
     @Override
+    //뒤로가기 버튼 막음
     public void onBackPressed() {
         return;
     }

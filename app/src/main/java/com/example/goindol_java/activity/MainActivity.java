@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         AutoPermissions.Companion.loadAllPermissions(this, 101);
     }
 
+    //READ, WRITE 권한은 위험 권한 이므로 따로 사용자가 앱을 켰을 경우 허용 할 것인지를 물어보는 함수
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     }
 
     @Override
+    //MainActivity로 넘어오는 경우가 많기 때문에 Resume() 함수에서 저장되어 있는 데이터를 계속해서 불러와야함!!
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         data = prefs.getString(SplashActivity.SETTINGS_PLAYER,null);
@@ -188,7 +190,9 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         occupation_period = findViewById(R.id.occupation_period);
     }
 
-    //여기만 수정하면 댐;
+    //시대 별로 Period 값을 가져와 만약 사용자의 데이터가 저장되어 있는지 Check하는 함수
+    //Period 안에 있는 데이터가 없다면 LearnActivity 로 이동
+    //Period 안에 기존에 저자오디어 있는 데이터가 있다면 PopupActivity로 이동
     private void shared_check(String name){
         int index = 0;
         switch (name) {
@@ -279,7 +283,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     }
 
     //뒤로 가기 버튼 막음
-
     @Override
     public void onBackPressed() {
         return;

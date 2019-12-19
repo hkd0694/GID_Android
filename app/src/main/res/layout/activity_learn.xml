@@ -79,7 +79,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="normal"
                 android:textColor="@color/white"
-                android:background="@drawable/confirm_android"
+                android:background="@drawable/learn_android"
                 />
         </LinearLayout>
 
