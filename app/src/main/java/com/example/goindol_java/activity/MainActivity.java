@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     private TextView text;
 
+    private Intent intent;
+
     private Button origin_formation;
     private Button ancient_society;
     private Button goryeo_dynasty;
@@ -163,9 +165,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                     case R.id.setting:
                         break;
                     case R.id.middle:
+                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.initial:
-                        Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(),InitialActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;

@@ -71,6 +71,9 @@ public class ProblemActivity extends AppCompatActivity {
     //처음 여길로 올 때 번호
     private int row_first;
 
+
+    private Intent intent;
+
     private HSSFWorkbook hss;
     private HSSFSheet sh;
     private HSSFRow row;
@@ -274,9 +277,12 @@ public class ProblemActivity extends AppCompatActivity {
                     case R.id.setting:
                         break;
                     case R.id.middle:
+                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.initial:
-                        Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(),InitialActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;

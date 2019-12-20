@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="331dp"
+    android:id="@+id/interview_relative"
+    android:layout_margin="5dp"
+    android:background="@drawable/button_radius"
+    android:layout_height="40dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:id="@+id/Interview_image"
+            android:src="@drawable/icon_document_filled_color_2"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:id="@+id/interview_number"
+            android:layout_alignBottom="@id/Interview_image"
+            android:layout_alignTop="@id/Interview_image"
+            android:layout_alignRight="@id/Interview_image"
+            android:layout_alignLeft="@id/Interview_image"
+            android:text="10"
+            android:gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="228dp"
+            android:layout_height="22dp"
+            android:id="@+id/interview_arrange"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue_grey"
+            android:text="아 이게 뭐야"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:textStyle="normal"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

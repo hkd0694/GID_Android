@@ -54,11 +54,12 @@ public class ArrangeActivity extends AppCompatActivity {
     private int page;
     private int sheet_number;
 
+    private List<ArrangeData> arrangeData = new ArrayList<>();
+    private List<ArrangeData> recycler = new ArrayList<>();
+
     private SharedPreferences prefs;
     private Gson gson = new Gson();
     private List<Period> list = new ArrayList<>();
-    private List<ArrangeData> arrangeData = new ArrayList<>();
-    private List<ArrangeData> recycler = new ArrayList<>();
     private Type listType;
     private String name;
 
@@ -198,9 +199,12 @@ public class ArrangeActivity extends AppCompatActivity {
                     case R.id.setting:
                         break;
                     case R.id.middle:
+                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.initial:
-                        Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(),InitialActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;

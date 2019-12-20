@@ -34,6 +34,8 @@ public class InitialActivity extends AppCompatActivity {
     private Button init_init;
     private Button init_cancel;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,9 +138,12 @@ public class InitialActivity extends AppCompatActivity {
                     case R.id.setting:
                         break;
                     case R.id.middle:
+                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.initial:
-                        Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(),InitialActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;

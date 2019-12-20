@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -95,7 +96,8 @@ public class PopupActivity extends Activity {
             public void onClick(View v) {
                 //마지막으로 진행한 문제!!
                 //만약 문제를 모두 다 풀었을 경우 체크하여 바로 EndActivity로 넘겨준다..!!;;
-                if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() < list.get(Integer.parseInt(intent_name.split(",")[1])).getIndex()) {
+                //문제 수가 시대별로 모두 같아야만 돌아가는거임 다시 수정해야 함!!
+                if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() >= 40) {
                     intent = new Intent(getApplicationContext(), EndActivity.class);
                     intent.putExtra("name",intent_name.split(",")[0]);
                 } else {

@@ -15,6 +15,12 @@ public class ArrangeData implements Serializable {
     public ArrangeData(){
     }
 
+    public ArrangeData(String number, String summary) {
+        this.number = number;
+        check = "확인불가";
+        this.summary = summary;
+    }
+
     public ArrangeData(String number, String check, String summary) {
         this.number = number;
         this.check = check;

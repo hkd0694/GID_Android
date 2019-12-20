@@ -6,19 +6,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.goindol_java.Adapter.ArrangeAdapter;
+import com.example.goindol_java.Adapter.InterimAdapter;
 import com.example.goindol_java.R;
+import com.example.goindol_java.data.ArrangeData;
+import com.example.goindol_java.data.Period;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-public class LearnActivity extends AppCompatActivity {
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
+
+public class InterimActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -31,58 +46,83 @@ public class LearnActivity extends AppCompatActivity {
 
     private Intent intent;
 
+    private TextView inter_text;
+    private RecyclerView inter_recyclerview;
+    private List<ArrangeData> inter_recycler = new ArrayList<>();
+
+    private SharedPreferences prefs;
+    private Gson gson = new Gson();
+    private List<Period> list = new ArrayList<>();
+    private Type listType;
     private String name;
-    private TextView textView;
-    private Button learn_cancel;
-    private Button learn_start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
+        setContentView(R.layout.activity_interim);
         settingapp_bar();
         navi_header_click();
-        name = getIntent().getStringExtra(MainActivity.period_data);
-        textView = findViewById(R.id.learn_text);
-        learn_cancel = findViewById(R.id.learn_cancel);
-        learn_start = findViewById(R.id.learn_start);
-
-        textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
-
-        //뒤로가기 버튼을 누를 시 해당 Activity를 종료하고 MainActivity로 넘어간다.
-        learn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        //학습 시작 버튼을 누를시 발생하는 리스너
-        //해당 시대 데이터를 넘겨 주면서 ProblemActivity로 넘어간다.
-        learn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //학습 시작.
-                Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
-                intent.putExtra(MainActivity.period_data,name);
-                startActivity(intent);
-                finish();
-            }
-        });
+        init();
+        inter_text.setText("중간정리를 다시 보면서\n" + "한번 더 확인해 보세요");
+        prefs = getSharedPreferences("shared", MODE_PRIVATE);
+        name = prefs.getString(SETTINGS_PLAYER,null);
+        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        list = gson.fromJson(name, listType);
+        recycler_adapter();
+        Log.e("Start", list.size() + " 사이즈");
     }
+
+    private void recycler_adapter(){
+        ArrangeData arrangeData = new ArrangeData();
+        Log.e("Start", list.size() + " 사이즈");
+        for(int i=0;i<list.size();i++) {
+            String name = list.get(i).getPeriodic();
+            int index = 0;
+            switch (list.get(i).getArrangeData().size()/10) {
+                case 0: index = 0; break;
+                case 1: index = 1; break;
+                case 2: index = 2; break;
+                case 3: index = 3; break;
+                case 4: index = 4; break;
+            }
+            arrangeData = new ArrangeData(String.valueOf(index),name);
+            inter_recycler.add(arrangeData);
+        }
+        InterimAdapter adapter = new InterimAdapter(this,inter_recycler);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        inter_recyclerview.setLayoutManager(linearLayout);
+        inter_recyclerview.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStop() {
+        inter_recycler.clear();
+        super.onStop();
+    }
+
+    private void init(){
+        inter_text = findViewById(R.id.inter_text);
+        inter_recyclerview = findViewById(R.id.inter_recyclerview);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 
     //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.learn_toolbar);
+        toolbar = findViewById(R.id.inter_toolbar);
         setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.learn_drawerlayout);
+        drawerLayout = findViewById(R.id.inter_drawerlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.learn_navigation);
+        navigationView = findViewById(R.id.inter_navigation);
         setUpDrawerContent(navigationView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
@@ -161,9 +201,4 @@ public class LearnActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
-    //뒤로가기 버튼 막음
-    @Override
-    public void onBackPressed() {
-        return;
-    }
 }
