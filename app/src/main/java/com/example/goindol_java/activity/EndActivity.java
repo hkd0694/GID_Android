@@ -127,7 +127,7 @@ public class EndActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });
@@ -146,8 +146,12 @@ public class EndActivity extends AppCompatActivity {
                     case R.id.middle:
                         break;
                     case R.id.initial:
+                        Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                 }
+                drawerLayout.closeDrawer(GravityCompat.END);
                 return false;
             }
         });

@@ -12,15 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.EndActivity"></activity>
+        <activity android:name=".popup.InitPopupActivity"
+            android:theme="@android:style/Theme.Dialog" ></activity>
+        <activity android:name=".activity.InitialActivity" />
+        <activity android:name=".activity.EndActivity" />
         <activity android:name=".activity.ArrangeActivity" />
         <activity
-            android:name=".activity.CheckActivity"
+            android:name=".popup.CheckActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".activity.ProblemActivity" />
         <activity android:name=".activity.LearnActivity" />
         <activity
-            android:name=".activity.PopupActivity"
+            android:name=".popup.PopupActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".activity.SplashActivity"

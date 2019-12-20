@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="304dp"
+    android:layout_height="128dp"
+    android:background="@drawable/button_radius"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="64dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue_grey"
+            android:text="모든 문제를 초기화 합니다!"
+            />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/cancel_light"
+            android:layout_marginLeft="25dp"
+            android:id="@+id/initpopup_close"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="64dp"
+            android:text="뒤로 가기"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue_grey"
+            android:background="@drawable/button_radius"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:id="@+id/initpopup_cancel"
+            />
+
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="64dp"
+            android:text="초기화 진행"
+            android:textSize="16sp"
+            android:background="@drawable/button_radius"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="#008994"
+            android:id="@+id/initpopup_ing"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

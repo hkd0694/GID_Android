@@ -16,9 +16,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
 
-public class LearnActivity extends AppCompatActivity {
+public class InitialActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -29,58 +30,55 @@ public class LearnActivity extends AppCompatActivity {
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
-    private String name;
-    private TextView textView;
-    private Button learn_cancel;
-    private Button learn_start;
+    private TextView init_text;
+    private Button init_init;
+    private Button init_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
+        setContentView(R.layout.activity_initial);
         settingapp_bar();
         navi_header_click();
-        name = getIntent().getStringExtra(MainActivity.period_data);
-        textView = findViewById(R.id.learn_text);
-        learn_cancel = findViewById(R.id.learn_cancel);
-        learn_start = findViewById(R.id.learn_start);
+        init();
+        init_text.setText("문제를 다시 풀고 싶나요?\n" + "전체 문제를 초기화합니다.");
 
-        textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
-
-        //뒤로가기 버튼을 누를 시 해당 Activity를 종료하고 MainActivity로 넘어간다.
-        learn_cancel.setOnClickListener(new View.OnClickListener() {
+        init_init.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //팝업 액티비티 시작!!
+                Intent intent = new Intent(getApplicationContext(), InitPopupActivity.class);
+                startActivity(intent);
             }
         });
 
-        //학습 시작 버튼을 누를시 발생하는 리스너
-        //해당 시대 데이터를 넘겨 주면서 ProblemActivity로 넘어간다.
-        learn_start.setOnClickListener(new View.OnClickListener() {
+        init_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //학습 시작.
-                Intent intent = new Intent(getApplicationContext(),ProblemActivity.class);
-                intent.putExtra(MainActivity.period_data,name);
-                startActivity(intent);
                 finish();
             }
         });
     }
 
+    private void init(){
+        init_text = findViewById(R.id.initial_textview);
+        init_init = findViewById(R.id.initial_init);
+        init_cancel = findViewById(R.id.initial_cancel);
+    }
+
+
     //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.learn_toolbar);
+        toolbar = findViewById(R.id.initial_toolbar);
         setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.learn_drawerlayout);
+        drawerLayout = findViewById(R.id.initial_drawerlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.learn_navigation);
+        navigationView = findViewById(R.id.initial_navigation);
         setUpDrawerContent(navigationView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +123,6 @@ public class LearnActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
@@ -154,11 +151,5 @@ public class LearnActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle setUpActionBarToggle(){
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
-    }
-
-    //뒤로가기 버튼 막음
-    @Override
-    public void onBackPressed() {
-        return;
     }
 }

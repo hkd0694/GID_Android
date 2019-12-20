@@ -24,9 +24,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
+import com.example.goindol_java.popup.CheckActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -112,7 +112,7 @@ public class ProblemActivity extends AppCompatActivity {
                 String ck;
                 if(answer == seleted) ck = "정답";
                 else ck = "오답";
-                Intent intent = new Intent(getApplicationContext(),CheckActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
                 //"정답", "오답"을 체크해주기 위해 넘겨줌
                 intent.putExtra("select",ck);
                 //sheet 번호를 기억해야하기 때문에 같이 넘겨줌
@@ -256,7 +256,7 @@ public class ProblemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });
@@ -276,8 +276,12 @@ public class ProblemActivity extends AppCompatActivity {
                     case R.id.middle:
                         break;
                     case R.id.initial:
+                        Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                 }
+                drawerLayout.closeDrawer(GravityCompat.END);
                 return false;
             }
         });

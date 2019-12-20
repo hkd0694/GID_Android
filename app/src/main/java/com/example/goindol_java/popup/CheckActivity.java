@@ -1,4 +1,4 @@
-package com.example.goindol_java.activity;
+package com.example.goindol_java.popup;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.activity.ArrangeActivity;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
@@ -146,7 +147,7 @@ public class CheckActivity extends Activity {
                 // 사용자가 10문제를 풀 때마다 중간정리를 보여주기 위해 ArrangeActivity로 넘어간다.
                 //만약 아직 10문제를 못 풀었으면 setResult를 통해 전 액티비티로 돌아간다.
                 if(pro.getExcel_no() % 10 == 0) {
-                    intent = new Intent(getApplicationContext(),ArrangeActivity.class);
+                    intent = new Intent(getApplicationContext(), ArrangeActivity.class);
                     int page = pro.getExcel_no() / 10;
                     intent.putExtra("page",page);
                     intent.putExtra("sheet",sheet_indexs);

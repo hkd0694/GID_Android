@@ -1,4 +1,4 @@
-package com.example.goindol_java.activity;
+package com.example.goindol_java.popup;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.activity.EndActivity;
+import com.example.goindol_java.activity.LearnActivity;
+import com.example.goindol_java.activity.ProblemActivity;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
@@ -77,7 +80,7 @@ public class PopupActivity extends Activity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
                 editor.commit();
-                Intent intent = new Intent(getApplicationContext(),LearnActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LearnActivity.class);
                 intent.putExtra(period_data,intent_name);
                 startActivity(intent);
                 finish();
@@ -93,10 +96,10 @@ public class PopupActivity extends Activity {
                 //마지막으로 진행한 문제!!
                 //만약 문제를 모두 다 풀었을 경우 체크하여 바로 EndActivity로 넘겨준다..!!;;
                 if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() < list.get(Integer.parseInt(intent_name.split(",")[1])).getIndex()) {
-                    intent = new Intent(getApplicationContext(),EndActivity.class);
+                    intent = new Intent(getApplicationContext(), EndActivity.class);
                     intent.putExtra("name",intent_name.split(",")[0]);
                 } else {
-                    intent = new Intent(getApplicationContext(),ProblemActivity.class);
+                    intent = new Intent(getApplicationContext(), ProblemActivity.class);
                     intent.putExtra(period_data,intent_name);
                 }
                 startActivity(intent);
