@@ -14,14 +14,15 @@ public class Period {
     private int index;
     //중간 정리용 데이터
     private List<ArrangeData> arrangeData = new ArrayList<>();
-
     //스크랩 체크 부분? 및 시간 여기다 저장
+    private List<ScriptData> scriptData = new ArrayList<>();
 
 
-    public Period(String periodic, List<ExcelProblem> period_data,List<ArrangeData> arrangeData) {
+    public Period(String periodic, List<ExcelProblem> period_data,List<ArrangeData> arrangeData,List<ScriptData> scriptData) {
         this.periodic = periodic;
         this.period_data = period_data;
         this.arrangeData = arrangeData;
+        this.scriptData = scriptData;
         index = 2;
     }
 
@@ -55,5 +56,12 @@ public class Period {
 
     public void setArrangeData(List<ArrangeData> arrangeData) {
         this.arrangeData = arrangeData;
+    }
+
+    public List<ScriptData> getScriptData() {
+        return scriptData;
+    }
+    public void setScriptData(List<ScriptData> scriptData) {
+        this.scriptData = scriptData;
     }
 }

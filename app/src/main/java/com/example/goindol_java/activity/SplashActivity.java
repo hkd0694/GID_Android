@@ -13,6 +13,7 @@ import com.example.goindol_java.R;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
+import com.example.goindol_java.data.ScriptData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +30,7 @@ public class SplashActivity extends Activity {
     private List<Period> arrayList = new ArrayList<>();
     private List<ExcelProblem> list = new ArrayList<>();
     private List<ArrangeData> arrange = new ArrayList<>();
+    private List<ScriptData> scriptData = new ArrayList<>();
     private SharedPreferences prefs;
 
     @Override
@@ -50,15 +52,15 @@ public class SplashActivity extends Activity {
 
     //만약 앱을 처음 설치하고 처음 실행시에 시대 별로 데이터를 보관해야 하기 때문에 초기화 진행
     private void init(){
-        arrayList.add(new Period("기원과 형성",list,arrange));
-        arrayList.add(new Period("고대사회",list,arrange));
-        arrayList.add(new Period("고려시대",list,arrange));
-        arrayList.add(new Period("조선전기",list,arrange));
-        arrayList.add(new Period("조선후기",list,arrange));
-        arrayList.add(new Period("근대 개화",list,arrange));
-        arrayList.add(new Period("일제 강점기",list,arrange));
-        arrayList.add(new Period("현대",list,arrange));
-        arrayList.add(new Period("랜덤",list,arrange));
+        arrayList.add(new Period("기원과 형성",list,arrange,scriptData));
+        arrayList.add(new Period("고대사회",list,arrange,scriptData));
+        arrayList.add(new Period("고려시대",list,arrange,scriptData));
+        arrayList.add(new Period("조선전기",list,arrange,scriptData));
+        arrayList.add(new Period("조선후기",list,arrange,scriptData));
+        arrayList.add(new Period("근대 개화",list,arrange,scriptData));
+        arrayList.add(new Period("일제 강점기",list,arrange,scriptData));
+        arrayList.add(new Period("현대",list,arrange,scriptData));
+        arrayList.add(new Period("랜덤",list,arrange,scriptData));
         Gson gson  = new GsonBuilder().create();
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         String json = gson.toJson(arrayList, listType);

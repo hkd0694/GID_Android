@@ -1,7 +1,7 @@
 package com.example.goindol_java.Adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.activity.TotalinterimActivity;
 import com.example.goindol_java.data.ArrangeData;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
     private Context context;
     private List<ArrangeData> arrangeData = new ArrayList<>();
     private ArrangeData arrange = new ArrangeData();
+
+    private Intent intent;
 
     public InterimAdapter(Context context, List<ArrangeData> arrangeData){
         this.context = context;
@@ -59,6 +62,8 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 //중간 정리 한거 Activity로 보여줌!!
+                intent = new Intent(context, TotalinterimActivity.class);
+                context.startActivity(intent);
             }
         });
     }

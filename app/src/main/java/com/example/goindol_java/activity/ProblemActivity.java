@@ -3,6 +3,7 @@ package com.example.goindol_java.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -57,8 +58,7 @@ public class ProblemActivity extends AppCompatActivity {
 
     private TextView pro_text;
     private TextView pro_no;
-    private Button pro_script;
-    private TextView pro_problem;
+    private ImageButton pro_script;
     private TextView pro_content;
     private RadioGroup pro_radiogroup;
     private RadioButton pro_radio1,pro_radio2,pro_radio3,pro_radio4,pro_radio5;
@@ -140,6 +140,13 @@ public class ProblemActivity extends AppCompatActivity {
             }
         });
 
+        pro_script.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
     }
 
     @Override
@@ -174,10 +181,16 @@ public class ProblemActivity extends AppCompatActivity {
                 }
             }
         }
-        pro_radio1.setSelected(false); pro_radio2.setSelected(false);
-        pro_radio3.setSelected(false); pro_radio4.setSelected(false);
-        pro_radio5.setSelected(false);
+
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        pro_radio1.setChecked(false); pro_radio2.setChecked(false);
+        pro_radio3.setChecked(false); pro_radio4.setChecked(false);
+        pro_radio5.setChecked(false);
+        super.onPause();
     }
 
     //onActivityResult가 불리고 난 후에 onResume() 이 불림!!

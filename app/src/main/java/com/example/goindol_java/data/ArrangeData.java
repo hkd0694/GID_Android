@@ -2,7 +2,7 @@ package com.example.goindol_java.data;
 
 import java.io.Serializable;
 
-//중간 정리용 데이터 class
+//중간 정리용, 스크랩한 데이터 class
 public class ArrangeData implements Serializable {
 
     //해당 번호
@@ -12,6 +12,7 @@ public class ArrangeData implements Serializable {
     //해당 문제 요약
     private String summary;
 
+
     public ArrangeData(){
     }
 
@@ -20,6 +21,8 @@ public class ArrangeData implements Serializable {
         check = "확인불가";
         this.summary = summary;
     }
+
+
 
     public ArrangeData(String number, String check, String summary) {
         this.number = number;
@@ -50,4 +53,5 @@ public class ArrangeData implements Serializable {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
 }
