@@ -224,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         startActivity(intent);
     }
 
+    
     //시대별 버튼 클릭시 발생하는 리스너들
     private void click_event(){
         origin_formation.setOnClickListener(new View.OnClickListener() {
