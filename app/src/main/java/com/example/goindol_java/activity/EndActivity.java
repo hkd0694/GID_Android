@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class EndActivity extends AppCompatActivity {
@@ -149,7 +150,7 @@ public class EndActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.initial:
-                        intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(), InitPopupActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;

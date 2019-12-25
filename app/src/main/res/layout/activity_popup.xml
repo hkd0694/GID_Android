@@ -14,12 +14,13 @@
         
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
             android:textSize="16sp"
             android:fontFamily="sans-serif"
             android:textStyle="normal"
             android:textColor="@color/dark_blue_grey"
             android:text="지난 학습에 이어 학습 하시겠어요?"
+            android:id="@+id/popup_content"
             />
 
         <ImageView

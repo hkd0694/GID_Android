@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.Period;
+import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -130,7 +131,7 @@ public class TotalinterimActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.initial:
-                        intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(), InitPopupActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;

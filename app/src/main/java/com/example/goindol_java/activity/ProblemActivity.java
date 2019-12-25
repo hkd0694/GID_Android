@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,7 +72,6 @@ public class ProblemActivity extends AppCompatActivity {
     //처음 여길로 올 때 번호
     private int row_first;
 
-
     private Intent intent;
 
     private HSSFWorkbook hss;
@@ -105,24 +105,28 @@ public class ProblemActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        seleted = 0;
         //정답 확인하기 버튼 누를 시 발생하는 리스너
         //
         pro_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int answer = (int)row.getCell(9).getNumericCellValue();
-                String ck;
-                if(answer == seleted) ck = "정답";
-                else ck = "오답";
-                Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
-                //"정답", "오답"을 체크해주기 위해 넘겨줌
-                intent.putExtra("select",ck);
-                //sheet 번호를 기억해야하기 때문에 같이 넘겨줌
-                intent.putExtra("sheet_index",sheet_index);
-                //sheet 번호와 같이 행번호도 기억해야 하기 때문에 intent를 통하여 넘겨줌.
-                intent.putExtra("row_first",row_first);
-                startActivityForResult(intent,101);
+                if(seleted == 0) {
+                    Toast.makeText(getApplicationContext(),"문제를 풀지 않았습니다.\n 보기 중 정답을 체크해주세요.",Toast.LENGTH_SHORT).show();
+                } else{
+                    int answer = (int)row.getCell(9).getNumericCellValue();
+                    String ck;
+                    if(answer == seleted) ck = "정답";
+                    else ck = "오답";
+                    Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
+                    //"정답", "오답"을 체크해주기 위해 넘겨줌
+                    intent.putExtra("select",ck);
+                    //sheet 번호를 기억해야하기 때문에 같이 넘겨줌
+                    intent.putExtra("sheet_index",sheet_index);
+                    //sheet 번호와 같이 행번호도 기억해야 하기 때문에 intent를 통하여 넘겨줌.
+                    intent.putExtra("row_first",row_first);
+                    startActivityForResult(intent,101);
+                }
             }
         });
 
@@ -157,6 +161,7 @@ public class ProblemActivity extends AppCompatActivity {
         name = prefs.getString(SETTINGS_PLAYER,null);
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
+        seleted = 0;
         //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다
         if(list.get(sheet_index).getIndex() != 2) {
             row_first = list.get(sheet_index).getIndex();

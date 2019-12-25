@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.Period;
+import com.example.goindol_java.popup.InitPopupActivity;
 import com.example.goindol_java.popup.PopupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -29,7 +30,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String period_data = "PERIOD";
 
@@ -70,9 +71,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         navi_header_click();
         init();
         click_event();
-        AutoPermissions.Companion.loadAllPermissions(this, 101);
     }
-
+/*
     //READ, WRITE 권한은 위험 권한 이므로 따로 사용자가 앱을 켰을 경우 허용 할 것인지를 물어보는 함수
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     @Override
     public void onDenied(int i, String[] strings) {
-    }
+    }*/
 
     @Override
     //MainActivity로 넘어오는 경우가 많기 때문에 Resume() 함수에서 저장되어 있는 데이터를 계속해서 불러와야함!!
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                         startActivity(intent);
                         break;
                     case R.id.initial:
-                        intent = new Intent(getApplicationContext(),InitialActivity.class);
+                        intent = new Intent(getApplicationContext(), InitPopupActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             intent = new Intent(getApplicationContext(),LearnActivity.class);
         } else {
             intent = new Intent(getApplicationContext(), PopupActivity.class);
+            intent.putExtra("size",period.getPeriod_data().size());
         }
         intent.putExtra(period_data,period.getPeriodic() + "," + index);
         startActivity(intent);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +41,7 @@ public class SplashActivity extends Activity {
         //앱을 키자마자 만약 사용자가 이용하고 있는 데이터가 있을 경우 data 변수에 값이 들어온다.
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         String data = prefs.getString(SETTINGS_PLAYER, null);
+        Log.e("Start",data + " 들어있다고?");
         if(data == null) {
             init();
         }
@@ -58,7 +60,7 @@ public class SplashActivity extends Activity {
         arrayList.add(new Period("조선전기",list,arrange,scriptData));
         arrayList.add(new Period("조선후기",list,arrange,scriptData));
         arrayList.add(new Period("근대 개화",list,arrange,scriptData));
-        arrayList.add(new Period("일제 강점기",list,arrange,scriptData));
+        arrayList.add(new Period("일제 강점기 ~ 현대",list,arrange,scriptData));
         Gson gson  = new GsonBuilder().create();
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         String json = gson.toJson(arrayList, listType);

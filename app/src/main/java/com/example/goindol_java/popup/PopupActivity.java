@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.goindol_java.R;
 import com.example.goindol_java.activity.EndActivity;
@@ -37,6 +38,7 @@ public class PopupActivity extends Activity {
     private ImageView imageView;
     private Button popup_reset;
     private Button popup_ing;
+    private TextView popup_content;
     private String name;
     private String intent_name;
 
@@ -49,6 +51,8 @@ public class PopupActivity extends Activity {
 
     private Intent intent;
 
+    private int size;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +60,17 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.activity_popup);
         //팝업 화면를 제외한 바깥 부분의 색을 투명하게 해주는 함수
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
+        size = getIntent().getIntExtra("size",0);
 
         intent_name = getIntent().getStringExtra(period_data);
         imageView = findViewById(R.id.popup_cancel);
         popup_reset = findViewById(R.id.popup_reset);
         popup_ing = findViewById(R.id.popup_ing);
+        popup_content = findViewById(R.id.popup_content);
+        if(size == 40) {
+            popup_content.setText("이 파트는 이미 다 풀었습니다.\n" + "한 번 더 학습 하시겠어요?");
+            popup_ing.setText("뒤로 가기");
+        }
         //X 표시를 누를 시 popupActivity 종료되면서 MainActivity로 넘어감
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,17 +104,20 @@ public class PopupActivity extends Activity {
         popup_ing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //이부분을 수정해야 함!!
                 //마지막으로 진행한 문제!!
                 //만약 문제를 모두 다 풀었을 경우 체크하여 바로 EndActivity로 넘겨준다..!!;;
                 //문제 수가 시대별로 모두 같아야만 돌아가는거임 다시 수정해야 함!!
-                if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() >= 40) {
-                    intent = new Intent(getApplicationContext(), EndActivity.class);
-                    intent.putExtra("name",intent_name.split(",")[0]);
-                } else {
-                    intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                    intent.putExtra(period_data,intent_name);
+                if(!popup_ing.getText().equals("뒤로 가기")) {
+                    if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() >= 40) {
+                        intent = new Intent(getApplicationContext(), EndActivity.class);
+                        intent.putExtra("name",intent_name.split(",")[0]);
+                    } else {
+                        intent = new Intent(getApplicationContext(), ProblemActivity.class);
+                        intent.putExtra(period_data,intent_name);
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
                 finish();
             }
         });

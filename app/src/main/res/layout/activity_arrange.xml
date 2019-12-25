@@ -55,7 +55,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                android:background="@drawable/button_radius_green"
+                android:background="@drawable/button_radius_green_top"
                 android:gravity="center"
                 >
 
@@ -96,7 +96,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:id="@+id/arr_button"
-                android:background="@drawable/confirm_android"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:text="계속 진행하기"
+                android:background="@drawable/button_radius_green"
                 />
 
         </LinearLayout>

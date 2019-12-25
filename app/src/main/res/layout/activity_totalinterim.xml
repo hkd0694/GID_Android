@@ -33,7 +33,6 @@
                 android:id="@+id/total_viewpager"
                 >
 
-
             </androidx.viewpager.widget.ViewPager>
 
         </LinearLayout>
