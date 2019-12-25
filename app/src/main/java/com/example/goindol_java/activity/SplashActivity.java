@@ -59,8 +59,6 @@ public class SplashActivity extends Activity {
         arrayList.add(new Period("조선후기",list,arrange,scriptData));
         arrayList.add(new Period("근대 개화",list,arrange,scriptData));
         arrayList.add(new Period("일제 강점기",list,arrange,scriptData));
-        arrayList.add(new Period("현대",list,arrange,scriptData));
-        arrayList.add(new Period("랜덤",list,arrange,scriptData));
         Gson gson  = new GsonBuilder().create();
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         String json = gson.toJson(arrayList, listType);

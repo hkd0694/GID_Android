@@ -140,39 +140,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/occupation_period"
-                android:layout_width="141dp"
-                android:layout_height="69dp"
-                android:layout_marginLeft="46dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/button_radius"
-                android:fontFamily="sans-serif"
-                android:text="일제 강점기"
-                android:textColor="@color/dark_green_blue"
-                android:textSize="16sp"
-                android:textStyle="normal" />
-
-            <Button
-                android:id="@+id/modern_times"
-                android:layout_width="141dp"
-                android:layout_height="69dp"
-                android:layout_marginRight="46dp"
-                android:background="@drawable/button_radius"
-                android:fontFamily="sans-serif"
-                android:text="현대"
-                android:textColor="@color/dark_green_blue"
-                android:textSize="16sp"
-                android:textStyle="normal" />
-
-        </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -185,12 +152,12 @@
             android:layout_marginLeft="46dp"
             android:layout_marginRight="46dp"
             android:background="@drawable/button_radius"
-            android:text="랜덤"
+            android:text="일제강점기 ~ 현대"
             android:textSize="16sp"
             android:fontFamily="sans-serif"
             android:textStyle="normal"
             android:textColor="@color/dark_green_blue"
-            android:id="@+id/random"
+            android:id="@+id/occupation_period"
             />
 
     </LinearLayout>

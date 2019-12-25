@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     private Button joseon_after;
     private Button modern;
     private Button occupation_period;
-    private Button modern_times;
-    private Button random;
 
     private List<Period> list = new ArrayList<>();
     private SharedPreferences prefs;
@@ -84,12 +82,10 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
     @Override
     public void onGranted(int i, String[] strings) {
-
     }
 
     @Override
     public void onDenied(int i, String[] strings) {
-
     }
 
     @Override
@@ -193,8 +189,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         joseon_before = findViewById(R.id.joseon_before);
         joseon_after = findViewById(R.id.joseon_after);
         modern = findViewById(R.id.modern);
-        modern_times = findViewById(R.id.modern_times);
-        random = findViewById(R.id.random);
         occupation_period = findViewById(R.id.occupation_period);
     }
 
@@ -211,8 +205,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             case "조선후기":        period = list.get(4); index = 4; break;
             case "근대 개화":       period = list.get(5); index = 5; break;
             case "일제 강점기":     period = list.get(6); index = 6;break;
-            case "현대":            period = list.get(7); index = 7; break;
-            case "랜덤":            period = list.get(8); index = 8; break;
         }
         Intent intent;
         if(period.getPeriod_data().size() == 0) {
@@ -224,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         startActivity(intent);
     }
 
-    
+
     //시대별 버튼 클릭시 발생하는 리스너들
     private void click_event(){
         origin_formation.setOnClickListener(new View.OnClickListener() {
@@ -276,19 +268,6 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             }
         });
 
-        modern_times.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shared_check(modern_times.getText().toString());
-            }
-        });
-
-        random.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shared_check(random.getText().toString());
-            }
-        });
     }
 
     //뒤로 가기 버튼 막음

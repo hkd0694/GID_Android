@@ -64,8 +64,9 @@
                 android:layout_height="48dp"
                 android:textSize="16sp"
                 android:id="@+id/learn_cancel"
+                android:text="뒤로가기"
                 android:textColor="@color/dark_blue_grey"
-                android:background="@drawable/back"
+                android:background="@drawable/button_radius"
                 android:layout_marginLeft="35.6dp"
                 android:layout_marginRight="36.4dp"
                 />
@@ -79,7 +80,8 @@
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="normal"
                 android:textColor="@color/white"
-                android:background="@drawable/learn_android"
+                android:text="학습 시작하기"
+                android:background="@drawable/button_radius_green"
                 />
         </LinearLayout>
 
