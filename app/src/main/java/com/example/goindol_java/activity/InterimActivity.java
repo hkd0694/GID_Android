@@ -70,12 +70,10 @@ public class InterimActivity extends AppCompatActivity {
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
         recycler_adapter();
-        Log.e("Start", list.size() + " 사이즈");
     }
 
     private void recycler_adapter(){
         ArrangeData arrangeData = new ArrangeData();
-        Log.e("Start", list.size() + " 사이즈");
         for(int i=0;i<list.size();i++) {
             String name = list.get(i).getPeriodic();
             int index = 0;
@@ -86,6 +84,7 @@ public class InterimActivity extends AppCompatActivity {
                 case 3: index = 3; break;
                 case 4: index = 4; break;
             }
+            //number, check, summary
             arrangeData = new ArrangeData(String.valueOf(index),String.valueOf(i),name);
             inter_recycler.add(arrangeData);
         }

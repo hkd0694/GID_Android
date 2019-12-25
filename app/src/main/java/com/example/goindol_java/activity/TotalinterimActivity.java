@@ -6,15 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.goindol_java.Adapter.ArrangePagerAdapter;
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.Period;
@@ -27,6 +31,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
+
+import static androidx.annotation.Dimension.DP;
+
 public class TotalinterimActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -38,9 +46,15 @@ public class TotalinterimActivity extends AppCompatActivity {
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
+    private TextView total_text;
+
+    private CircleIndicator indicator;
 
     private ViewPager viewPager;
     private Intent intent;
+    private String name;
+    private int index;
+    private ArrangePagerAdapter arrangePagerAdapter;
 
     private List<Period> list = new ArrayList<>();
     private List<ArrangeData> arrangeData = new ArrayList<>();
@@ -54,15 +68,34 @@ public class TotalinterimActivity extends AppCompatActivity {
         setContentView(R.layout.activity_totalinterim);
         settingapp_bar();
         navi_header_click();
-        viewPager = findViewById(R.id.total_viewpager);
-
+        name = getIntent().getStringExtra("area");
+        index = getIntent().getIntExtra("index",10);
+        total_text = findViewById(R.id.total_text);
+        total_text.setText(name + " 중간정리를 다시 보면서\n" + "한번 더 확인해 보세요.");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         data = prefs.getString(SplashActivity.SETTINGS_PLAYER,null);
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
-        // 변환
         list = gson.fromJson(data, listType);
+        viepager_adapter();
     }
 
+    private void viepager_adapter(){
+        viewPager = findViewById(R.id.total_viewpager);
+        indicator = findViewById(R.id.indicator);
+        viewPager.setClipToPadding(false);
+        float density = getResources().getDisplayMetrics().density;
+        int margin = (int) (DP * density);
+        viewPager.setPadding(margin, 0, margin, 0);
+        viewPager.setPageMargin(margin/2);
+        arrangePagerAdapter = new ArrangePagerAdapter(this,list.get(index).getArrangeData());
+        viewPager.setAdapter(arrangePagerAdapter);
+        indicator.setViewPager(viewPager);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){

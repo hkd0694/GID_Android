@@ -63,6 +63,8 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
             public void onClick(View v) {
                 //중간 정리 한거 Activity로 보여줌!!
                 intent = new Intent(context, TotalinterimActivity.class);
+                intent.putExtra("index",position);
+                intent.putExtra("area",holder.inter_summary.getText().toString());
                 context.startActivity(intent);
             }
         });
