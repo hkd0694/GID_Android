@@ -3,6 +3,8 @@ package com.example.goindol_java.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +32,7 @@ import com.example.goindol_java.popup.CheckActivity;
 import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -148,8 +151,27 @@ public class ProblemActivity extends AppCompatActivity {
         pro_script.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Drawable temp = pro_script.getDrawable();
+                Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
+                Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
+                Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
+                Log.e("Start",list.get(sheet_index).getScriptData().size() + " 크기");
+                if(tmpBitmap.equals(tmpBitmap1)) {
+                    list.get(sheet_index).getScriptData().get(row_first-2).setScript(true);
+                    int add_count = list.get(sheet_index).getScriptData().get(row_first-2).getCount();
+                    list.get(sheet_index).getScriptData().get(row_first-2).setCount(add_count+1);
+                    pro_script.setImageResource(R.drawable.star_active_darkblue);
+                } else{
+                    list.get(sheet_index).getScriptData().get(row_first-2).setScript(false);
+                    int delete_count = list.get(sheet_index).getScriptData().get(row_first-2).getCount();
+                    list.get(sheet_index).getScriptData().get(row_first-2).setCount(delete_count-1);
+                    pro_script.setImageResource(R.drawable.star_normal_darkblue);
+                }
+                gson  = new GsonBuilder().create();
+                String json = gson.toJson(list, listType);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(SETTINGS_PLAYER, json);
+                editor.commit();
             }
         });
     }
@@ -166,8 +188,16 @@ public class ProblemActivity extends AppCompatActivity {
         //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다
         if(list.get(sheet_index).getIndex() != 2) {
             row_first = list.get(sheet_index).getIndex();
-        } else{
+        } else {
             row_first = 2;
+        }
+        if(list.get(sheet_index).getScriptData().size() == 0) pro_script.setImageResource(R.drawable.star_normal_darkblue);
+        else{
+            if(list.get(sheet_index).getScriptData().get(row_first - 2).isScript()){
+                pro_script.setImageResource(R.drawable.star_active_darkblue);
+            } else{
+                pro_script.setImageResource(R.drawable.star_normal_darkblue);
+            }
         }
         sh = hss.getSheetAt(sheet_index);
         row = sh.getRow(row_first);
@@ -196,6 +226,10 @@ public class ProblemActivity extends AppCompatActivity {
         pro_radio1.setChecked(false); pro_radio2.setChecked(false);
         pro_radio3.setChecked(false); pro_radio4.setChecked(false);
         pro_radio5.setChecked(false);
+        for(int i=0;i<40;i++) {
+            Log.e("Start",list.get(sheet_index).getScriptData().get(row_first-2).getNumber() + " : " + list.get(sheet_index).getScriptData().get(row_first-2).getCount() + " : " + list.get(sheet_index).getScriptData().get(row_first-2).isScript());
+        }
+
         super.onPause();
     }
 

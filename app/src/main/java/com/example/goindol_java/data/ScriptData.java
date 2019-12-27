@@ -10,7 +10,13 @@ public class ScriptData {
     private boolean script;
 
     public ScriptData(){
+        script = false;
+    }
 
+    public ScriptData(String number, int count, boolean script) {
+        this.number = number;
+        this.count = count;
+        this.script = script;
     }
 
     public String getNumber() {

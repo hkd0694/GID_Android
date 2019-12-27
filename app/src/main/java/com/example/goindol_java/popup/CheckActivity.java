@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,6 +104,36 @@ public class CheckActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if(list.get(sheet_indexs).getScriptData().get(row_number-2).isScript()) check_script.setImageResource(R.drawable.star_active_darkblue);
+        else {
+            check_script.setImageResource(R.drawable.star_normal_darkblue);
+        }
+
+        check_script.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable temp = check_script.getDrawable();
+                Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
+                Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
+                Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
+                Log.e("Start",list.get(sheet_indexs).getScriptData().size() + " 크기");
+                if(tmpBitmap.equals(tmpBitmap1)) {
+                    list.get(sheet_indexs).getScriptData().get(row_number-2).setScript(true);
+                    int add_count = list.get(sheet_indexs).getScriptData().get(row_number-2).getCount();
+                    list.get(sheet_indexs).getScriptData().get(row_number-2).setCount(add_count+1);
+                    check_script.setImageResource(R.drawable.star_active_darkblue);
+                } else{
+                    list.get(sheet_indexs).getScriptData().get(row_number-2).setScript(false);
+                    check_script.setImageResource(R.drawable.star_normal_darkblue);
+                }
+                gson  = new GsonBuilder().create();
+                String json = gson.toJson(list, listType);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(SETTINGS_PLAYER, json);
+                editor.commit();
+            }
+        });
+
         sh = hss.getSheetAt(sheet_indexs);
         row = sh.getRow(row_number);
         //시트 번호에서 해설 부분 가져오기
@@ -211,5 +244,14 @@ public class CheckActivity extends Activity {
     //뒤로가기 버튼 막음
     public void onBackPressed() {
         return;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        for(int i=0;i<40;i++) {
+            Log.e("Start",list.get(sheet_indexs).getScriptData().get(row_number-2).getNumber() + " : " + list.get(sheet_indexs).getScriptData().get(row_number-2).getCount() + " : " + list.get(sheet_indexs).getScriptData().get(row_number-2).isScript());
+        }
+        super.onDestroy();
     }
 }

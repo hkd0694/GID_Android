@@ -7,7 +7,6 @@
             android:icon="@drawable/star_filled"
             android:title="스트랩한 문제 보기">
 
-
         </item>
         <item
             android:id="@+id/middle"

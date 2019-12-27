@@ -63,8 +63,8 @@
                     <ImageButton
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/star_normal_darkblue"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/star_normal_darkblue"
                         android:id="@+id/pro_script"
                         />
                     
