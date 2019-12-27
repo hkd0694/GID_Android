@@ -18,11 +18,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.goindol_java.Adapter.ArrangeAdapter;
 import com.example.goindol_java.Adapter.InterimAdapter;
+import com.example.goindol_java.Adapter.ScriptAdapter;
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.Period;
+import com.example.goindol_java.data.ScriptData;
 import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -34,7 +35,7 @@ import java.util.List;
 
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
-public class InterimActivity extends AppCompatActivity {
+public class ScrapActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -47,9 +48,9 @@ public class InterimActivity extends AppCompatActivity {
 
     private Intent intent;
 
-    private TextView inter_text;
-    private RecyclerView inter_recyclerview;
-    private List<ArrangeData> inter_recycler = new ArrayList<>();
+    private TextView scrap_text;
+    private RecyclerView scrap_recyclerview;
+    private List<ArrangeData> scrap_recycler = new ArrayList<>();
 
     private SharedPreferences prefs;
     private Gson gson = new Gson();
@@ -57,14 +58,16 @@ public class InterimActivity extends AppCompatActivity {
     private Type listType;
     private String name;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interim);
+        setContentView(R.layout.activity_scrap);
         settingapp_bar();
         navi_header_click();
         init();
-        inter_text.setText("중간정리를 다시 보면서\n" + "한번 더 확인해 보세요");
+        scrap_text.setText("스크랩한 문제를 다시 풀면서\n" + "한번 더 확인해 보세요.");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER,null);
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
@@ -72,57 +75,44 @@ public class InterimActivity extends AppCompatActivity {
         recycler_adapter();
     }
 
+
+    private void init(){
+        scrap_text = findViewById(R.id.scrap_text);
+        scrap_recyclerview = findViewById(R.id.scrap_recycler);
+    }
+
     private void recycler_adapter(){
         ArrangeData arrangeData = new ArrangeData();
         for(int i=0;i<list.size();i++) {
             String name = list.get(i).getPeriodic();
             int index = 0;
-            switch (list.get(i).getArrangeData().size()/10) {
-                case 0: index = 0; break;
-                case 1: index = 1; break;
-                case 2: index = 2; break;
-                case 3: index = 3; break;
-                case 4: index = 4; break;
+            List<ScriptData> data = list.get(i).getScriptData();
+            for(int j=0;j<data.size();j++) {
+                if(list.get(i).getScriptData().get(j).isScript()) index++;
             }
             //number, check, summary
             arrangeData = new ArrangeData(String.valueOf(index),String.valueOf(i),name);
-            inter_recycler.add(arrangeData);
+            scrap_recycler.add(arrangeData);
         }
-        InterimAdapter adapter = new InterimAdapter(this,inter_recycler);
+        ScriptAdapter adapter = new ScriptAdapter(this,scrap_recycler);
         LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        inter_recyclerview.setLayoutManager(linearLayout);
-        inter_recyclerview.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onStop() {
-        inter_recycler.clear();
-        super.onStop();
-    }
-
-    private void init(){
-        inter_text = findViewById(R.id.inter_text);
-        inter_recyclerview = findViewById(R.id.inter_recyclerview);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        scrap_recyclerview.setLayoutManager(linearLayout);
+        scrap_recyclerview.setAdapter(adapter);
     }
 
 
     //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
-        toolbar = findViewById(R.id.inter_toolbar);
+        toolbar = findViewById(R.id.scrap_toolbar);
         setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
-        drawerLayout = findViewById(R.id.inter_drawerlayout);
+        drawerLayout = findViewById(R.id.scrap_drawerlayout);
         actionBarDrawerToggle = setUpActionBarToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView = findViewById(R.id.inter_navigation);
+        navigationView = findViewById(R.id.scrap_navigation);
         setUpDrawerContent(navigationView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +135,8 @@ public class InterimActivity extends AppCompatActivity {
             }
         }
     };
+
+
 
     //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
     private void navi_header_click(){
@@ -203,5 +195,8 @@ public class InterimActivity extends AppCompatActivity {
     private ActionBarDrawerToggle setUpActionBarToggle(){
         return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
+
+
+
 
 }

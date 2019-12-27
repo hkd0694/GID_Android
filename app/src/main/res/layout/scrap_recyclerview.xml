@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="331dp"
+    android:id="@+id/script_relative"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/button_radius"
+    android:layout_height="42dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/script_image"
+            android:src="@drawable/icon_star_filled_color_copy"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:id="@+id/script_number"
+            android:layout_alignBottom="@id/script_image"
+            android:layout_alignTop="@id/script_image"
+            android:layout_alignRight="@id/script_image"
+            android:layout_alignLeft="@id/script_image"
+            android:text="10"
+            android:gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="228dp"
+            android:layout_height="22dp"
+            android:id="@+id/script_arrange"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue_grey"
+            android:text="아 이게 뭐야"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:textStyle="normal"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -161,12 +161,13 @@ public class ProblemActivity extends AppCompatActivity {
                     int add_count = list.get(sheet_index).getScriptData().get(row_first-2).getCount();
                     list.get(sheet_index).getScriptData().get(row_first-2).setCount(add_count+1);
                     pro_script.setImageResource(R.drawable.star_active_darkblue);
-                } else{
+                } else {
                     list.get(sheet_index).getScriptData().get(row_first-2).setScript(false);
                     int delete_count = list.get(sheet_index).getScriptData().get(row_first-2).getCount();
                     list.get(sheet_index).getScriptData().get(row_first-2).setCount(delete_count-1);
                     pro_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
+                Log.e("Start",list.get(sheet_index).getScriptData().get(row_first-2).getCount() + " 총 크기1");
                 gson  = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -201,7 +202,6 @@ public class ProblemActivity extends AppCompatActivity {
         }
         sh = hss.getSheetAt(sheet_index);
         row = sh.getRow(row_first);
-        Log.e("Start",row_first + " ok");
         if(row != null){
             //Excel 데이터를 불러와 화면에 맞게 계속해서 불러온다.
             for(int i=1;i<=10;i++) {
@@ -326,12 +326,15 @@ public class ProblemActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.script :
+                        intent = new Intent(getApplicationContext(),ScrapActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.initial:

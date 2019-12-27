@@ -72,21 +72,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         click_event();
     }
-/*
-    //READ, WRITE 권한은 위험 권한 이므로 따로 사용자가 앱을 켰을 경우 허용 할 것인지를 물어보는 함수
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AutoPermissions.Companion.parsePermissions(this,requestCode,permissions,this);
-    }
-
-    @Override
-    public void onGranted(int i, String[] strings) {
-    }
-
-    @Override
-    public void onDenied(int i, String[] strings) {
-    }*/
 
     @Override
     //MainActivity로 넘어오는 경우가 많기 때문에 Resume() 함수에서 저장되어 있는 데이터를 계속해서 불러와야함!!
@@ -157,12 +142,15 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.script :
+                        intent = new Intent(getApplicationContext(),ScrapActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.initial:

@@ -116,7 +116,6 @@ public class CheckActivity extends Activity {
                 Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
                 Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
                 Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
-                Log.e("Start",list.get(sheet_indexs).getScriptData().size() + " 크기");
                 if(tmpBitmap.equals(tmpBitmap1)) {
                     list.get(sheet_indexs).getScriptData().get(row_number-2).setScript(true);
                     int add_count = list.get(sheet_indexs).getScriptData().get(row_number-2).getCount();
@@ -124,8 +123,11 @@ public class CheckActivity extends Activity {
                     check_script.setImageResource(R.drawable.star_active_darkblue);
                 } else{
                     list.get(sheet_indexs).getScriptData().get(row_number-2).setScript(false);
+                    int delete_count = list.get(sheet_indexs).getScriptData().get(row_number-2).getCount();
+                    list.get(sheet_indexs).getScriptData().get(row_number-2).setCount(delete_count-1);
                     check_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
+                Log.e("Start",list.get(sheet_indexs).getScriptData().get(row_number-2).getCount() + " 총 크기");
                 gson  = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
