@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.activity.ScrapListActivity;
 import com.example.goindol_java.data.ArrangeData;
 
 import java.util.ArrayList;
@@ -60,7 +61,10 @@ public class ScriptAdapter extends RecyclerView.Adapter<ScriptAdapter.ViewHolder
         holder.scrap_relative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("Start","클릭");
+                intent = new Intent(context, ScrapListActivity.class);
+                intent.putExtra("index",position);
+                intent.putExtra("area",holder.scrap_summary.getText().toString());
+                context.startActivity(intent);
             }
         });
     }

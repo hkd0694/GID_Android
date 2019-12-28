@@ -167,7 +167,6 @@ public class ProblemActivity extends AppCompatActivity {
                     list.get(sheet_index).getScriptData().get(row_first-2).setCount(delete_count-1);
                     pro_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
-                Log.e("Start",list.get(sheet_index).getScriptData().get(row_first-2).getCount() + " 총 크기1");
                 gson  = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -189,7 +188,10 @@ public class ProblemActivity extends AppCompatActivity {
         //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다
         if(list.get(sheet_index).getIndex() != 2) {
             row_first = list.get(sheet_index).getIndex();
-        } else {
+        } else if(getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
+            row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2])+1;
+        }
+        else {
             row_first = 2;
         }
         if(list.get(sheet_index).getScriptData().size() == 0) pro_script.setImageResource(R.drawable.star_normal_darkblue);
@@ -223,13 +225,7 @@ public class ProblemActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        pro_radio1.setChecked(false); pro_radio2.setChecked(false);
-        pro_radio3.setChecked(false); pro_radio4.setChecked(false);
-        pro_radio5.setChecked(false);
-        for(int i=0;i<40;i++) {
-            Log.e("Start",list.get(sheet_index).getScriptData().get(row_first-2).getNumber() + " : " + list.get(sheet_index).getScriptData().get(row_first-2).getCount() + " : " + list.get(sheet_index).getScriptData().get(row_first-2).isScript());
-        }
-
+        pro_radiogroup.clearCheck();
         super.onPause();
     }
 
