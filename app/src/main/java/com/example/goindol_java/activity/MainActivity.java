@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.setting:
+                        intent = new Intent(getApplicationContext(),SettingActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);

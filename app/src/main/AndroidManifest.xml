@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ScrapListActivity"></activity>
+        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.ScrapListActivity" />
         <activity android:name=".activity.ScrapActivity" />
         <activity android:name=".activity.TotalinterimActivity" />
         <activity android:name=".activity.InterimActivity" />
