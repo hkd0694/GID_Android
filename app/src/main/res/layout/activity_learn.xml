@@ -44,11 +44,19 @@
             android:orientation="vertical"
             >
 
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/learn_image"
+                android:id="@+id/learn_arrange"
+                android:layout_margin="15dp"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/dark_blue_grey"
+                android:lineSpacingExtra="7sp"
                 />
+
+
 
         </LinearLayout>
 
@@ -94,8 +102,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="39dp"
-                android:scaleType="centerCrop"
+                android:layout_height="wrap_content"
                 android:src="@drawable/android"
                 />
 

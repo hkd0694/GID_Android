@@ -3,6 +3,7 @@ package com.example.goindol_java.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -59,22 +60,26 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         settingapp_bar();
         navi_header_click();
         init();
-        settingButton.setOnClickListener(this);
-        String[] yearArray = getResources().getStringArray(R.array.year);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,yearArray);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        settingYearSpinner.setAdapter(arrayAdapter);
         try {
             Field popup = Spinner.class.getDeclaredField("mPopup");
             popup.setAccessible(true);
-            // Get private mPopup member variable and try cast to ListPopupWindow
-            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(settingYearSpinner);
-            // Set popupWindow height to 500px
-            popupWindow.setHeight(400);
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow)popup.get(settingYearSpinner);
+            popupWindow.setHeight(90);
         }
         catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
 
         }
+        settingButton.setOnClickListener(this);
+        String[] yearArray = getResources().getStringArray(R.array.year);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.custom_spinner_dropdown_item,yearArray);
+        //arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        settingYearSpinner.setAdapter(arrayAdapter);
+        settingYearSpinner.setSelection(0);
+        String[] monthArray = getResources().getStringArray(R.array.month);
+        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this,R.layout.custom_spinner_dropdown_item,monthArray);
+        settingMonthSpinner.setAdapter(monthAdapter);
+        settingMonthSpinner.setSelection(0);
+
     }
 
     private void init(){
@@ -161,22 +166,22 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 switch (item.getItemId()){
                     case R.id.script :
                         intent = new Intent(getApplicationContext(),ScrapActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         intent = new Intent(getApplicationContext(),SettingActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.initial:
                         intent = new Intent(getApplicationContext(), InitPopupActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                 }

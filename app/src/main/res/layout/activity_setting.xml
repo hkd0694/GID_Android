@@ -59,6 +59,7 @@
             android:layout_height="24dp"
             android:layout_marginRight="6dp"
             android:entries="@array/year"
+            android:background="@color/pale_teal"
             android:textAlignment="center"
             android:id="@+id/setting_year"
             >
@@ -81,6 +82,7 @@
                 android:layout_height="24dp"
                 android:layout_marginRight="6dp"
                 android:textAlignment="center"
+                android:background="@color/pale_teal"
                 android:entries="@array/month"
                 android:id="@+id/setting_month"
                 >
@@ -102,8 +104,8 @@
                 android:layout_width="64dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="6dp"
+                android:background="@color/pale_teal"
                 android:textAlignment="center"
-                android:background="@drawable/spinner_background"
                 android:id="@+id/setting_day"
                 >
 

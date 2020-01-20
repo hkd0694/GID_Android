@@ -41,7 +41,8 @@ public class PopupActivity extends Activity {
     private TextView popup_content;
     private String name;
     private String intent_name;
-
+    private View view;
+    //popup_cancel
     private SharedPreferences prefs;
     private Gson gson = new Gson();
     private List<Period> list = new ArrayList<>();
@@ -66,13 +67,13 @@ public class PopupActivity extends Activity {
         imageView = findViewById(R.id.popup_cancel);
         popup_reset = findViewById(R.id.popup_reset);
         popup_ing = findViewById(R.id.popup_ing);
+        view = findViewById(R.id.popup_view);
         popup_content = findViewById(R.id.popup_content);
         if(size == 40) {
             popup_content.setText("이 파트는 이미 다 풀었습니다.\n" + "한 번 더 학습 하시겠어요?");
             popup_ing.setText("뒤로 가기");
         }
-        //X 표시를 누를 시 popupActivity 종료되면서 MainActivity로 넘어감
-        imageView.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

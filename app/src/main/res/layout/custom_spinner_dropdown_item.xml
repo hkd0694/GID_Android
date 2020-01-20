@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_marginBottom="10dp"
+    android:ellipsize="marquee"
+    android:fontFamily="sans-serif"
+    android:textSize="14sp"
+    android:textStyle="normal"
+    android:gravity="center"
+    style="?android:attr/dropDownItemStyle"
+    android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+    android:textColor="@color/dark_blue_grey"
+    android:lineSpacingExtra="7sp"
+    >
+
+   <!-- <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:textColor="@color/dark_blue_grey"
+        android:lineSpacingExtra="7sp"
+        />-->
+
+</TextView>

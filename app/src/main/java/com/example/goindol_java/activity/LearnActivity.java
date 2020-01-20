@@ -8,7 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,15 @@ import android.widget.TextView;
 import com.example.goindol_java.R;
 import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class LearnActivity extends AppCompatActivity {
 
@@ -37,6 +48,13 @@ public class LearnActivity extends AppCompatActivity {
     private Button learn_cancel;
     private Button learn_start;
 
+    private TextView learnArrange;
+
+    private HSSFWorkbook hss;
+    private HSSFSheet sh;
+    private HSSFRow row;
+    private HSSFCell cell;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +65,14 @@ public class LearnActivity extends AppCompatActivity {
         textView = findViewById(R.id.learn_text);
         learn_cancel = findViewById(R.id.learn_cancel);
         learn_start = findViewById(R.id.learn_start);
+        learnArrange = findViewById(R.id.learn_arrange);
 
         textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
+
+        sh = hss.getSheetAt(8);
+        row = sh.getRow(Integer.parseInt(name.split(",")[1]));
+        cell = row.getCell(0);
+        learnArrange.setText(cell.getStringCellValue());
 
         //뒤로가기 버튼을 누를 시 해당 Activity를 종료하고 MainActivity로 넘어간다.
         learn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +109,17 @@ public class LearnActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView = findViewById(R.id.learn_navigation);
         setUpDrawerContent(navigationView);
+
+        try {
+            //엑셀 시트 가져오기
+            InputStream is;
+            AssetManager assetManager = getAssets();
+            is = assetManager.open("goindol_update.xls");
+            POIFSFileSystem poif = new POIFSFileSystem(is);
+            hss = new HSSFWorkbook(poif);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,19 +174,19 @@ public class LearnActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.script :
                         intent = new Intent(getApplicationContext(),ScrapActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.initial:
                         intent = new Intent(getApplicationContext(), InitPopupActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                 }

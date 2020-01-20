@@ -35,6 +35,7 @@ import java.util.List;
 
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
+
 public class ArrangeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -197,19 +198,19 @@ public class ArrangeActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.script :
                         intent = new Intent(getApplicationContext(),ScrapActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.initial:
                         intent = new Intent(getApplicationContext(), InitPopupActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                 }

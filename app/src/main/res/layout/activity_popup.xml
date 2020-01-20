@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:layout_marginLeft="24dp"
             android:fontFamily="sans-serif"
             android:textStyle="normal"
             android:textColor="@color/dark_blue_grey"
@@ -23,13 +24,24 @@
             android:id="@+id/popup_content"
             />
 
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:src="@drawable/cancel_light"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/popup_cancel"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:id="@+id/popup_view"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/cancel_light"
+                android:id="@+id/popup_cancel"
+                />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

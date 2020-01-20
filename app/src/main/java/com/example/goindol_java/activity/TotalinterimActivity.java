@@ -82,14 +82,15 @@ public class TotalinterimActivity extends AppCompatActivity {
     private void viepager_adapter(){
         viewPager = findViewById(R.id.total_viewpager);
         indicator = findViewById(R.id.indicator);
+
+        arrangePagerAdapter = new ArrangePagerAdapter(this,list.get(index).getArrangeData());
         viewPager.setClipToPadding(false);
+        viewPager.setAdapter(arrangePagerAdapter);
+        indicator.setViewPager(viewPager);
         float density = getResources().getDisplayMetrics().density;
         int margin = (int) (DP * density);
         viewPager.setPadding(margin, 0, margin, 0);
         viewPager.setPageMargin(margin/2);
-        arrangePagerAdapter = new ArrangePagerAdapter(this,list.get(index).getArrangeData());
-        viewPager.setAdapter(arrangePagerAdapter);
-        indicator.setViewPager(viewPager);
     }
 
     @Override
@@ -156,19 +157,19 @@ public class TotalinterimActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.script :
                         intent = new Intent(getApplicationContext(),ScrapActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
                         intent = new Intent(getApplicationContext(),InterimActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.initial:
                         intent = new Intent(getApplicationContext(), InitPopupActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                 }
