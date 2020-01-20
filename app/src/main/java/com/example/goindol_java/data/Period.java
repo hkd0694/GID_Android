@@ -23,7 +23,7 @@ public class Period {
         this.period_data = period_data;
         this.arrangeData = arrangeData;
         this.scriptData = scriptData;
-        index = 2;
+        index = 1;
     }
 
     public String getPeriodic() {

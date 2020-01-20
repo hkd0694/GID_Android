@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_margin="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:layout_margin="20dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="402dp"
         android:background="@drawable/button_radius"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:background="@drawable/button_radius_green_top"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <TextView
+                android:id="@+id/pager_middle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="중간정리 1번째"
-                android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"
-                android:textStyle="normal"
-                android:textColor="@color/white"
                 android:gravity="center_horizontal"
-                android:id="@+id/pager_middle"
-                />
+                android:text="중간정리 1번째"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pager_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="18dp"
-            android:id="@+id/pager_recyclerview"
-            >
+            android:overScrollMode="never">
 
         </androidx.recyclerview.widget.RecyclerView>
 

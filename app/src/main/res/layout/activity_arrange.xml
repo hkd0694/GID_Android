@@ -78,6 +78,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="18dp"
                 android:id="@+id/arr_recyclerview"
+                android:overScrollMode="never"
                 >
 
             </androidx.recyclerview.widget.RecyclerView>

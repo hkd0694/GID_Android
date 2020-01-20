@@ -55,13 +55,12 @@ public class SplashActivity extends Activity {
     //만약 앱을 처음 설치하고 처음 실행시에 시대 별로 데이터를 보관해야 하기 때문에 초기화 진행
     private void init(){
         arrayList.add(new Period("기원과 형성",list,arrange,scriptData));
-        arrayList.add(new Period("고대사회",list,arrange,scriptData));
+        arrayList.add(new Period("삼국시대",list,arrange,scriptData));
         arrayList.add(new Period("고려시대",list,arrange,scriptData));
         arrayList.add(new Period("조선전기",list,arrange,scriptData));
         arrayList.add(new Period("조선후기",list,arrange,scriptData));
-        arrayList.add(new Period("근대 개화",list,arrange,scriptData));
-        arrayList.add(new Period("일제 강점기 ~ 현대",list,arrange,scriptData));
-        Log.e("Start",scriptData.size() + " 크기가 몇?");
+        arrayList.add(new Period("근대개화",list,arrange,scriptData));
+        arrayList.add(new Period("일제 강점기~현대",list,arrange,scriptData));
         Gson gson  = new GsonBuilder().create();
         Type listType = new TypeToken<ArrayList<Period>>() {}.getType();
         String json = gson.toJson(arrayList, listType);

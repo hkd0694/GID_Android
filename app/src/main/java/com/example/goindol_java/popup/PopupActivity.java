@@ -84,9 +84,9 @@ public class PopupActivity extends Activity {
         popup_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.get(Integer.parseInt(intent_name.split(",")[1])).setPeriod_data(excelProblems);
-                list.get(Integer.parseInt(intent_name.split(",")[1])).setIndex(2);
-                list.get(Integer.parseInt(intent_name.split(",")[1])).setArrangeData(arrangeData);
+                list.get(Integer.parseInt(intent_name.split(",")[1])-1).setPeriod_data(excelProblems);
+                list.get(Integer.parseInt(intent_name.split(",")[1])-1).setIndex(1);
+                list.get(Integer.parseInt(intent_name.split(",")[1])-1).setArrangeData(arrangeData);
                 Gson gson1  = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -110,7 +110,7 @@ public class PopupActivity extends Activity {
                 //만약 문제를 모두 다 풀었을 경우 체크하여 바로 EndActivity로 넘겨준다..!!;;
                 //문제 수가 시대별로 모두 같아야만 돌아가는거임 다시 수정해야 함!!
                 if(!popup_ing.getText().equals("뒤로 가기")) {
-                    if(list.get(Integer.parseInt(intent_name.split(",")[1])).getPeriod_data().size() >= 40) {
+                    if(list.get(Integer.parseInt(intent_name.split(",")[1])-1).getPeriod_data().size() >= 40) {
                         intent = new Intent(getApplicationContext(), EndActivity.class);
                         intent.putExtra("name",intent_name.split(",")[0]);
                     } else {

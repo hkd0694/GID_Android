@@ -66,11 +66,10 @@ public class LearnActivity extends AppCompatActivity {
         learn_cancel = findViewById(R.id.learn_cancel);
         learn_start = findViewById(R.id.learn_start);
         learnArrange = findViewById(R.id.learn_arrange);
-
         textView.setText("한국사능력검정시험을 위해\n" + name.split(",")[0] + "를 공부합니다.");
 
         sh = hss.getSheetAt(8);
-        row = sh.getRow(Integer.parseInt(name.split(",")[1]));
+        row = sh.getRow(Integer.parseInt(name.split(",")[1]) -1 );
         cell = row.getCell(0);
         learnArrange.setText(cell.getStringCellValue());
 

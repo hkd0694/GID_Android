@@ -17,8 +17,6 @@ public class ExcelProblem {
     private String exam_3;
     //보기(4)
     private String exam_4;
-    //보기(5)
-    private String exam_5;
     // 답
     private int answer;
     // 해설
@@ -32,7 +30,7 @@ public class ExcelProblem {
     public ExcelProblem() {
     }
 
-    public ExcelProblem(int excel_no, String era, String problem, String exam_1, String exam_2, String exam_3, String exam_4, String exam_5, int answer, String solution) {
+    public ExcelProblem(int excel_no, String era, String problem, String exam_1, String exam_2, String exam_3, String exam_4, int answer, String solution) {
         this.excel_no = excel_no;
         this.era = era;
         this.problem = problem;
@@ -40,7 +38,6 @@ public class ExcelProblem {
         this.exam_2 = exam_2;
         this.exam_3 = exam_3;
         this.exam_4 = exam_4;
-        this.exam_5 = exam_5;
         this.answer = answer;
         this.solution = solution;
     }
@@ -99,14 +96,6 @@ public class ExcelProblem {
 
     public void setExam_4(String exam_4) {
         this.exam_4 = exam_4;
-    }
-
-    public String getExam_5() {
-        return exam_5;
-    }
-
-    public void setExam_5(String exam_5) {
-        this.exam_5 = exam_5;
     }
 
     public int getAnswer() {

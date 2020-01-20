@@ -91,20 +91,20 @@ public class CheckActivity extends Activity {
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
 
-        excelProblems = list.get(sheet_indexs).getPeriod_data();
-        arrangeData = list.get(sheet_indexs).getArrangeData();
+        excelProblems = list.get(sheet_indexs-1).getPeriod_data();
+        arrangeData = list.get(sheet_indexs-1).getArrangeData();
 
         //엑셀 파일 불러와 데이터 저장
         try {
             InputStream is;
             AssetManager assetManager = getAssets();
-            is = assetManager.open("goindol.xls");
+            is = assetManager.open("goindol_update.xls");
             POIFSFileSystem poif = new POIFSFileSystem(is);
             hss = new HSSFWorkbook(poif);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(list.get(sheet_indexs).getScriptData().get(row_number-2).isScript()) check_script.setImageResource(R.drawable.star_active_darkblue);
+        if(list.get(sheet_indexs-1).getScriptData().get(row_number-1).isScript()) check_script.setImageResource(R.drawable.star_active_darkblue);
         else {
             check_script.setImageResource(R.drawable.star_normal_darkblue);
         }
@@ -117,17 +117,16 @@ public class CheckActivity extends Activity {
                 Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
                 Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
                 if(tmpBitmap.equals(tmpBitmap1)) {
-                    list.get(sheet_indexs).getScriptData().get(row_number-2).setScript(true);
-                    int add_count = list.get(sheet_indexs).getScriptData().get(row_number-2).getCount();
-                    list.get(sheet_indexs).getScriptData().get(row_number-2).setCount(add_count+1);
+                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setScript(true);
+                    int add_count = list.get(sheet_indexs-1).getScriptData().get(row_number-1).getCount();
+                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setCount(add_count+1);
                     check_script.setImageResource(R.drawable.star_active_darkblue);
                 } else{
-                    list.get(sheet_indexs).getScriptData().get(row_number-2).setScript(false);
-                    int delete_count = list.get(sheet_indexs).getScriptData().get(row_number-2).getCount();
-                    list.get(sheet_indexs).getScriptData().get(row_number-2).setCount(delete_count-1);
+                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setScript(false);
+                    int delete_count = list.get(sheet_indexs-1).getScriptData().get(row_number-1).getCount();
+                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setCount(delete_count-1);
                     check_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
-                Log.e("Start",list.get(sheet_indexs).getScriptData().get(row_number-2).getCount() + " 총 크기");
                 gson  = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -139,7 +138,7 @@ public class CheckActivity extends Activity {
         sh = hss.getSheetAt(sheet_indexs);
         row = sh.getRow(row_number);
         //시트 번호에서 해설 부분 가져오기
-        cell = row.getCell(10);
+        cell = row.getCell(8);
         if(check.equals("정답")){
             check_image.setImageResource(R.drawable.good);
             check_answer.setText("정답을 맞췄습니다!");
@@ -169,11 +168,11 @@ public class CheckActivity extends Activity {
                 excelProblems.add(pro);
                 arrangeData.add(arr);
                 //문제 ArrayList로 add 하여 저장
-                list.get(sheet_indexs).setPeriod_data(excelProblems);
-                list.get(sheet_indexs).setArrangeData(arrangeData);
+                list.get(sheet_indexs-1).setPeriod_data(excelProblems);
+                list.get(sheet_indexs-1).setArrangeData(arrangeData);
                 //현재 푼 문제가 아닌 다음 번호를 기억해 저장
                 int next = row_number + 1;
-                list.get(sheet_indexs).setIndex(next);
+                list.get(sheet_indexs-1).setIndex(next);
                 gson  = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -196,28 +195,27 @@ public class CheckActivity extends Activity {
     //SharedPreferences 에다가 저장하기 위해 ArrangeData class에 데이터 넣는 함수
     private ArrangeData saveArrangeData(){
         ArrangeData arrangeData = new ArrangeData();
-        arrangeData.setNumber(String.valueOf((int)row.getCell(1).getNumericCellValue()));
+        arrangeData.setNumber(String.valueOf((int)row.getCell(0).getNumericCellValue()));
         if(check.equals("정답")) {
             arrangeData.setCheck("정답");
         } else arrangeData.setCheck("오답");
         //Excel 에 요약 정보 추가되면 그에 맞는 인덱스 넣어줘야함 지금은 보기 5번으로 고정 시킴.
-        arrangeData.setSummary(row.getCell(8).getStringCellValue());
+        arrangeData.setSummary(row.getCell(9).getStringCellValue());
         return arrangeData;
     }
 
     //SharedPreferences에다가 저장하기 위해 ExcelProblem class에 데이터 넣는 함수
     private ExcelProblem saveExcelProblem(){
         ExcelProblem problem = new ExcelProblem();
-        problem.setExcel_no((int)row.getCell(1).getNumericCellValue());
-        problem.setEra(row.getCell(2).getStringCellValue());
-        problem.setProblem(row.getCell(3).getStringCellValue());
-        problem.setExam_1(row.getCell(4).getStringCellValue());
-        problem.setExam_2(row.getCell(5).getStringCellValue());
-        problem.setExam_3(row.getCell(6).getStringCellValue());
-        problem.setExam_4(row.getCell(7).getStringCellValue());
-        problem.setExam_5(row.getCell(8).getStringCellValue());
-        problem.setAnswer((int)row.getCell(9).getNumericCellValue());
-        problem.setSolution(row.getCell(10).getStringCellValue());
+        problem.setExcel_no((int)row.getCell(0).getNumericCellValue());
+        problem.setEra(row.getCell(1).getStringCellValue());
+        problem.setProblem(row.getCell(2).getStringCellValue());
+        problem.setExam_1(row.getCell(3).getStringCellValue());
+        problem.setExam_2(row.getCell(4).getStringCellValue());
+        problem.setExam_3(row.getCell(5).getStringCellValue());
+        problem.setExam_4(row.getCell(6).getStringCellValue());
+        problem.setAnswer((int)row.getCell(7).getNumericCellValue());
+        problem.setSolution(row.getCell(8).getStringCellValue());
         return problem;
     }
 
@@ -251,9 +249,6 @@ public class CheckActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        for(int i=0;i<40;i++) {
-            Log.e("Start",list.get(sheet_indexs).getScriptData().get(row_number-2).getNumber() + " : " + list.get(sheet_indexs).getScriptData().get(row_number-2).getCount() + " : " + list.get(sheet_indexs).getScriptData().get(row_number-2).isScript());
-        }
         super.onDestroy();
     }
 }

@@ -64,7 +64,7 @@
                 android:fontFamily="sans-serif"
                 android:textStyle="normal"
                 android:textColor="@color/dark_green_blue"
-                android:text="고대사회"
+                android:text="삼국시대"
                 android:id="@+id/ancient_society"
                 />
 
@@ -134,7 +134,7 @@
                 android:fontFamily="sans-serif"
                 android:textStyle="normal"
                 android:textColor="@color/dark_green_blue"
-                android:text="근대 개화"
+                android:text="근대개화"
                 android:id="@+id/modern"
                 />
 
@@ -152,7 +152,7 @@
             android:layout_marginLeft="46dp"
             android:layout_marginRight="46dp"
             android:background="@drawable/button_radius"
-            android:text="일제강점기 ~ 현대"
+            android:text="일제 강점기~현대"
             android:textSize="16sp"
             android:fontFamily="sans-serif"
             android:textStyle="normal"

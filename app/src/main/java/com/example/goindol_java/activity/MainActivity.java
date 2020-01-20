@@ -189,13 +189,13 @@ public class MainActivity extends AppCompatActivity {
     private void shared_check(String name){
         int index = 0;
         switch (name) {
-            case "기원과 형성":     period = list.get(0); index = 0; break;
-            case "고대사회":        period = list.get(1); index = 1; break;
-            case "고려시대":        period = list.get(2); index = 2; break;
-            case "조선전기":        period = list.get(3); index = 3; break;
-            case "조선후기":        period = list.get(4); index = 4; break;
-            case "근대 개화":       period = list.get(5); index = 5; break;
-            case "일제 강점기":     period = list.get(6); index = 6;break;
+            case "기원과 형성":     period = list.get(0); index = 1; break;
+            case "삼국시대":        period = list.get(1); index = 2; break;
+            case "고려시대":        period = list.get(2); index = 3; break;
+            case "조선전기":        period = list.get(3); index = 4; break;
+            case "조선후기":        period = list.get(4); index = 5; break;
+            case "근대개화":       period = list.get(5); index = 6; break;
+            case "일제 강점기~현대":     period = list.get(6); index = 7;break;
         }
         Intent intent;
         if(period.getPeriod_data().size() == 0) {

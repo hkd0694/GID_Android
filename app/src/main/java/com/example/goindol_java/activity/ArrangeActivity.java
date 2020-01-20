@@ -83,11 +83,11 @@ public class ArrangeActivity extends AppCompatActivity {
         list = gson.fromJson(name, listType);
 
         // 저장되어 있는 값을 가져옴..
-        arrangeData = list.get(sheet_number).getArrangeData();
+        arrangeData = list.get(sheet_number-1).getArrangeData();
         Log.e("Start", arrangeData.size() + " 사이즈 몇개");
         recycler_adapter(arrangeData);
 
-        arr_text.setText("한국사능력검정시험 " + list.get(sheet_number).getPeriodic());
+        arr_text.setText("한국사능력검정시험 " + list.get(sheet_number-1).getPeriodic());
 
         //계속 진행하기 버튼을 누를 시 발생하는 리스너로
         //만약 마지막 페이지인 4번째 중간정리가 나오게 되면 더이상 풀 문제가 없으므로 EndActivity로 넘어가게 된다.
@@ -98,7 +98,7 @@ public class ArrangeActivity extends AppCompatActivity {
                 if(arrangeData.get(arrangeData.size()-1).getNumber().equals("40")) {
                     //문제가 다 끝났으므로 시대별 종료 화면으로 넘어감...!!!!
                     intent = new Intent(getApplicationContext(),EndActivity.class);
-                    intent.putExtra("name",list.get(sheet_number).getPeriodic());
+                    intent.putExtra("name",list.get(sheet_number-1).getPeriodic());
                     startActivity(intent);
                 }
                 finish();

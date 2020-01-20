@@ -66,7 +66,7 @@ public class ProblemActivity extends AppCompatActivity {
     private ImageButton pro_script;
     private TextView pro_content;
     private RadioGroup pro_radiogroup;
-    private RadioButton pro_radio1,pro_radio2,pro_radio3,pro_radio4,pro_radio5;
+    private RadioButton pro_radio1,pro_radio2,pro_radio3,pro_radio4;
     private Button pro_answer;
 
     private String name;
@@ -97,13 +97,14 @@ public class ProblemActivity extends AppCompatActivity {
         settingapp_bar();
         navi_header_click();
         name = getIntent().getStringExtra(MainActivity.period_data).split(",")[0];
+        //시대별 시트 번호 기원과 형성 (1), 삼국시대 (2), 고려시대 (3) 등...
         sheet_index = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[1]);
         pro_text.setText("한국사능력검정시험 " + name);
         try {
             //엑셀 시트 가져오기
             InputStream is;
             AssetManager assetManager = getAssets();
-            is = assetManager.open("goindol.xls");
+            is = assetManager.open("goindol_update.xls");
             POIFSFileSystem poif = new POIFSFileSystem(is);
             hss = new HSSFWorkbook(poif);
         } catch (IOException e) {
@@ -118,7 +119,7 @@ public class ProblemActivity extends AppCompatActivity {
                 if(seleted == 0) {
                     Toast.makeText(getApplicationContext(),"문제를 풀지 않았습니다.\n 보기 중 정답을 체크해주세요.",Toast.LENGTH_SHORT).show();
                 } else{
-                    int answer = (int)row.getCell(9).getNumericCellValue();
+                    int answer = (int)row.getCell(7).getNumericCellValue();
                     String ck;
                     if(answer == seleted) ck = "정답";
                     else ck = "오답";
@@ -143,7 +144,6 @@ public class ProblemActivity extends AppCompatActivity {
                     case R.id.pro_radio2: seleted = 2; break;
                     case R.id.pro_radio3: seleted = 3; break;
                     case R.id.pro_radio4: seleted = 4; break;
-                    case R.id.pro_radio5: seleted = 5; break;
                 }
             }
         });
@@ -155,16 +155,15 @@ public class ProblemActivity extends AppCompatActivity {
                 Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
                 Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
                 Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
-                Log.e("Start",list.get(sheet_index).getScriptData().size() + " 크기");
                 if(tmpBitmap.equals(tmpBitmap1)) {
-                    list.get(sheet_index).getScriptData().get(row_first-2).setScript(true);
-                    int add_count = list.get(sheet_index).getScriptData().get(row_first-2).getCount();
-                    list.get(sheet_index).getScriptData().get(row_first-2).setCount(add_count+1);
+                    list.get(sheet_index-1).getScriptData().get(row_first-1).setScript(true);
+                    int add_count = list.get(sheet_index-1).getScriptData().get(row_first-1).getCount();
+                    list.get(sheet_index-1).getScriptData().get(row_first-1).setCount(add_count+1);
                     pro_script.setImageResource(R.drawable.star_active_darkblue);
                 } else {
-                    list.get(sheet_index).getScriptData().get(row_first-2).setScript(false);
-                    int delete_count = list.get(sheet_index).getScriptData().get(row_first-2).getCount();
-                    list.get(sheet_index).getScriptData().get(row_first-2).setCount(delete_count-1);
+                    list.get(sheet_index-1).getScriptData().get(row_first-1).setScript(false);
+                    int delete_count = list.get(sheet_index-1).getScriptData().get(row_first-1).getCount();
+                    list.get(sheet_index-1).getScriptData().get(row_first-1).setCount(delete_count-1);
                     pro_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
                 gson  = new GsonBuilder().create();
@@ -185,18 +184,18 @@ public class ProblemActivity extends AppCompatActivity {
         listType = new TypeToken<ArrayList<Period>>() {}.getType();
         list = gson.fromJson(name, listType);
         seleted = 0;
-        //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다
-        if(list.get(sheet_index).getIndex() != 2) {
-            row_first = list.get(sheet_index).getIndex();
+        //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다.
+        if(list.get(sheet_index-1).getIndex() != 1) {
+            row_first = list.get(sheet_index-1).getIndex();
         } else if(getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
             row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2])+1;
         }
         else {
-            row_first = 2;
+            row_first = 1;
         }
-        if(list.get(sheet_index).getScriptData().size() == 0) pro_script.setImageResource(R.drawable.star_normal_darkblue);
+        if(list.get(sheet_index-1).getScriptData().size() == 0) pro_script.setImageResource(R.drawable.star_normal_darkblue);
         else{
-            if(list.get(sheet_index).getScriptData().get(row_first - 2).isScript()){
+            if(list.get(sheet_index-1).getScriptData().get(row_first - 1).isScript()){
                 pro_script.setImageResource(R.drawable.star_active_darkblue);
             } else{
                 pro_script.setImageResource(R.drawable.star_normal_darkblue);
@@ -206,16 +205,15 @@ public class ProblemActivity extends AppCompatActivity {
         row = sh.getRow(row_first);
         if(row != null){
             //Excel 데이터를 불러와 화면에 맞게 계속해서 불러온다.
-            for(int i=1;i<=10;i++) {
+            for(int i=0;i<=10;i++) {
                 cell = row.getCell(i);
                 switch (i){
-                    case 1: pro_no.setText(String.valueOf(cell.getNumericCellValue())); break;
-                    case 3: pro_content.setText(cell.getStringCellValue()); break;
-                    case 4: pro_radio1.setText(cell.getStringCellValue()); break;
-                    case 5: pro_radio2.setText(cell.getStringCellValue()); break;
-                    case 6: pro_radio3.setText(cell.getStringCellValue()); break;
-                    case 7: pro_radio4.setText(cell.getStringCellValue()); break;
-                    case 8: pro_radio5.setText(cell.getStringCellValue()); break;
+                    case 0: pro_no.setText(String.valueOf(cell.getNumericCellValue())); break;
+                    case 2: pro_content.setText(cell.getStringCellValue()); break;
+                    case 3: pro_radio1.setText(cell.getStringCellValue()); break;
+                    case 4: pro_radio2.setText(cell.getStringCellValue()); break;
+                    case 5: pro_radio3.setText(cell.getStringCellValue()); break;
+                    case 6: pro_radio4.setText(cell.getStringCellValue()); break;
                 }
             }
         }
@@ -253,7 +251,6 @@ public class ProblemActivity extends AppCompatActivity {
         pro_radio2 = findViewById(R.id.pro_radio2);
         pro_radio3 = findViewById(R.id.pro_radio3);
         pro_radio4 = findViewById(R.id.pro_radio4);
-        pro_radio5 = findViewById(R.id.pro_radio5);
         pro_answer = findViewById(R.id.pro_answer);
     }
 
