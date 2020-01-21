@@ -1,7 +1,5 @@
 package com.example.goindol_java.popup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.goindol_java.R;
-import com.example.goindol_java.activity.LearnActivity;
 import com.example.goindol_java.activity.MainActivity;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
@@ -27,7 +24,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.goindol_java.activity.MainActivity.period_data;
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 public class InitPopupActivity extends Activity {
@@ -70,12 +66,12 @@ public class InitPopupActivity extends Activity {
         initpopup_ing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i=0;i< list.size(); i++) {
+                for (int i = 0; i < list.size(); i++) {
                     list.get(i).setPeriod_data(excelProblems);
                     list.get(i).setIndex(2);
                     list.get(i).setArrangeData(arrangeData);
                 }
-                Gson gson1  = new GsonBuilder().create();
+                Gson gson1 = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
@@ -92,13 +88,14 @@ public class InitPopupActivity extends Activity {
     @Override
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
         list = gson.fromJson(name, listType);
         super.onResume();
     }
 
-    private void init(){
+    private void init() {
         init_imageView = findViewById(R.id.initpopup_close);
         initpopup_cancel = findViewById(R.id.initpopup_cancel);
         initpopup_ing = findViewById(R.id.initpopup_ing);

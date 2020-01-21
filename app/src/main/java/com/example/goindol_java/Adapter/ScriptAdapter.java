@@ -2,7 +2,6 @@ package com.example.goindol_java.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,7 +36,7 @@ public class ScriptAdapter extends RecyclerView.Adapter<ScriptAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.scrap_recyclerview,parent,false);
+        View view = inflater.inflate(R.layout.scrap_recyclerview, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -48,7 +47,7 @@ public class ScriptAdapter extends RecyclerView.Adapter<ScriptAdapter.ViewHolder
         holder.scrap_image.setImageResource(R.drawable.icon_star_filled_color_copy);
         holder.scrap_number.setText(data.getNumber());
         holder.scrap_summary.setText(data.getSummary());
-        if(data.getNumber().equals("0")) {
+        if (data.getNumber().equals("0")) {
             holder.scrap_relative.setClickable(false);
             holder.scrap_relative.setFocusable(false);
             holder.scrap_relative.setOnTouchListener(new View.OnTouchListener() {
@@ -62,8 +61,8 @@ public class ScriptAdapter extends RecyclerView.Adapter<ScriptAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 intent = new Intent(context, ScrapListActivity.class);
-                intent.putExtra("index",position);
-                intent.putExtra("area",holder.scrap_summary.getText().toString());
+                intent.putExtra("index", position);
+                intent.putExtra("area", holder.scrap_summary.getText().toString());
                 context.startActivity(intent);
             }
         });
@@ -81,7 +80,7 @@ public class ScriptAdapter extends RecyclerView.Adapter<ScriptAdapter.ViewHolder
         private TextView scrap_summary;
         private RelativeLayout scrap_relative;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             scrap_number = view.findViewById(R.id.script_number);
             scrap_image = view.findViewById(R.id.script_image);

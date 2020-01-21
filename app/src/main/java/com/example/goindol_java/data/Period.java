@@ -18,7 +18,7 @@ public class Period {
     private List<ScriptData> scriptData = new ArrayList<>();
 
 
-    public Period(String periodic, List<ExcelProblem> period_data,List<ArrangeData> arrangeData,List<ScriptData> scriptData) {
+    public Period(String periodic, List<ExcelProblem> period_data, List<ArrangeData> arrangeData, List<ScriptData> scriptData) {
         this.periodic = periodic;
         this.period_data = period_data;
         this.arrangeData = arrangeData;
@@ -61,6 +61,7 @@ public class Period {
     public List<ScriptData> getScriptData() {
         return scriptData;
     }
+
     public void setScriptData(List<ScriptData> scriptData) {
         this.scriptData = scriptData;
     }

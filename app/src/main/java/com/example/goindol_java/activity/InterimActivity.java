@@ -1,24 +1,20 @@
 package com.example.goindol_java.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.goindol_java.Adapter.ArrangeAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.goindol_java.Adapter.InterimAdapter;
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.ArrangeData;
@@ -37,8 +33,7 @@ import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 public class InterimActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private View toolbar;
     private NavigationView navigationView;
     private ImageButton btnShowNavigationDrawer;
     private ImageButton navi_cancel;
@@ -66,29 +61,40 @@ public class InterimActivity extends AppCompatActivity {
         init();
         inter_text.setText("중간정리를 다시 보면서\n" + "한번 더 확인해 보세요");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
         list = gson.fromJson(name, listType);
         recycler_adapter();
     }
 
-    private void recycler_adapter(){
+    private void recycler_adapter() {
         ArrangeData arrangeData = new ArrangeData();
-        for(int i=0;i<list.size();i++) {
+        for (int i = 0; i < list.size(); i++) {
             String name = list.get(i).getPeriodic();
             int index = 0;
-            switch (list.get(i).getArrangeData().size()/10) {
-                case 0: index = 0; break;
-                case 1: index = 1; break;
-                case 2: index = 2; break;
-                case 3: index = 3; break;
-                case 4: index = 4; break;
+            switch (list.get(i).getArrangeData().size() / 10) {
+                case 0:
+                    index = 0;
+                    break;
+                case 1:
+                    index = 1;
+                    break;
+                case 2:
+                    index = 2;
+                    break;
+                case 3:
+                    index = 3;
+                    break;
+                case 4:
+                    index = 4;
+                    break;
             }
             //number, check, summary
-            arrangeData = new ArrangeData(String.valueOf(index),String.valueOf(i),name);
+            arrangeData = new ArrangeData(String.valueOf(index), String.valueOf(i), name);
             inter_recycler.add(arrangeData);
         }
-        InterimAdapter adapter = new InterimAdapter(this,inter_recycler);
+        InterimAdapter adapter = new InterimAdapter(this, inter_recycler);
         LinearLayoutManager linearLayout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         inter_recyclerview.setLayoutManager(linearLayout);
         inter_recyclerview.setAdapter(adapter);
@@ -100,7 +106,7 @@ public class InterimActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    private void init(){
+    private void init() {
         inter_text = findViewById(R.id.inter_text);
         inter_recyclerview = findViewById(R.id.inter_recyclerview);
     }
@@ -112,16 +118,13 @@ public class InterimActivity extends AppCompatActivity {
 
 
     //Toolbar 안에있는 값들 초기화
-    private void settingapp_bar(){
+    private void settingapp_bar() {
         toolbar = findViewById(R.id.inter_toolbar);
-        setSupportActionBar(toolbar);
-        btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
+        btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.inter_drawerlayout);
-        actionBarDrawerToggle = setUpActionBarToggle();
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView = findViewById(R.id.inter_navigation);
         setUpDrawerContent(navigationView);
 
@@ -138,7 +141,7 @@ public class InterimActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.navibutton:
                     drawerLayout.openDrawer(GravityCompat.END);
                     break;
@@ -147,7 +150,7 @@ public class InterimActivity extends AppCompatActivity {
     };
 
     //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
-    private void navi_header_click(){
+    private void navi_header_click() {
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
         navi_home = naviView.findViewById(R.id.navi_home);
@@ -171,20 +174,20 @@ public class InterimActivity extends AppCompatActivity {
     }
 
     //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
-    private void setUpDrawerContent(NavigationView navi){
+    private void setUpDrawerContent(NavigationView navi) {
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.script :
-                        intent = new Intent(getApplicationContext(),ScrapActivity.class);
+                switch (item.getItemId()) {
+                    case R.id.script:
+                        intent = new Intent(getApplicationContext(), ScrapActivity.class);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
-                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent = new Intent(getApplicationContext(), InterimActivity.class);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
@@ -198,10 +201,6 @@ public class InterimActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private ActionBarDrawerToggle setUpActionBarToggle(){
-        return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
 }

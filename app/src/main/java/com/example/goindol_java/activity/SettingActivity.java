@@ -1,13 +1,5 @@
 package com.example.goindol_java.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.Period;
@@ -32,8 +29,7 @@ import java.util.List;
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener{
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private View toolbar;
     private NavigationView navigationView;
     private ImageButton btnShowNavigationDrawer;
     private ImageButton navi_cancel;
@@ -100,14 +96,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     //Toolbar 안에있는 값들 초기화
     private void settingapp_bar(){
         toolbar = findViewById(R.id.setting_toolbar);
-        setSupportActionBar(toolbar);
         btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.setting_drawerlayout);
-        actionBarDrawerToggle = setUpActionBarToggle();
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView = findViewById(R.id.setting_navigation);
         setUpDrawerContent(navigationView);
 
@@ -190,10 +183,5 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
-
-    private ActionBarDrawerToggle setUpActionBarToggle(){
-        return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
-    }
-
 
 }

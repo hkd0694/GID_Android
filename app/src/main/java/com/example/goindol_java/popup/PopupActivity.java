@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -61,7 +60,7 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.activity_popup);
         //팝업 화면를 제외한 바깥 부분의 색을 투명하게 해주는 함수
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
-        size = getIntent().getIntExtra("size",0);
+        size = getIntent().getIntExtra("size", 0);
 
         intent_name = getIntent().getStringExtra(period_data);
         imageView = findViewById(R.id.popup_cancel);
@@ -69,7 +68,7 @@ public class PopupActivity extends Activity {
         popup_ing = findViewById(R.id.popup_ing);
         view = findViewById(R.id.popup_view);
         popup_content = findViewById(R.id.popup_content);
-        if(size == 40) {
+        if (size == 40) {
             popup_content.setText("이 파트는 이미 다 풀었습니다.\n" + "한 번 더 학습 하시겠어요?");
             popup_ing.setText("뒤로 가기");
         }
@@ -84,16 +83,16 @@ public class PopupActivity extends Activity {
         popup_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.get(Integer.parseInt(intent_name.split(",")[1])-1).setPeriod_data(excelProblems);
-                list.get(Integer.parseInt(intent_name.split(",")[1])-1).setIndex(1);
-                list.get(Integer.parseInt(intent_name.split(",")[1])-1).setArrangeData(arrangeData);
-                Gson gson1  = new GsonBuilder().create();
+                list.get(Integer.parseInt(intent_name.split(",")[1]) - 1).setPeriod_data(excelProblems);
+                list.get(Integer.parseInt(intent_name.split(",")[1]) - 1).setIndex(1);
+                list.get(Integer.parseInt(intent_name.split(",")[1]) - 1).setArrangeData(arrangeData);
+                Gson gson1 = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
                 editor.commit();
                 Intent intent = new Intent(getApplicationContext(), LearnActivity.class);
-                intent.putExtra(period_data,intent_name);
+                intent.putExtra(period_data, intent_name);
                 startActivity(intent);
                 finish();
             }
@@ -109,13 +108,13 @@ public class PopupActivity extends Activity {
                 //마지막으로 진행한 문제!!
                 //만약 문제를 모두 다 풀었을 경우 체크하여 바로 EndActivity로 넘겨준다..!!;;
                 //문제 수가 시대별로 모두 같아야만 돌아가는거임 다시 수정해야 함!!
-                if(!popup_ing.getText().equals("뒤로 가기")) {
-                    if(list.get(Integer.parseInt(intent_name.split(",")[1])-1).getPeriod_data().size() >= 40) {
+                if (!popup_ing.getText().equals("뒤로 가기")) {
+                    if (list.get(Integer.parseInt(intent_name.split(",")[1]) - 1).getPeriod_data().size() >= 40) {
                         intent = new Intent(getApplicationContext(), EndActivity.class);
-                        intent.putExtra("name",intent_name.split(",")[0]);
+                        intent.putExtra("name", intent_name.split(",")[0]);
                     } else {
                         intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                        intent.putExtra(period_data,intent_name);
+                        intent.putExtra(period_data, intent_name);
                     }
                     startActivity(intent);
                 }
@@ -128,8 +127,9 @@ public class PopupActivity extends Activity {
     //MainActivity와 동일하게 계속해서 sharedpreferences안에 저장되어 있는 값들을 불러와야한다.
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
         list = gson.fromJson(name, listType);
         super.onResume();
     }
@@ -138,7 +138,7 @@ public class PopupActivity extends Activity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //바깥레이어 클릭시 안닫히게
-        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
             return false;
         }
         return true;

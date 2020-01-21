@@ -20,7 +20,7 @@ import com.example.goindol_java.data.ArrangeData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHolder>{
+public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHolder> {
 
     private Context context;
     private List<ArrangeData> arrangeData = new ArrayList<>();
@@ -28,7 +28,7 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
 
     private Intent intent;
 
-    public InterimAdapter(Context context, List<ArrangeData> arrangeData){
+    public InterimAdapter(Context context, List<ArrangeData> arrangeData) {
         this.context = context;
         this.arrangeData = arrangeData;
     }
@@ -37,7 +37,7 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.inter_recyclerview,parent,false);
+        View view = inflater.inflate(R.layout.inter_recyclerview, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -48,7 +48,7 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
         holder.inter_image.setImageResource(R.drawable.icon_document_filled_color_2);
         holder.inter_number.setText(arrange.getNumber());
         holder.inter_summary.setText(arrange.getSummary());
-        if(arrange.getNumber().equals("0")) {
+        if (arrange.getNumber().equals("0")) {
             holder.inter_relative.setClickable(false);
             holder.inter_relative.setFocusable(false);
             holder.inter_relative.setOnTouchListener(new View.OnTouchListener() {
@@ -63,8 +63,8 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
             public void onClick(View v) {
                 //중간 정리 한거 Activity로 보여줌!!
                 intent = new Intent(context, TotalinterimActivity.class);
-                intent.putExtra("index",position);
-                intent.putExtra("area",holder.inter_summary.getText().toString());
+                intent.putExtra("index", position);
+                intent.putExtra("area", holder.inter_summary.getText().toString());
                 context.startActivity(intent);
             }
         });
@@ -83,7 +83,7 @@ public class InterimAdapter extends RecyclerView.Adapter<InterimAdapter.ViewHold
         private TextView inter_summary;
         private RelativeLayout inter_relative;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             inter_number = view.findViewById(R.id.interview_number);
             inter_image = view.findViewById(R.id.Interview_image);

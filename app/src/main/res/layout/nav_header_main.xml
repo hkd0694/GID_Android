@@ -1,27 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_width="311dp"
+    android:layout_width="280dp"
     android:background="#ffffff"
     android:layout_margin="4dp"
-    android:layout_height="56dp">
+    android:layout_height="300dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:id="@+id/header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#ffffff"
+            android:id="@+id/navi_cancel"
+            android:layout_gravity="center"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/cancel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/home"
+            android:background="#ffffff"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="9dp"
+            android:id="@+id/navi_home"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:id="@+id/navi_first"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="11dp"
+            android:id="@+id/navi_script"
+            android:src="@drawable/star_filled"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/greyish_brown"
+            android:lineSpacingExtra="2sp"
+            android:text="스크랩한 문제 보기"
+            app:layout_constraintLeft_toRightOf="@id/navi_script"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:text="23"
+            android:textSize="16sp"
+            android:id="@+id/navi_script_text"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/seafoam_blue"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
 
 
-    <ImageButton
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="#ffffff"
-        android:id="@+id/navi_cancel"
-        android:layout_gravity="center"
-        android:src="@drawable/cancel"
-        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
-        android:layout_width="48dp"
-        android:src="@drawable/home"
-        android:background="#ffffff"
-        android:layout_gravity="center"
-        android:id="@+id/navi_home"
-        android:layout_height="48dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:id="@+id/navi_second"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navi_first"
+        >
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="11dp"
+            android:id="@+id/navi_middle"
+            android:src="@drawable/document_filled"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/greyish_brown"
+            android:lineSpacingExtra="2sp"
+            android:text="중간정리 보기"
+            app:layout_constraintLeft_toRightOf="@id/navi_middle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:text="23"
+            android:textSize="16sp"
+            android:id="@+id/navi_middle_text"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:visibility="gone"
+            android:textColor="@color/seafoam_blue"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:id="@+id/navi_third"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navi_second"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="11dp"
+            android:id="@+id/navi_setting"
+            android:src="@drawable/pencil"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/greyish_brown"
+            android:lineSpacingExtra="2sp"
+            android:text="시험일정 세팅하기"
+            app:layout_constraintLeft_toRightOf="@id/navi_setting"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navi_third"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="11dp"
+            android:id="@+id/navi_initial"
+            android:src="@drawable/setting"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/greyish_brown"
+            android:lineSpacingExtra="2sp"
+            android:text="문제 초기화 하기"
+            app:layout_constraintLeft_toRightOf="@id/navi_initial"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

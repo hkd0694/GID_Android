@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -82,17 +81,18 @@ public class CheckActivity extends Activity {
         //"정답" or "오답"
         check = intent.getStringExtra("select");
         //시트 번호
-        sheet_indexs = intent.getIntExtra("sheet_index",2);
+        sheet_indexs = intent.getIntExtra("sheet_index", 2);
         // 행 번호
-        row_number = intent.getIntExtra("row_first",1);
+        row_number = intent.getIntExtra("row_first", 1);
 
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
         list = gson.fromJson(name, listType);
 
-        excelProblems = list.get(sheet_indexs-1).getPeriod_data();
-        arrangeData = list.get(sheet_indexs-1).getArrangeData();
+        excelProblems = list.get(sheet_indexs - 1).getPeriod_data();
+        arrangeData = list.get(sheet_indexs - 1).getArrangeData();
 
         //엑셀 파일 불러와 데이터 저장
         try {
@@ -104,7 +104,8 @@ public class CheckActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(list.get(sheet_indexs-1).getScriptData().get(row_number-1).isScript()) check_script.setImageResource(R.drawable.star_active_darkblue);
+        if (list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).isScript())
+            check_script.setImageResource(R.drawable.star_active_darkblue);
         else {
             check_script.setImageResource(R.drawable.star_normal_darkblue);
         }
@@ -114,20 +115,20 @@ public class CheckActivity extends Activity {
             public void onClick(View v) {
                 Drawable temp = check_script.getDrawable();
                 Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
-                Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
-                Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
-                if(tmpBitmap.equals(tmpBitmap1)) {
-                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setScript(true);
-                    int add_count = list.get(sheet_indexs-1).getScriptData().get(row_number-1).getCount();
-                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setCount(add_count+1);
+                Bitmap tmpBitmap = ((BitmapDrawable) temp).getBitmap();
+                Bitmap tmpBitmap1 = ((BitmapDrawable) temp1).getBitmap();
+                if (tmpBitmap.equals(tmpBitmap1)) {
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(true);
+                    int add_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(add_count + 1);
                     check_script.setImageResource(R.drawable.star_active_darkblue);
-                } else{
-                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setScript(false);
-                    int delete_count = list.get(sheet_indexs-1).getScriptData().get(row_number-1).getCount();
-                    list.get(sheet_indexs-1).getScriptData().get(row_number-1).setCount(delete_count-1);
+                } else {
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(false);
+                    int delete_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(delete_count - 1);
                     check_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
-                gson  = new GsonBuilder().create();
+                gson = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
@@ -139,10 +140,10 @@ public class CheckActivity extends Activity {
         row = sh.getRow(row_number);
         //시트 번호에서 해설 부분 가져오기
         cell = row.getCell(8);
-        if(check.equals("정답")){
+        if (check.equals("정답")) {
             check_image.setImageResource(R.drawable.good);
             check_answer.setText("정답을 맞췄습니다!");
-        } else  {
+        } else {
             check_image.setImageResource(R.drawable.wrong);
             check_cry.setVisibility(View.VISIBLE);
             check_answer.setText("틀렸습니다.");
@@ -168,23 +169,23 @@ public class CheckActivity extends Activity {
                 excelProblems.add(pro);
                 arrangeData.add(arr);
                 //문제 ArrayList로 add 하여 저장
-                list.get(sheet_indexs-1).setPeriod_data(excelProblems);
-                list.get(sheet_indexs-1).setArrangeData(arrangeData);
+                list.get(sheet_indexs - 1).setPeriod_data(excelProblems);
+                list.get(sheet_indexs - 1).setArrangeData(arrangeData);
                 //현재 푼 문제가 아닌 다음 번호를 기억해 저장
                 int next = row_number + 1;
-                list.get(sheet_indexs-1).setIndex(next);
-                gson  = new GsonBuilder().create();
+                list.get(sheet_indexs - 1).setIndex(next);
+                gson = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
                 editor.commit();
                 // 사용자가 10문제를 풀 때마다 중간정리를 보여주기 위해 ArrangeActivity로 넘어간다.
                 //만약 아직 10문제를 못 풀었으면 setResult를 통해 전 액티비티로 돌아간다.
-                if(pro.getExcel_no() % 10 == 0) {
+                if (pro.getExcel_no() % 10 == 0) {
                     intent = new Intent(getApplicationContext(), ArrangeActivity.class);
                     int page = pro.getExcel_no() / 10;
-                    intent.putExtra("page",page);
-                    intent.putExtra("sheet",sheet_indexs);
+                    intent.putExtra("page", page);
+                    intent.putExtra("sheet", sheet_indexs);
                     startActivity(intent);
                 } else setResult(RESULT_OK);
                 finish();
@@ -193,10 +194,10 @@ public class CheckActivity extends Activity {
     }
 
     //SharedPreferences 에다가 저장하기 위해 ArrangeData class에 데이터 넣는 함수
-    private ArrangeData saveArrangeData(){
+    private ArrangeData saveArrangeData() {
         ArrangeData arrangeData = new ArrangeData();
-        arrangeData.setNumber(String.valueOf((int)row.getCell(0).getNumericCellValue()));
-        if(check.equals("정답")) {
+        arrangeData.setNumber(String.valueOf((int) row.getCell(0).getNumericCellValue()));
+        if (check.equals("정답")) {
             arrangeData.setCheck("정답");
         } else arrangeData.setCheck("오답");
         //Excel 에 요약 정보 추가되면 그에 맞는 인덱스 넣어줘야함 지금은 보기 5번으로 고정 시킴.
@@ -205,22 +206,22 @@ public class CheckActivity extends Activity {
     }
 
     //SharedPreferences에다가 저장하기 위해 ExcelProblem class에 데이터 넣는 함수
-    private ExcelProblem saveExcelProblem(){
+    private ExcelProblem saveExcelProblem() {
         ExcelProblem problem = new ExcelProblem();
-        problem.setExcel_no((int)row.getCell(0).getNumericCellValue());
+        problem.setExcel_no((int) row.getCell(0).getNumericCellValue());
         problem.setEra(row.getCell(1).getStringCellValue());
         problem.setProblem(row.getCell(2).getStringCellValue());
         problem.setExam_1(row.getCell(3).getStringCellValue());
         problem.setExam_2(row.getCell(4).getStringCellValue());
         problem.setExam_3(row.getCell(5).getStringCellValue());
         problem.setExam_4(row.getCell(6).getStringCellValue());
-        problem.setAnswer((int)row.getCell(7).getNumericCellValue());
+        problem.setAnswer((int) row.getCell(7).getNumericCellValue());
         problem.setSolution(row.getCell(8).getStringCellValue());
         return problem;
     }
 
     //해당 Activity xml 데이터 초기화 하는 함수
-    private void init(){
+    private void init() {
         check_script = findViewById(R.id.check_script);
         check_answer = findViewById(R.id.check_answer);
         check_cry = findViewById(R.id.check_cry);
@@ -234,7 +235,7 @@ public class CheckActivity extends Activity {
     //바깥 레이아웃 눌러도 닫히지 않게 하기.
     public boolean onTouchEvent(MotionEvent event) {
         //바깥레이어 클릭시 안닫히게
-        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
             return false;
         }
         return true;

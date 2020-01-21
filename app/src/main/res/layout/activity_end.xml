@@ -25,14 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="183dp"
-            android:layout_marginLeft="123dp"
-            android:layout_marginRight="123dp"
             android:gravity="center"
             >
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="168dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/end_imageview"
                 />
 
@@ -103,14 +101,13 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:id="@+id/end_navigation"
         android:layout_gravity="end"
         android:background="#ffffff"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/slider_menu"
         >
     </com.google.android.material.navigation.NavigationView>
 

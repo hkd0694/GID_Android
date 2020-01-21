@@ -9,7 +9,7 @@ public class ScriptData {
     //스크립을 체크하면 true, 해제하면 false;
     private boolean script;
 
-    public ScriptData(){
+    public ScriptData() {
         script = false;
     }
 

@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,9 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -52,8 +49,7 @@ import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 public class ProblemActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private View toolbar;
     private NavigationView navigationView;
     private ImageButton btnShowNavigationDrawer;
 
@@ -66,7 +62,7 @@ public class ProblemActivity extends AppCompatActivity {
     private ImageButton pro_script;
     private TextView pro_content;
     private RadioGroup pro_radiogroup;
-    private RadioButton pro_radio1,pro_radio2,pro_radio3,pro_radio4;
+    private RadioButton pro_radio1, pro_radio2, pro_radio3, pro_radio4;
     private Button pro_answer;
 
     private String name;
@@ -116,21 +112,21 @@ public class ProblemActivity extends AppCompatActivity {
         pro_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(seleted == 0) {
-                    Toast.makeText(getApplicationContext(),"문제를 풀지 않았습니다.\n 보기 중 정답을 체크해주세요.",Toast.LENGTH_SHORT).show();
-                } else{
-                    int answer = (int)row.getCell(7).getNumericCellValue();
+                if (seleted == 0) {
+                    Toast.makeText(getApplicationContext(), "문제를 풀지 않았습니다.\n 보기 중 정답을 체크해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    int answer = (int) row.getCell(7).getNumericCellValue();
                     String ck;
-                    if(answer == seleted) ck = "정답";
+                    if (answer == seleted) ck = "정답";
                     else ck = "오답";
                     Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
                     //"정답", "오답"을 체크해주기 위해 넘겨줌
-                    intent.putExtra("select",ck);
+                    intent.putExtra("select", ck);
                     //sheet 번호를 기억해야하기 때문에 같이 넘겨줌
-                    intent.putExtra("sheet_index",sheet_index);
+                    intent.putExtra("sheet_index", sheet_index);
                     //sheet 번호와 같이 행번호도 기억해야 하기 때문에 intent를 통하여 넘겨줌.
-                    intent.putExtra("row_first",row_first);
-                    startActivityForResult(intent,101);
+                    intent.putExtra("row_first", row_first);
+                    startActivityForResult(intent, 101);
                 }
             }
         });
@@ -140,10 +136,18 @@ public class ProblemActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.pro_radio1: seleted = 1; break;
-                    case R.id.pro_radio2: seleted = 2; break;
-                    case R.id.pro_radio3: seleted = 3; break;
-                    case R.id.pro_radio4: seleted = 4; break;
+                    case R.id.pro_radio1:
+                        seleted = 1;
+                        break;
+                    case R.id.pro_radio2:
+                        seleted = 2;
+                        break;
+                    case R.id.pro_radio3:
+                        seleted = 3;
+                        break;
+                    case R.id.pro_radio4:
+                        seleted = 4;
+                        break;
                 }
             }
         });
@@ -153,20 +157,20 @@ public class ProblemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Drawable temp = pro_script.getDrawable();
                 Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
-                Bitmap tmpBitmap = ((BitmapDrawable)temp).getBitmap();
-                Bitmap tmpBitmap1 = ((BitmapDrawable)temp1).getBitmap();
-                if(tmpBitmap.equals(tmpBitmap1)) {
-                    list.get(sheet_index-1).getScriptData().get(row_first-1).setScript(true);
-                    int add_count = list.get(sheet_index-1).getScriptData().get(row_first-1).getCount();
-                    list.get(sheet_index-1).getScriptData().get(row_first-1).setCount(add_count+1);
+                Bitmap tmpBitmap = ((BitmapDrawable) temp).getBitmap();
+                Bitmap tmpBitmap1 = ((BitmapDrawable) temp1).getBitmap();
+                if (tmpBitmap.equals(tmpBitmap1)) {
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(true);
+                    int add_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(add_count + 1);
                     pro_script.setImageResource(R.drawable.star_active_darkblue);
                 } else {
-                    list.get(sheet_index-1).getScriptData().get(row_first-1).setScript(false);
-                    int delete_count = list.get(sheet_index-1).getScriptData().get(row_first-1).getCount();
-                    list.get(sheet_index-1).getScriptData().get(row_first-1).setCount(delete_count-1);
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(false);
+                    int delete_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(delete_count - 1);
                     pro_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
-                gson  = new GsonBuilder().create();
+                gson = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(SETTINGS_PLAYER, json);
@@ -180,40 +184,53 @@ public class ProblemActivity extends AppCompatActivity {
     //SharedPreferences 데이터를 다시 불러와 다음 문제를 보여주기 위해 데이터를 불러온다.
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
         list = gson.fromJson(name, listType);
         seleted = 0;
         //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다.
-        if(list.get(sheet_index-1).getIndex() != 1) {
-            row_first = list.get(sheet_index-1).getIndex();
-        } else if(getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
-            row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2])+1;
-        }
-        else {
+        if (list.get(sheet_index - 1).getIndex() != 1) {
+            row_first = list.get(sheet_index - 1).getIndex();
+        } else if (getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
+            row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2]) + 1;
+        } else {
             row_first = 1;
         }
-        if(list.get(sheet_index-1).getScriptData().size() == 0) pro_script.setImageResource(R.drawable.star_normal_darkblue);
-        else{
-            if(list.get(sheet_index-1).getScriptData().get(row_first - 1).isScript()){
+        if (list.get(sheet_index - 1).getScriptData().size() == 0)
+            pro_script.setImageResource(R.drawable.star_normal_darkblue);
+        else {
+            if (list.get(sheet_index - 1).getScriptData().get(row_first - 1).isScript()) {
                 pro_script.setImageResource(R.drawable.star_active_darkblue);
-            } else{
+            } else {
                 pro_script.setImageResource(R.drawable.star_normal_darkblue);
             }
         }
         sh = hss.getSheetAt(sheet_index);
         row = sh.getRow(row_first);
-        if(row != null){
+        if (row != null) {
             //Excel 데이터를 불러와 화면에 맞게 계속해서 불러온다.
-            for(int i=0;i<=10;i++) {
+            for (int i = 0; i <= 10; i++) {
                 cell = row.getCell(i);
-                switch (i){
-                    case 0: pro_no.setText(String.valueOf(cell.getNumericCellValue())); break;
-                    case 2: pro_content.setText(cell.getStringCellValue()); break;
-                    case 3: pro_radio1.setText(cell.getStringCellValue()); break;
-                    case 4: pro_radio2.setText(cell.getStringCellValue()); break;
-                    case 5: pro_radio3.setText(cell.getStringCellValue()); break;
-                    case 6: pro_radio4.setText(cell.getStringCellValue()); break;
+                switch (i) {
+                    case 0:
+                        pro_no.setText(String.valueOf(cell.getNumericCellValue()));
+                        break;
+                    case 2:
+                        pro_content.setText(cell.getStringCellValue());
+                        break;
+                    case 3:
+                        pro_radio1.setText(cell.getStringCellValue());
+                        break;
+                    case 4:
+                        pro_radio2.setText(cell.getStringCellValue());
+                        break;
+                    case 5:
+                        pro_radio3.setText(cell.getStringCellValue());
+                        break;
+                    case 6:
+                        pro_radio4.setText(cell.getStringCellValue());
+                        break;
                 }
             }
         }
@@ -232,8 +249,8 @@ public class ProblemActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //팝업 액티비티에서 다음 문제로 넘어갈 경우에 rows를 증가!!
-        if(requestCode == 101) {
-            if(resultCode == -1) {
+        if (requestCode == 101) {
+            if (resultCode == -1) {
                 //마지막 번호 기억하기
             }
         }
@@ -241,7 +258,7 @@ public class ProblemActivity extends AppCompatActivity {
     }
 
     //해당 Activity xml 데이터 초기화 하는 함수
-    private void init(){
+    private void init() {
         pro_text = findViewById(R.id.pro_text);
         pro_no = findViewById(R.id.pro_no);
         pro_script = findViewById(R.id.pro_script);
@@ -255,16 +272,13 @@ public class ProblemActivity extends AppCompatActivity {
     }
 
     //Toolbar 안에있는 값들 초기화
-    private void settingapp_bar(){
+    private void settingapp_bar() {
         toolbar = findViewById(R.id.pro_toolbar);
-        setSupportActionBar(toolbar);
-        btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
+        btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.pro_drawlayout);
-        actionBarDrawerToggle = setUpActionBarToggle();
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView = findViewById(R.id.pro_navigation);
         setUpDrawerContent(navigationView);
 
@@ -280,7 +294,7 @@ public class ProblemActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.navibutton:
                     drawerLayout.openDrawer(GravityCompat.END);
                     break;
@@ -289,7 +303,7 @@ public class ProblemActivity extends AppCompatActivity {
     };
 
     //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
-    private void navi_header_click(){
+    private void navi_header_click() {
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
         navi_home = naviView.findViewById(R.id.navi_home);
@@ -313,20 +327,20 @@ public class ProblemActivity extends AppCompatActivity {
     }
 
     //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
-    private void setUpDrawerContent(NavigationView navi){
+    private void setUpDrawerContent(NavigationView navi) {
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.script :
-                        intent = new Intent(getApplicationContext(),ScrapActivity.class);
+                switch (item.getItemId()) {
+                    case R.id.script:
+                        intent = new Intent(getApplicationContext(), ScrapActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
-                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent = new Intent(getApplicationContext(), InterimActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
@@ -340,10 +354,6 @@ public class ProblemActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private ActionBarDrawerToggle setUpActionBarToggle(){
-        return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
     @Override

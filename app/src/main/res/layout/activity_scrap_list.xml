@@ -596,14 +596,13 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:id="@+id/scrapList_navigation"
         android:layout_gravity="end"
         android:background="#ffffff"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/slider_menu"
         >
     </com.google.android.material.navigation.NavigationView>
 

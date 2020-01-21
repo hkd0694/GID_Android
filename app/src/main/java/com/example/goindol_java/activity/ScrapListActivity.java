@@ -1,22 +1,19 @@
 package com.example.goindol_java.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.goindol_java.R;
 import com.example.goindol_java.data.Period;
@@ -32,11 +29,10 @@ import java.util.List;
 
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
-public class ScrapListActivity extends AppCompatActivity implements View.OnClickListener{
+public class ScrapListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private View toolbar;
     private NavigationView navigationView;
     private ImageButton btnShowNavigationDrawer;
     private ImageButton navi_cancel;
@@ -104,197 +100,270 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
         settingapp_bar();
         navi_header_click();
         init();
-        index = getIntent().getIntExtra("index",0);
+        index = getIntent().getIntExtra("index", 0);
         area = getIntent().getStringExtra("area");
         scrapList_text.setText(area + " 스크랩한 문제를 다시 풀면서\n" + "한번 더 확인해 보세요.");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
-        name = prefs.getString(SETTINGS_PLAYER,null);
-        listType = new TypeToken<ArrayList<Period>>() {}.getType();
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
         list = gson.fromJson(name, listType);
 
         grid_check();
 
     }
 
-    private void grid_check(){
+    private void grid_check() {
         List<ScriptData> dataList = list.get(index).getScriptData();
-        for(int i=0;i<dataList.size();i++) {
-            if(dataList.get(i).isScript()) {
+        for (int i = 0; i < dataList.size(); i++) {
+            if (dataList.get(i).isScript()) {
                 switch (i) {
-                    case 0: grid_button1.setEnabled(true);
-                            grid_button1.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button1.setTextColor(Color.WHITE);
-                            grid_button1.setOnClickListener(this);
-                            break;
-                    case 1: grid_button2.setEnabled(true);
-                            grid_button2.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button2.setTextColor(Color.WHITE);
+                    case 0:
+                        grid_button1.setEnabled(true);
+                        grid_button1.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button1.setTextColor(Color.WHITE);
+                        grid_button1.setOnClickListener(this);
+                        break;
+                    case 1:
+                        grid_button2.setEnabled(true);
+                        grid_button2.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button2.setTextColor(Color.WHITE);
                         grid_button2.setOnClickListener(this);
-                            break;
-                    case 2: grid_button3.setEnabled(true);
-                            grid_button3.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button3.setTextColor(Color.WHITE);
+                        break;
+                    case 2:
+                        grid_button3.setEnabled(true);
+                        grid_button3.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button3.setTextColor(Color.WHITE);
                         grid_button3.setOnClickListener(this);
-                            break;
-                    case 3: grid_button4.setEnabled(true);
-                            grid_button4.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button4.setTextColor(Color.WHITE);
+                        break;
+                    case 3:
+                        grid_button4.setEnabled(true);
+                        grid_button4.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button4.setTextColor(Color.WHITE);
                         grid_button4.setOnClickListener(this);
-                            break;
-                    case 4: grid_button5.setEnabled(true);
-                            grid_button5.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button5.setTextColor(Color.WHITE);
+                        break;
+                    case 4:
+                        grid_button5.setEnabled(true);
+                        grid_button5.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button5.setTextColor(Color.WHITE);
                         grid_button5.setOnClickListener(this);
-                            break;
-                    case 5: grid_button6.setEnabled(true);
-                            grid_button6.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button6.setTextColor(Color.WHITE);
+                        break;
+                    case 5:
+                        grid_button6.setEnabled(true);
+                        grid_button6.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button6.setTextColor(Color.WHITE);
                         grid_button6.setOnClickListener(this);
-                            break;
-                    case 6: grid_button7.setEnabled(true);
-                            grid_button7.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button7.setTextColor(Color.WHITE);
+                        break;
+                    case 6:
+                        grid_button7.setEnabled(true);
+                        grid_button7.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button7.setTextColor(Color.WHITE);
                         grid_button7.setOnClickListener(this);
-                            break;
-                    case 7: grid_button8.setEnabled(true);
-                            grid_button8.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button8.setTextColor(Color.WHITE);
+                        break;
+                    case 7:
+                        grid_button8.setEnabled(true);
+                        grid_button8.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button8.setTextColor(Color.WHITE);
                         grid_button8.setOnClickListener(this);
-                            break;
-                    case 8: grid_button9.setEnabled(true);
-                            grid_button9.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button9.setTextColor(Color.WHITE);
+                        break;
+                    case 8:
+                        grid_button9.setEnabled(true);
+                        grid_button9.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button9.setTextColor(Color.WHITE);
                         grid_button9.setOnClickListener(this);
-                            break;
-                    case 9: grid_button10.setEnabled(true);
-                            grid_button10.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button10.setTextColor(Color.WHITE);
+                        break;
+                    case 9:
+                        grid_button10.setEnabled(true);
+                        grid_button10.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button10.setTextColor(Color.WHITE);
                         grid_button10.setOnClickListener(this);
-                            break;
-                    case 10: grid_button11.setEnabled(true);
-                            grid_button11.setBackgroundResource(R.drawable.grid_button_green_radius);
-                            grid_button11.setTextColor(Color.WHITE);
+                        break;
+                    case 10:
+                        grid_button11.setEnabled(true);
+                        grid_button11.setBackgroundResource(R.drawable.grid_button_green_radius);
+                        grid_button11.setTextColor(Color.WHITE);
                         grid_button11.setOnClickListener(this);
-                            break;
-                    case 11: grid_button12.setEnabled(true);
+                        break;
+                    case 11:
+                        grid_button12.setEnabled(true);
                         grid_button12.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button12.setTextColor(Color.WHITE);
                         grid_button12.setOnClickListener(this);
                         break;
-                    case 12: grid_button13.setEnabled(true);
+                    case 12:
+                        grid_button13.setEnabled(true);
                         grid_button13.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button13.setTextColor(Color.WHITE);
                         grid_button13.setOnClickListener(this);
                         break;
-                    case 13: grid_button14.setEnabled(true);
+                    case 13:
+                        grid_button14.setEnabled(true);
                         grid_button14.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button14.setTextColor(Color.WHITE);
                         grid_button14.setOnClickListener(this);
                         break;
-                    case 14: grid_button15.setEnabled(true);
+                    case 14:
+                        grid_button15.setEnabled(true);
                         grid_button15.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button15.setTextColor(Color.WHITE);
                         grid_button15.setOnClickListener(this);
                         break;
-                    case 15: grid_button16.setEnabled(true);
+                    case 15:
+                        grid_button16.setEnabled(true);
                         grid_button16.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button16.setTextColor(Color.WHITE);
                         grid_button16.setOnClickListener(this);
                         break;
-                    case 16: grid_button17.setEnabled(true);
+                    case 16:
+                        grid_button17.setEnabled(true);
                         grid_button17.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button17.setTextColor(Color.WHITE);
-                        grid_button17.setOnClickListener(this);break;
-                    case 17: grid_button18.setEnabled(true);
+                        grid_button17.setOnClickListener(this);
+                        break;
+                    case 17:
+                        grid_button18.setEnabled(true);
                         grid_button18.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button18.setTextColor(Color.WHITE);grid_button18.setOnClickListener(this);break;
-                    case 18: grid_button19.setEnabled(true);
+                        grid_button18.setTextColor(Color.WHITE);
+                        grid_button18.setOnClickListener(this);
+                        break;
+                    case 18:
+                        grid_button19.setEnabled(true);
                         grid_button19.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button19.setTextColor(Color.WHITE);grid_button19.setOnClickListener(this);break;
-                    case 19: grid_button20.setEnabled(true);
+                        grid_button19.setTextColor(Color.WHITE);
+                        grid_button19.setOnClickListener(this);
+                        break;
+                    case 19:
+                        grid_button20.setEnabled(true);
                         grid_button20.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button20.setTextColor(Color.WHITE);grid_button20.setOnClickListener(this);break;
-                    case 20: grid_button21.setEnabled(true);
+                        grid_button20.setTextColor(Color.WHITE);
+                        grid_button20.setOnClickListener(this);
+                        break;
+                    case 20:
+                        grid_button21.setEnabled(true);
                         grid_button21.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button21.setTextColor(Color.WHITE);grid_button21.setOnClickListener(this);break;
-                    case 21: grid_button22.setEnabled(true);
+                        grid_button21.setTextColor(Color.WHITE);
+                        grid_button21.setOnClickListener(this);
+                        break;
+                    case 21:
+                        grid_button22.setEnabled(true);
                         grid_button22.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button22.setTextColor(Color.WHITE);
                         grid_button22.setOnClickListener(this);
                         break;
-                    case 22: grid_button23.setEnabled(true);
+                    case 22:
+                        grid_button23.setEnabled(true);
                         grid_button23.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button23.setTextColor(Color.WHITE);
                         grid_button23.setOnClickListener(this);
                         break;
-                    case 23: grid_button24.setEnabled(true);
+                    case 23:
+                        grid_button24.setEnabled(true);
                         grid_button24.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button24.setTextColor(Color.WHITE);
                         grid_button24.setOnClickListener(this);
                         break;
-                    case 24: grid_button25.setEnabled(true);
+                    case 24:
+                        grid_button25.setEnabled(true);
                         grid_button25.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button25.setTextColor(Color.WHITE);
-                        grid_button25.setOnClickListener(this);break;
-                    case 25: grid_button26.setEnabled(true);
+                        grid_button25.setOnClickListener(this);
+                        break;
+                    case 25:
+                        grid_button26.setEnabled(true);
                         grid_button26.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button26.setTextColor(Color.WHITE);
-                        grid_button26.setOnClickListener(this);break;
-                    case 26: grid_button27.setEnabled(true);
+                        grid_button26.setOnClickListener(this);
+                        break;
+                    case 26:
+                        grid_button27.setEnabled(true);
                         grid_button27.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button27.setTextColor(Color.WHITE);
-                        grid_button27.setOnClickListener(this);break;
-                    case 27: grid_button28.setEnabled(true);
+                        grid_button27.setOnClickListener(this);
+                        break;
+                    case 27:
+                        grid_button28.setEnabled(true);
                         grid_button28.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button28.setTextColor(Color.WHITE);
-                        grid_button28.setOnClickListener(this);break;
-                    case 28: grid_button29.setEnabled(true);
+                        grid_button28.setOnClickListener(this);
+                        break;
+                    case 28:
+                        grid_button29.setEnabled(true);
                         grid_button29.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button29.setTextColor(Color.WHITE);
-                        grid_button29.setOnClickListener(this);break;
-                    case 29: grid_button30.setEnabled(true);
+                        grid_button29.setOnClickListener(this);
+                        break;
+                    case 29:
+                        grid_button30.setEnabled(true);
                         grid_button30.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button30.setTextColor(Color.WHITE);
-                        grid_button30.setOnClickListener(this);break;
-                    case 30: grid_button31.setEnabled(true);
+                        grid_button30.setOnClickListener(this);
+                        break;
+                    case 30:
+                        grid_button31.setEnabled(true);
                         grid_button31.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button31.setTextColor(Color.WHITE);
                         grid_button31.setOnClickListener(this);
                         break;
-                    case 31: grid_button32.setEnabled(true);
+                    case 31:
+                        grid_button32.setEnabled(true);
                         grid_button32.setBackgroundResource(R.drawable.grid_button_green_radius);
                         grid_button32.setTextColor(Color.WHITE);
-                        grid_button32.setOnClickListener(this);break;
-                    case 32: grid_button33.setEnabled(true);
+                        grid_button32.setOnClickListener(this);
+                        break;
+                    case 32:
+                        grid_button33.setEnabled(true);
                         grid_button33.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button33.setTextColor(Color.WHITE);grid_button33.setOnClickListener(this);break;
-                    case 33: grid_button34.setEnabled(true);
+                        grid_button33.setTextColor(Color.WHITE);
+                        grid_button33.setOnClickListener(this);
+                        break;
+                    case 33:
+                        grid_button34.setEnabled(true);
                         grid_button34.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button34.setTextColor(Color.WHITE);grid_button34.setOnClickListener(this);break;
-                    case 34: grid_button35.setEnabled(true);
+                        grid_button34.setTextColor(Color.WHITE);
+                        grid_button34.setOnClickListener(this);
+                        break;
+                    case 34:
+                        grid_button35.setEnabled(true);
                         grid_button35.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button35.setTextColor(Color.WHITE);grid_button35.setOnClickListener(this);break;
-                    case 35: grid_button36.setEnabled(true);
+                        grid_button35.setTextColor(Color.WHITE);
+                        grid_button35.setOnClickListener(this);
+                        break;
+                    case 35:
+                        grid_button36.setEnabled(true);
                         grid_button36.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button36.setTextColor(Color.WHITE);grid_button36.setOnClickListener(this);break;
-                    case 36: grid_button37.setEnabled(true);
+                        grid_button36.setTextColor(Color.WHITE);
+                        grid_button36.setOnClickListener(this);
+                        break;
+                    case 36:
+                        grid_button37.setEnabled(true);
                         grid_button37.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button37.setTextColor(Color.WHITE);grid_button37.setOnClickListener(this);break;
-                    case 37: grid_button38.setEnabled(true);
+                        grid_button37.setTextColor(Color.WHITE);
+                        grid_button37.setOnClickListener(this);
+                        break;
+                    case 37:
+                        grid_button38.setEnabled(true);
                         grid_button38.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button38.setTextColor(Color.WHITE);grid_button38.setOnClickListener(this);break;
-                    case 38: grid_button39.setEnabled(true);
+                        grid_button38.setTextColor(Color.WHITE);
+                        grid_button38.setOnClickListener(this);
+                        break;
+                    case 38:
+                        grid_button39.setEnabled(true);
                         grid_button39.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button39.setTextColor(Color.WHITE);grid_button39.setOnClickListener(this);break;
-                    case 39: grid_button40.setEnabled(true);
+                        grid_button39.setTextColor(Color.WHITE);
+                        grid_button39.setOnClickListener(this);
+                        break;
+                    case 39:
+                        grid_button40.setEnabled(true);
                         grid_button40.setBackgroundResource(R.drawable.grid_button_green_radius);
-                        grid_button40.setTextColor(Color.WHITE);grid_button40.setOnClickListener(this);break;
+                        grid_button40.setTextColor(Color.WHITE);
+                        grid_button40.setOnClickListener(this);
+                        break;
                 }
             }
         }
     }
 
-    private void init(){
+    private void init() {
         scrapList_text = findViewById(R.id.scrapList_text);
         grid_button1 = findViewById(R.id.grid_button1);
         grid_button2 = findViewById(R.id.grid_button2);
@@ -340,15 +409,15 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        intent = new Intent(getApplicationContext(),ProblemActivity.class);
+        intent = new Intent(getApplicationContext(), ProblemActivity.class);
         switch (v.getId()) {
             case R.id.grid_button1:
-                intent.putExtra(MainActivity.period_data,area + "," + index + "," + "1");
+                intent.putExtra(MainActivity.period_data, area + "," + index + "," + "1");
                 break;
             case R.id.grid_button2:
-                intent.putExtra(MainActivity.period_data,area + "," + index + "," + "2");
+                intent.putExtra(MainActivity.period_data, area + "," + index + "," + "2");
                 break;
-                //값 다 넣어야함.
+            //값 다 넣어야함.
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
@@ -356,16 +425,13 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     }
 
     //Toolbar 안에있는 값들 초기화
-    private void settingapp_bar(){
+    private void settingapp_bar() {
         toolbar = findViewById(R.id.scrapList_toolbar);
-        setSupportActionBar(toolbar);
-        btnShowNavigationDrawer =  toolbar.findViewById(R.id.navibutton);
+        btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.scrapList_drawerlayout);
-        actionBarDrawerToggle = setUpActionBarToggle();
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView = findViewById(R.id.scrapList_navigation);
         setUpDrawerContent(navigationView);
 
@@ -382,7 +448,7 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.navibutton:
                     drawerLayout.openDrawer(GravityCompat.END);
                     break;
@@ -391,9 +457,8 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     };
 
 
-
     //navi header를 클릭하면 발생하는 이벤트 함수 (엑스, 홈)
-    private void navi_header_click(){
+    private void navi_header_click() {
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
         navi_home = naviView.findViewById(R.id.navi_home);
@@ -417,20 +482,20 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     }
 
     //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
-    private void setUpDrawerContent(NavigationView navi){
+    private void setUpDrawerContent(NavigationView navi) {
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.script :
-                        intent = new Intent(getApplicationContext(),ScrapActivity.class);
+                switch (item.getItemId()) {
+                    case R.id.script:
+                        intent = new Intent(getApplicationContext(), ScrapActivity.class);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.setting:
                         break;
                     case R.id.middle:
-                        intent = new Intent(getApplicationContext(),InterimActivity.class);
+                        intent = new Intent(getApplicationContext(), InterimActivity.class);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
@@ -444,10 +509,6 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
                 return false;
             }
         });
-    }
-
-    private ActionBarDrawerToggle setUpActionBarToggle(){
-        return new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.app_name, R.string.app_name);
     }
 
 }

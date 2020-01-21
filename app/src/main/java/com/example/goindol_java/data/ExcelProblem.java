@@ -1,7 +1,5 @@
 package com.example.goindol_java.data;
 
-import java.util.Date;
-
 public class ExcelProblem {
     //문제번호
     private int excel_no;

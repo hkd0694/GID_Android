@@ -29,7 +29,7 @@ public class ArrangePagerAdapter extends PagerAdapter {
     public ArrangePagerAdapter(Context context, List<ArrangeData> arrangeData) {
         this.context = context;
         this.arrangeData = arrangeData;
-        size = arrangeData.size()/10;
+        size = arrangeData.size() / 10;
     }
 
     @Override
@@ -45,31 +45,40 @@ public class ArrangePagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = null ;
+        View view = null;
         if (context != null) {
             List<ArrangeData> recycler_data = new ArrayList<>();
             // LayoutInflater를 통해 "/res/layout/page.xml"을 뷰로 생성.
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.interimpager, container, false);
-            pager_middel = (TextView)view.findViewById(R.id.pager_middle);
-            pager_middel.setText("중간정리 " + (position+1) + "번째");
-            pager_recyclerview = (RecyclerView)view.findViewById(R.id.pager_recyclerview);
+            pager_middel = (TextView) view.findViewById(R.id.pager_middle);
+            pager_middel.setText("중간정리 " + (position + 1) + "번째");
+            pager_recyclerview = (RecyclerView) view.findViewById(R.id.pager_recyclerview);
             int startIndex = 0;
             switch (position) {
-                case 0: startIndex = 0;  break;
-                case 1: startIndex = 10; break;
-                case 2: startIndex = 20; break;
-                case 3: startIndex = 30; break;
+                case 0:
+                    startIndex = 0;
+                    break;
+                case 1:
+                    startIndex = 10;
+                    break;
+                case 2:
+                    startIndex = 20;
+                    break;
+                case 3:
+                    startIndex = 30;
+                    break;
             }
-            for(int i = startIndex; i<startIndex+10;i++) recycler_data.add(arrangeData.get(i));
+            for (int i = startIndex; i < startIndex + 10; i++)
+                recycler_data.add(arrangeData.get(i));
             ArrangeAdapter arrangeAdapter = new ArrangeAdapter(context, recycler_data);
             LinearLayoutManager linearLayout = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
             pager_recyclerview.setLayoutManager(linearLayout);
             pager_recyclerview.setAdapter(arrangeAdapter);
         }
         // 뷰페이저에 추가.
-        container.addView(view) ;
-        return view ;
+        container.addView(view);
+        return view;
     }
 
     @Override

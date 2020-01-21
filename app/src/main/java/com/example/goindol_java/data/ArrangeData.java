@@ -13,7 +13,7 @@ public class ArrangeData implements Serializable {
     private String summary;
 
 
-    public ArrangeData(){
+    public ArrangeData() {
     }
 
     public ArrangeData(String number, String summary) {
@@ -21,7 +21,6 @@ public class ArrangeData implements Serializable {
         check = "확인불가";
         this.summary = summary;
     }
-
 
 
     public ArrangeData(String number, String check, String summary) {
