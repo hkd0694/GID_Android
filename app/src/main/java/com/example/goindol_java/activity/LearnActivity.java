@@ -1,6 +1,7 @@
 package com.example.goindol_java.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,8 +16,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.data.Period;
 import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -26,6 +30,9 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LearnActivity extends AppCompatActivity {
 
@@ -44,12 +51,29 @@ public class LearnActivity extends AppCompatActivity {
     private Button learn_cancel;
     private Button learn_start;
 
+    private View naviScriptView;
+    private View naviMiddleView;
+    private View naviSettingView;
+    private View naviInitialView;
+
+    private TextView naviMiddleText;
+    private TextView naviScriptText;
+
+    private int scriptIndex = 0;
+    private int middleIndex = 0;
+
     private TextView learnArrange;
 
     private HSSFWorkbook hss;
     private HSSFSheet sh;
     private HSSFRow row;
     private HSSFCell cell;
+
+    private List<Period> list = new ArrayList<>();
+    private SharedPreferences prefs;
+    private Gson gson = new Gson();
+    private Period period;
+    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +124,6 @@ public class LearnActivity extends AppCompatActivity {
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.learn_drawerlayout);
         navigationView = findViewById(R.id.learn_navigation);
-        setUpDrawerContent(navigationView);
 
         try {
             //엑셀 시트 가져오기
@@ -122,6 +145,17 @@ public class LearnActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        prefs = getSharedPreferences("shared", MODE_PRIVATE);
+        data = prefs.getString(SplashActivity.SETTINGS_PLAYER, null);
+        Type listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
+        // 변환
+        list = gson.fromJson(data, listType);
+        super.onResume();
+    }
+
     //Navigation 버튼 클릭시 발생하는 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -129,6 +163,25 @@ public class LearnActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.navibutton:
                     drawerLayout.openDrawer(GravityCompat.END);
+
+                    scriptIndex = 0;
+                    middleIndex = 0;
+                    //여기다가 중간정리 및 스크랩한 갯수 계속해서 초기화!!
+                    for(int i=0;i<list.size();i++) {
+                        scriptIndex +=list.get(i).getScriptTotalCount();
+                        if(list.get(i).getArrangeData().size() == 0) continue;
+                        middleIndex += list.get(i).getArrangeData().size() / 10;
+                    }
+                    if(scriptIndex == 0) naviScriptText.setVisibility(View.GONE);
+                    else {
+                        naviScriptText.setVisibility(View.VISIBLE);
+                        naviScriptText.setText(String.valueOf(scriptIndex));
+                    }
+                    if(middleIndex == 0) naviMiddleText.setVisibility(View.GONE);
+                    else{
+                        naviMiddleText.setVisibility(View.VISIBLE);
+                        naviMiddleText.setText(String.valueOf(middleIndex));
+                    }
                     break;
             }
         }
@@ -139,6 +192,53 @@ public class LearnActivity extends AppCompatActivity {
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
         navi_home = naviView.findViewById(R.id.navi_home);
+
+        naviScriptView = naviView.findViewById(R.id.navi_script_view);
+        naviMiddleView = naviView.findViewById(R.id.navi_middle_view);
+        naviSettingView = naviView.findViewById(R.id.navi_setting_view);
+        naviInitialView = naviView.findViewById(R.id.navi_initial_view);
+        naviMiddleText = naviView.findViewById(R.id.navi_middle_text);
+        naviScriptText = naviView.findViewById(R.id.navi_script_text);
+
+        naviScriptView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ScrapActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
+
+        naviMiddleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), InterimActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
+
+        naviSettingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), SettingActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
+
+        naviInitialView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), InitPopupActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
 
         navi_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,36 +256,6 @@ public class LearnActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    //nvai 몸통부분 안에 있는 버튼 클릭시 발생하는 리스너 (스크랩한 문제 보기, 중간정리 보기, 시험일정 세팅하기, 문제 초기화 하기)
-    private void setUpDrawerContent(NavigationView navi) {
-        navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.script:
-                        intent = new Intent(getApplicationContext(), ScrapActivity.class);
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(intent);
-                        break;
-                    case R.id.setting:
-                        break;
-                    case R.id.middle:
-                        intent = new Intent(getApplicationContext(), InterimActivity.class);
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(intent);
-                        break;
-                    case R.id.initial:
-                        intent = new Intent(getApplicationContext(), InitPopupActivity.class);
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(intent);
-                        break;
-                }
-                drawerLayout.closeDrawer(GravityCompat.END);
-                return false;
-            }
-        });
     }
 
     //뒤로가기 버튼 막음

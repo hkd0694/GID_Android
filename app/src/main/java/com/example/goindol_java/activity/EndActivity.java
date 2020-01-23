@@ -1,6 +1,7 @@
 package com.example.goindol_java.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +16,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.goindol_java.R;
+import com.example.goindol_java.data.Period;
 import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 public class EndActivity extends AppCompatActivity {
 
@@ -34,6 +44,23 @@ public class EndActivity extends AppCompatActivity {
 
     private String name;
     private Intent intent;
+
+    private View naviScriptView;
+    private View naviMiddleView;
+    private View naviSettingView;
+    private View naviInitialView;
+
+    private TextView naviMiddleText;
+    private TextView naviScriptText;
+
+    private int scriptIndex = 0;
+    private int middleIndex = 0;
+
+    private SharedPreferences prefs;
+    private Gson gson = new Gson();
+    private List<Period> list = new ArrayList<>();
+    private Type listType;
+    private String name1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +80,12 @@ public class EndActivity extends AppCompatActivity {
         } else {
             end_image.setImageResource(R.drawable.area_image);
         }
+
+        prefs = getSharedPreferences("shared", MODE_PRIVATE);
+        name = prefs.getString(SETTINGS_PLAYER, null);
+        listType = new TypeToken<ArrayList<Period>>() {
+        }.getType();
+        list = gson.fromJson(name1, listType);
         //메인화면 돌아가기 버튼을 클릭 시 발생하는 리스너로
         //Activitiy Stack 안에 있는 MainActivity 위에 있는 Activity를 모두 없애고 MainActivity를 다시 불러서 재사용 한다.
         end_button.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +133,25 @@ public class EndActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.navibutton:
                     drawerLayout.openDrawer(GravityCompat.END);
+
+                    scriptIndex = 0;
+                    middleIndex = 0;
+                    //여기다가 중간정리 및 스크랩한 갯수 계속해서 초기화!!
+                    for(int i=0;i<list.size();i++) {
+                        scriptIndex +=list.get(i).getScriptTotalCount();
+                        if(list.get(i).getArrangeData().size() == 0) continue;
+                        middleIndex += list.get(i).getArrangeData().size() / 10;
+                    }
+                    if(scriptIndex == 0) naviScriptText.setVisibility(View.GONE);
+                    else {
+                        naviScriptText.setVisibility(View.VISIBLE);
+                        naviScriptText.setText(String.valueOf(scriptIndex));
+                    }
+                    if(middleIndex == 0) naviMiddleText.setVisibility(View.GONE);
+                    else{
+                        naviMiddleText.setVisibility(View.VISIBLE);
+                        naviMiddleText.setText(String.valueOf(middleIndex));
+                    }
                     break;
             }
         }
@@ -110,6 +162,53 @@ public class EndActivity extends AppCompatActivity {
         View naviView = navigationView.getHeaderView(0);
         navi_cancel = naviView.findViewById(R.id.navi_cancel);
         navi_home = naviView.findViewById(R.id.navi_home);
+
+        naviScriptView = naviView.findViewById(R.id.navi_script_view);
+        naviMiddleView = naviView.findViewById(R.id.navi_middle_view);
+        naviSettingView = naviView.findViewById(R.id.navi_setting_view);
+        naviInitialView = naviView.findViewById(R.id.navi_initial_view);
+        naviMiddleText = naviView.findViewById(R.id.navi_middle_text);
+        naviScriptText = naviView.findViewById(R.id.navi_script_text);
+
+        naviScriptView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ScrapActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
+
+        naviMiddleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), InterimActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
+
+        naviSettingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), SettingActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
+
+        naviInitialView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), InitPopupActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
 
         navi_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

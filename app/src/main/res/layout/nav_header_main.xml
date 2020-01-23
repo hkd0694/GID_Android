@@ -46,7 +46,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:id="@+id/navi_first"
+        android:id="@+id/navi_script_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
@@ -100,10 +100,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:id="@+id/navi_second"
+        android:id="@+id/navi_middle_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/navi_first"
+        app:layout_constraintTop_toBottomOf="@id/navi_script_view"
         >
 
         <ImageView
@@ -153,10 +153,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:id="@+id/navi_third"
+        android:id="@+id/navi_setting_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/navi_second"
+        app:layout_constraintTop_toBottomOf="@id/navi_middle_view"
         >
 
         <ImageView
@@ -191,9 +191,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
+        android:id="@+id/navi_initial_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/navi_third"
+        app:layout_constraintTop_toBottomOf="@id/navi_setting_view"
         >
 
         <ImageView

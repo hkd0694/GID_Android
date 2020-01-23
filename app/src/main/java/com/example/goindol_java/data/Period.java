@@ -17,6 +17,10 @@ public class Period {
     //스크랩 체크 부분? 및 시간 여기다 저장
     private List<ScriptData> scriptData = new ArrayList<>();
 
+    private int scriptTotalCount;
+
+    private int middleTotalCount;
+
 
     public Period(String periodic, List<ExcelProblem> period_data, List<ArrangeData> arrangeData, List<ScriptData> scriptData) {
         this.periodic = periodic;
@@ -24,6 +28,8 @@ public class Period {
         this.arrangeData = arrangeData;
         this.scriptData = scriptData;
         index = 1;
+        scriptTotalCount = 0;
+        middleTotalCount = 0;
     }
 
     public String getPeriodic() {
@@ -64,5 +70,21 @@ public class Period {
 
     public void setScriptData(List<ScriptData> scriptData) {
         this.scriptData = scriptData;
+    }
+
+    public int getScriptTotalCount() {
+        return scriptTotalCount;
+    }
+
+    public void setScriptTotalCount(int scriptTotalCount) {
+        this.scriptTotalCount = scriptTotalCount;
+    }
+
+    public int getMiddleTotalCount() {
+        return middleTotalCount;
+    }
+
+    public void setMiddleTotalCount(int middleTotalCount) {
+        this.middleTotalCount = middleTotalCount;
     }
 }

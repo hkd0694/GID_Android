@@ -121,11 +121,13 @@ public class CheckActivity extends Activity {
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(true);
                     int add_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(add_count + 1);
+                    list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() + 1);
                     check_script.setImageResource(R.drawable.star_active_darkblue);
                 } else {
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(false);
                     int delete_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(delete_count - 1);
+                    list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() - 1);
                     check_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
                 gson = new GsonBuilder().create();
