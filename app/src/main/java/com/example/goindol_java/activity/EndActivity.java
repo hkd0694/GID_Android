@@ -39,6 +39,7 @@ public class EndActivity extends AppCompatActivity {
     private ImageButton toolbar_cancel;
 
     private TextView end_text;
+    
     private Button end_button;
     private ImageView end_image;
 
