@@ -3,13 +3,11 @@ package com.example.goindol_java.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -114,18 +112,18 @@ public class MainActivity extends AppCompatActivity {
                     scriptIndex = 0;
                     middleIndex = 0;
                     //여기다가 중간정리 및 스크랩한 갯수 계속해서 초기화!!
-                    for(int i=0;i<list.size();i++) {
-                        scriptIndex +=list.get(i).getScriptTotalCount();
-                        if(list.get(i).getArrangeData().size() == 0) continue;
+                    for (int i = 0; i < list.size(); i++) {
+                        scriptIndex += list.get(i).getScriptTotalCount();
+                        if (list.get(i).getArrangeData().size() == 0) continue;
                         middleIndex += list.get(i).getArrangeData().size() / 10;
                     }
-                    if(scriptIndex == 0) naviScriptText.setVisibility(View.GONE);
+                    if (scriptIndex == 0) naviScriptText.setVisibility(View.GONE);
                     else {
                         naviScriptText.setVisibility(View.VISIBLE);
                         naviScriptText.setText(String.valueOf(scriptIndex));
                     }
-                    if(middleIndex == 0) naviMiddleText.setVisibility(View.GONE);
-                    else{
+                    if (middleIndex == 0) naviMiddleText.setVisibility(View.GONE);
+                    else {
                         naviMiddleText.setVisibility(View.VISIBLE);
                         naviMiddleText.setText(String.valueOf(middleIndex));
                     }

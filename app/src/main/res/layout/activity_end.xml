@@ -7,7 +7,71 @@
     android:layout_height="match_parent"
     >
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_blue_grey"
+        >
+
+        <include
+            layout="@layout/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/end_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:id="@+id/end_imageview"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end_toolbar"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginLeft="79dp"
+            android:layout_marginRight="79dp"
+            android:id="@+id/end_textview"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue_grey"
+            android:lineSpacingExtra="2sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end_imageview"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="108dp"
+            android:layout_marginRight="106dp"
+            android:id="@+id/end_button"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="@color/white"
+            android:text="메인화면 돌아가기"
+            android:background="@drawable/button_radius_green"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end_textview"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_blue_grey"
@@ -98,7 +162,7 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="280dp"

@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,7 +15,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -174,13 +172,13 @@ public class ProblemActivity extends AppCompatActivity {
                     list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(true);
                     int add_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
                     list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(add_count + 1);
-                    list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index-1).getScriptTotalCount() + 1);
+                    list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index - 1).getScriptTotalCount() + 1);
                     pro_script.setImageResource(R.drawable.star_active_darkblue);
                 } else {
                     list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(false);
                     int delete_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
                     list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(delete_count - 1);
-                    list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index-1).getScriptTotalCount() - 1);
+                    list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index - 1).getScriptTotalCount() - 1);
                     pro_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
                 gson = new GsonBuilder().create();
@@ -313,18 +311,18 @@ public class ProblemActivity extends AppCompatActivity {
                     scriptIndex = 0;
                     middleIndex = 0;
                     //여기다가 중간정리 및 스크랩한 갯수 계속해서 초기화!!
-                    for(int i=0;i<list.size();i++) {
-                        scriptIndex +=list.get(i).getScriptTotalCount();
-                        if(list.get(i).getArrangeData().size() == 0) continue;
+                    for (int i = 0; i < list.size(); i++) {
+                        scriptIndex += list.get(i).getScriptTotalCount();
+                        if (list.get(i).getArrangeData().size() == 0) continue;
                         middleIndex += list.get(i).getArrangeData().size() / 10;
                     }
-                    if(scriptIndex == 0) naviScriptText.setVisibility(View.GONE);
+                    if (scriptIndex == 0) naviScriptText.setVisibility(View.GONE);
                     else {
                         naviScriptText.setVisibility(View.VISIBLE);
                         naviScriptText.setText(String.valueOf(scriptIndex));
                     }
-                    if(middleIndex == 0) naviMiddleText.setVisibility(View.GONE);
-                    else{
+                    if (middleIndex == 0) naviMiddleText.setVisibility(View.GONE);
+                    else {
                         naviMiddleText.setVisibility(View.VISIBLE);
                         naviMiddleText.setText(String.valueOf(middleIndex));
                     }
