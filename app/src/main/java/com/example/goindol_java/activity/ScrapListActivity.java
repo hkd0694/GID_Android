@@ -420,12 +420,46 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         intent = new Intent(getApplicationContext(), ProblemActivity.class);
         switch (v.getId()) {
-            case R.id.grid_button1:
-                intent.putExtra(MainActivity.period_data, area + "," + index + "," + "1");
-                break;
-            case R.id.grid_button2:
-                intent.putExtra(MainActivity.period_data, area + "," + index + "," + "2");
-                break;
+            case R.id.grid_button1: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "1"); break;
+            case R.id.grid_button2: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "2"); break;
+            case R.id.grid_button3: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "3"); break;
+            case R.id.grid_button4: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "4"); break;
+            case R.id.grid_button5: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "5"); break;
+            case R.id.grid_button6: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "6"); break;
+            case R.id.grid_button7: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "7"); break;
+            case R.id.grid_button8: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "8"); break;
+            case R.id.grid_button9: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "9"); break;
+            case R.id.grid_button10: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "10"); break;
+            case R.id.grid_button11: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "11"); break;
+            case R.id.grid_button12: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "12"); break;
+            case R.id.grid_button13: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "13"); break;
+            case R.id.grid_button14: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "14"); break;
+            case R.id.grid_button15: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "15"); break;
+            case R.id.grid_button16: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "16"); break;
+            case R.id.grid_button17: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "17"); break;
+            case R.id.grid_button18: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "18"); break;
+            case R.id.grid_button19: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "19"); break;
+            case R.id.grid_button20: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "20"); break;
+            case R.id.grid_button21: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "21"); break;
+            case R.id.grid_button22: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "22"); break;
+            case R.id.grid_button23: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "23"); break;
+            case R.id.grid_button24: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "24"); break;
+            case R.id.grid_button25: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "25"); break;
+            case R.id.grid_button26: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "26"); break;
+            case R.id.grid_button27: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "27"); break;
+            case R.id.grid_button28: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "28"); break;
+            case R.id.grid_button29: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "29"); break;
+            case R.id.grid_button30: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "30"); break;
+            case R.id.grid_button31: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "31"); break;
+            case R.id.grid_button32: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "32"); break;
+            case R.id.grid_button33: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "33"); break;
+            case R.id.grid_button34: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "34"); break;
+            case R.id.grid_button35: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "35"); break;
+            case R.id.grid_button36: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "36"); break;
+            case R.id.grid_button37: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "37"); break;
+            case R.id.grid_button38: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "38"); break;
+            case R.id.grid_button39: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "39"); break;
+            case R.id.grid_button40: intent.putExtra(MainActivity.period_data, area + "," + (index+1) + "," + "40"); break;
             //값 다 넣어야함.
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

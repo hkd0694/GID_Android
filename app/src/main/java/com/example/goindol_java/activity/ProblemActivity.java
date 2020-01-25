@@ -204,7 +204,7 @@ public class ProblemActivity extends AppCompatActivity {
         if (list.get(sheet_index - 1).getIndex() != 1) {
             row_first = list.get(sheet_index - 1).getIndex();
         } else if (getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
-            row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2]) + 1;
+            row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2]);
         } else {
             row_first = 1;
         }
