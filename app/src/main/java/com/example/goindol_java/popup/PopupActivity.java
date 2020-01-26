@@ -50,7 +50,7 @@ public class PopupActivity extends Activity {
     private Type listType;
 
     private Intent intent;
-    
+
 
     private int size;
 

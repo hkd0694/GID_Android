@@ -16,6 +16,7 @@ import com.example.goindol_java.activity.MainActivity;
 import com.example.goindol_java.data.ArrangeData;
 import com.example.goindol_java.data.ExcelProblem;
 import com.example.goindol_java.data.Period;
+import com.example.goindol_java.data.ScriptData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -37,7 +38,9 @@ public class InitPopupActivity extends Activity {
     private List<Period> list = new ArrayList<>();
     private List<ExcelProblem> excelProblems = new ArrayList<>();
     private List<ArrangeData> arrangeData = new ArrayList<>();
+    private List<ScriptData> scriptData = new ArrayList<>();
     private Type listType;
+
 
     private String name;
 
@@ -67,9 +70,13 @@ public class InitPopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < list.size(); i++) {
+                    // 초기화 부분
                     list.get(i).setPeriod_data(excelProblems);
-                    list.get(i).setIndex(2);
+                    list.get(i).setIndex(1);
                     list.get(i).setArrangeData(arrangeData);
+                    list.get(i).setScriptData(scriptData);
+                    list.get(i).setScriptTotalCount(0);
+                    list.get(i).setMiddleTotalCount(0);
                 }
                 Gson gson1 = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
