@@ -6,11 +6,11 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/goindol_copy"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ScrapListActivity" />
         <activity android:name=".activity.ScrapActivity" />
         <activity android:name=".activity.TotalinterimActivity" />

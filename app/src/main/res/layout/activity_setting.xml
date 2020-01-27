@@ -82,8 +82,8 @@
         </Spinner>-->
 
             <TextView
-                android:layout_width="13dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="년"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"
@@ -119,8 +119,8 @@
                 />
 
             <TextView
-                android:layout_width="13dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="월"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"
@@ -156,8 +156,8 @@
             </Spinner>-->
 
             <TextView
-                android:layout_width="13dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="일"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"

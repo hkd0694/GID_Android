@@ -22,6 +22,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.goindol_java.activity.SettingActivity.SETTINGS_DATE;
+
 public class SplashActivity extends Activity {
 
     public static final String SETTINGS_PLAYER = "goindol";
@@ -65,6 +67,7 @@ public class SplashActivity extends Activity {
         }.getType();
         String json = gson.toJson(arrayList, listType);
         SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(SETTINGS_DATE,"");
         editor.putString(SETTINGS_PLAYER, json); // JSON으로 변환한 객체를 저장한다.
         editor.commit(); //완료한다.
     }

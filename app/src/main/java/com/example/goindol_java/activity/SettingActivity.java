@@ -2,12 +2,12 @@ package com.example.goindol_java.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +20,20 @@ import com.example.goindol_java.popup.InitPopupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tsongkha.spinnerdatepicker.DatePicker;
+import com.tsongkha.spinnerdatepicker.DatePickerDialog;
+import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public static final String SETTINGS_DATE = "setting";
 
     private DrawerLayout drawerLayout;
     private View toolbar;
@@ -36,6 +42,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private ImageButton navi_cancel;
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
+    private TextView toolbarText;
 
     private Button settingButton;
     private Button settingYearButton;
@@ -61,29 +68,36 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private Type listType;
     private String name;
 
+    private SpinnerDatePickerDialogBuilder builder;
+    private Calendar cal = Calendar.getInstance();
+
+    private String exam;
+    private int year;
+    private int month;
+    private int days;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        settingapp_bar();
-        navi_header_click();
-        init();
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER, null);
+        exam = prefs.getString(SETTINGS_DATE,"");
         listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         list = gson.fromJson(name, listType);
-
+        settingapp_bar();
+        navi_header_click();
+        init();
+        if(!exam.equals("")) {
+            settingYearButton.setText(exam.split("-")[0]);
+            settingMonthButton.setText(exam.split("-")[1]);
+            settingDayButton.setText(exam.split("-")[2]);
+            year = Integer.parseInt(exam.split("-")[0]);
+            month = Integer.parseInt(exam.split("-")[1]);
+            days = Integer.parseInt(exam.split("-")[2]);
+        }
         settingButton.setOnClickListener(this);
-            /*String[] yearArray = getResources().getStringArray(R.array.year);
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_dropdown_item, yearArray);
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            //settingYearSpinner.setAdapter(arrayAdapter);
-            settingYearSpinner.setSelection(0);
-            String[] monthArray = getResources().getStringArray(R.array.month);
-            ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_dropdown_item, monthArray);
-            settingMonthSpinner.setAdapter(monthAdapter);
-            settingMonthSpinner.setSelection(0);*/
     }
 
     private void init() {
@@ -100,6 +114,33 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setting_button:
+                exam = String.format("%d-%02d-%02d",year,month,days);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(SETTINGS_DATE,exam);
+                editor.commit();
+                finish();
+                break;
+            case R.id.setting_year:
+            case R.id.setting_month:
+            case R.id.setting_day:
+                if(exam.equals("")) {
+                    year = cal.get(cal.YEAR);
+                    month = cal.get(cal.MONTH)+1;
+                    days = cal.get(cal.DATE);
+                }
+                builder = new SpinnerDatePickerDialogBuilder();
+                builder.context(this).defaultDate(year,month-1,days).callback(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int years, int monthOfYear, int dayOfMonth) {
+                        String settingDate = String.format("%d-%02d-%02d",years,(monthOfYear+1),dayOfMonth);
+                        year = years;
+                        month = monthOfYear+1;
+                        days = dayOfMonth;
+                        settingYearButton.setText(String.valueOf(years));
+                        settingMonthButton.setText(settingDate.split("-")[1]);
+                        settingDayButton.setText(settingDate.split("-")[2]);
+                    }
+                }).build().show();
                 break;
         }
     }
@@ -110,9 +151,18 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
+        toolbarText = toolbar.findViewById(R.id.toolbar_textView);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.setting_drawerlayout);
         navigationView = findViewById(R.id.setting_navigation);
+
+        if(!exam.equals("")) {
+            toolbarText.setText("시험 " + exam.split("-")[0] + "년 " + exam.split("-")[1] + "월 " + exam.split("-")[2] + "일");
+            toolbarText.setTextColor(Color.parseColor("#3698a0"));
+        } else{
+            toolbarText.setText("시험 일정을 기록해 보세요.");
+            toolbarText.setTextColor(Color.parseColor("#e65555"));
+        }
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
