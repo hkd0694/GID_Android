@@ -53,31 +53,46 @@
             android:gravity="center"
             >
 
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:id="@+id/setting_year"
+                android:layout_marginRight="6dp"
+                android:background="@color/pale_teal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#2b2e38"
+                android:textAlignment="center"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                />
 
-            <Spinner
-            android:layout_width="80dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="6dp"
-            android:entries="@array/year"
-            android:background="@color/pale_teal"
-            android:textAlignment="center"
-            android:id="@+id/setting_year"
-            >
 
-        </Spinner>
+            <!--<Spinner
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:background="@color/pale_teal"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:id="@+id/setting_year"
+                >
+
+        </Spinner>-->
 
             <TextView
                 android:layout_width="13dp"
                 android:layout_height="17dp"
                 android:text="년"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginRight="13dp"
                 android:textStyle="normal"
                 android:textColor="@color/dark_blue_grey"
                 />
 
-            <Spinner
+            <!--<Spinner
                 android:layout_width="64dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="6dp"
@@ -86,21 +101,50 @@
                 android:entries="@array/month"
                 android:id="@+id/setting_month"
                 >
+            </Spinner>-->
 
-            </Spinner>
+            <Button
+                android:layout_width="64dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="6dp"
+                android:id="@+id/setting_month"
+                android:background="@color/pale_teal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#2b2e38"
+                android:textAlignment="center"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                />
 
             <TextView
                 android:layout_width="13dp"
                 android:layout_height="17dp"
                 android:text="월"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginRight="13dp"
                 android:textStyle="normal"
                 android:textColor="@color/dark_blue_grey"
                 />
 
-            <Spinner
+            <Button
+                android:layout_width="64dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="6dp"
+                android:id="@+id/setting_day"
+                android:background="@color/pale_teal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#2b2e38"
+                android:textAlignment="center"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                />
+
+            <!--<Spinner
                 android:layout_width="64dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="6dp"
@@ -109,13 +153,13 @@
                 android:id="@+id/setting_day"
                 >
 
-            </Spinner>
+            </Spinner>-->
 
             <TextView
                 android:layout_width="13dp"
                 android:layout_height="17dp"
                 android:text="일"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginRight="13dp"
                 android:textStyle="normal"

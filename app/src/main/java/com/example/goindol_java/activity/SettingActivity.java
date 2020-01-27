@@ -21,7 +21,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +38,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private ImageButton toolbar_cancel;
 
     private Button settingButton;
-    private Spinner settingYearSpinner;
-    private Spinner settingMonthSpinner;
-    private Spinner settingDaySpinner;
+    private Button settingYearButton;
+    private Button settingMonthButton;
+    private Button settingDayButton;
 
     private Intent intent;
 
@@ -74,32 +73,27 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         list = gson.fromJson(name, listType);
-        try {
-            Field popup = Spinner.class.getDeclaredField("mPopup");
-            popup.setAccessible(true);
-            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(settingYearSpinner);
-            popupWindow.setHeight(90);
-        } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
 
-        }
         settingButton.setOnClickListener(this);
-        String[] yearArray = getResources().getStringArray(R.array.year);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_dropdown_item, yearArray);
-        //arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        settingYearSpinner.setAdapter(arrayAdapter);
-        settingYearSpinner.setSelection(0);
-        String[] monthArray = getResources().getStringArray(R.array.month);
-        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_dropdown_item, monthArray);
-        settingMonthSpinner.setAdapter(monthAdapter);
-        settingMonthSpinner.setSelection(0);
-
+            /*String[] yearArray = getResources().getStringArray(R.array.year);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_dropdown_item, yearArray);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //settingYearSpinner.setAdapter(arrayAdapter);
+            settingYearSpinner.setSelection(0);
+            String[] monthArray = getResources().getStringArray(R.array.month);
+            ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_dropdown_item, monthArray);
+            settingMonthSpinner.setAdapter(monthAdapter);
+            settingMonthSpinner.setSelection(0);*/
     }
 
     private void init() {
         settingButton = findViewById(R.id.setting_button);
-        settingYearSpinner = findViewById(R.id.setting_year);
-        settingMonthSpinner = findViewById(R.id.setting_month);
-        settingDaySpinner = findViewById(R.id.setting_day);
+        settingYearButton = findViewById(R.id.setting_year);
+        settingMonthButton = findViewById(R.id.setting_month);
+        settingDayButton = findViewById(R.id.setting_day);
+        settingYearButton.setOnClickListener(this);
+        settingMonthButton.setOnClickListener(this);
+        settingDayButton.setOnClickListener(this);
     }
 
     @Override
