@@ -2,6 +2,7 @@ package com.example.goindol_java.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.goindol_java.activity.SettingActivity.SETTINGS_DATE;
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 
@@ -70,6 +72,9 @@ public class ArrangeActivity extends AppCompatActivity {
     private Type listType;
     private String name;
 
+    private String exam;
+    private TextView toolbarText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +89,18 @@ public class ArrangeActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER, null);
+        exam = prefs.getString(SETTINGS_DATE,"");
         listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         list = gson.fromJson(name, listType);
+
+        if(!exam.equals("")) {
+            toolbarText.setText("시험 " + exam.split("-")[0] + "년 " + exam.split("-")[1] + "월 " + exam.split("-")[2] + "일");
+            toolbarText.setTextColor(Color.parseColor("#3698a0"));
+        } else{
+            toolbarText.setText("시험 일정을 기록해 보세요.");
+            toolbarText.setTextColor(Color.parseColor("#e65555"));
+        }
 
         // 저장되어 있는 값을 가져옴..
         arrangeData = list.get(sheet_number - 1).getArrangeData();
@@ -146,6 +160,7 @@ public class ArrangeActivity extends AppCompatActivity {
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.arr_drawerlayout);
         navigationView = findViewById(R.id.arr_navigation);
+        toolbarText = toolbar.findViewById(R.id.toolbar_textView);
 
         toolbar_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,6 +2,7 @@ package com.example.goindol_java.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.goindol_java.activity.SettingActivity.SETTINGS_DATE;
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 public class EndActivity extends AppCompatActivity {
@@ -63,6 +65,9 @@ public class EndActivity extends AppCompatActivity {
     private Type listType;
     private String name1;
 
+    private String exam;
+    private TextView toolbarText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +89,18 @@ public class EndActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER, null);
+        exam = prefs.getString(SETTINGS_DATE,"");
         listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         list = gson.fromJson(name1, listType);
+
+        if(!exam.equals("")) {
+            toolbarText.setText("시험 " + exam.split("-")[0] + "년 " + exam.split("-")[1] + "월 " + exam.split("-")[2] + "일");
+            toolbarText.setTextColor(Color.parseColor("#3698a0"));
+        } else{
+            toolbarText.setText("시험 일정을 기록해 보세요.");
+            toolbarText.setTextColor(Color.parseColor("#e65555"));
+        }
         //메인화면 돌아가기 버튼을 클릭 시 발생하는 리스너로
         //Activitiy Stack 안에 있는 MainActivity 위에 있는 Activity를 모두 없애고 MainActivity를 다시 불러서 재사용 한다.
         end_button.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +127,7 @@ public class EndActivity extends AppCompatActivity {
         btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
+        toolbarText = toolbar.findViewById(R.id.toolbar_textView);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.end_drawerlayout);
         navigationView = findViewById(R.id.end_navigation);

@@ -3,6 +3,7 @@ package com.example.goindol_java.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.goindol_java.activity.SettingActivity.SETTINGS_DATE;
 
 public class LearnActivity extends AppCompatActivity {
 
@@ -72,6 +75,9 @@ public class LearnActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private Period period;
     private String data;
+
+    private String exam;
+    private TextView toolbarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +124,7 @@ public class LearnActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.learn_toolbar);
         btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
+        toolbarText = toolbar.findViewById(R.id.toolbar_textView);
         toolbar_cancel.setVisibility(View.VISIBLE);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.learn_drawerlayout);
@@ -147,6 +154,14 @@ public class LearnActivity extends AppCompatActivity {
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         data = prefs.getString(SplashActivity.SETTINGS_PLAYER, null);
+        exam = prefs.getString(SETTINGS_DATE,"");
+        if(!exam.equals("")) {
+            toolbarText.setText("시험 " + exam.split("-")[0] + "년 " + exam.split("-")[1] + "월 " + exam.split("-")[2] + "일");
+            toolbarText.setTextColor(Color.parseColor("#3698a0"));
+        } else{
+            toolbarText.setText("시험 일정을 기록해 보세요.");
+            toolbarText.setTextColor(Color.parseColor("#e65555"));
+        }
         Type listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         // 변환

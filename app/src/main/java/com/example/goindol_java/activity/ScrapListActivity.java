@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.goindol_java.activity.SettingActivity.SETTINGS_DATE;
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 public class ScrapListActivity extends AppCompatActivity implements View.OnClickListener {
@@ -102,6 +103,9 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     private int index;
     private String area;
 
+    private String exam;
+    private TextView toolbarText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +118,14 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
         scrapList_text.setText(area + " 스크랩한 문제를 다시 풀면서\n" + "한번 더 확인해 보세요.");
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER, null);
+        exam = prefs.getString(SETTINGS_DATE,"");
+        if(!exam.equals("")) {
+            toolbarText.setText("시험 " + exam.split("-")[0] + "년 " + exam.split("-")[1] + "월 " + exam.split("-")[2] + "일");
+            toolbarText.setTextColor(Color.parseColor("#3698a0"));
+        } else{
+            toolbarText.setText("시험 일정을 기록해 보세요.");
+            toolbarText.setTextColor(Color.parseColor("#e65555"));
+        }
         listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         list = gson.fromJson(name, listType);
@@ -473,6 +485,7 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
         btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
+        toolbarText = toolbar.findViewById(R.id.toolbar_textView);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.scrapList_drawerlayout);
         navigationView = findViewById(R.id.scrapList_navigation);

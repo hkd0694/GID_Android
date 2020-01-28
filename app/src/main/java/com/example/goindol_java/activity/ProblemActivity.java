@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.goindol_java.activity.SettingActivity.SETTINGS_DATE;
 import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 
 public class ProblemActivity extends AppCompatActivity {
@@ -93,6 +95,9 @@ public class ProblemActivity extends AppCompatActivity {
     private List<Period> list = new ArrayList<>();
     private List<ExcelProblem> excelProblems = new ArrayList<>();
     private Type listType;
+
+    private String exam;
+    private TextView toolbarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,6 +201,14 @@ public class ProblemActivity extends AppCompatActivity {
     protected void onResume() {
         prefs = getSharedPreferences("shared", MODE_PRIVATE);
         name = prefs.getString(SETTINGS_PLAYER, null);
+        exam = prefs.getString(SETTINGS_DATE,"");
+        if(!exam.equals("")) {
+            toolbarText.setText("시험 " + exam.split("-")[0] + "년 " + exam.split("-")[1] + "월 " + exam.split("-")[2] + "일");
+            toolbarText.setTextColor(Color.parseColor("#3698a0"));
+        } else{
+            toolbarText.setText("시험 일정을 기록해 보세요.");
+            toolbarText.setTextColor(Color.parseColor("#e65555"));
+        }
         listType = new TypeToken<ArrayList<Period>>() {
         }.getType();
         list = gson.fromJson(name, listType);
@@ -288,6 +301,7 @@ public class ProblemActivity extends AppCompatActivity {
         btnShowNavigationDrawer = toolbar.findViewById(R.id.navibutton);
         toolbar_cancel = toolbar.findViewById(R.id.toolbar_cancel);
         toolbar_cancel.setVisibility(View.VISIBLE);
+        toolbarText = toolbar.findViewById(R.id.toolbar_textView);
         btnShowNavigationDrawer.setOnClickListener(onClickListener);
         drawerLayout = findViewById(R.id.pro_drawlayout);
         navigationView = findViewById(R.id.pro_navigation);
