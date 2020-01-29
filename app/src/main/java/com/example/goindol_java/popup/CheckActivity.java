@@ -44,7 +44,7 @@ import static com.example.goindol_java.activity.SplashActivity.SETTINGS_PLAYER;
 //Popup식으로 화면에 띄우기 때문에 Activity를 상속한다.
 public class CheckActivity extends Activity {
 
-    private ImageButton check_script;
+    private ImageView check_script;
     private TextView check_answer;
     private ImageView check_image;
     private ImageView check_cry;
@@ -105,16 +105,16 @@ public class CheckActivity extends Activity {
             e.printStackTrace();
         }
         if (list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).isScript())
-            check_script.setImageResource(R.drawable.star_active_darkblue);
+            check_script.setImageResource(R.drawable.icon_star_active_darkblue_30_x_30);
         else {
-            check_script.setImageResource(R.drawable.star_normal_darkblue);
+            check_script.setImageResource(R.drawable.icon_star_normal_darkblue_30_x_30);
         }
 
         check_script.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Drawable temp = check_script.getDrawable();
-                Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
+                Drawable temp1 = getDrawable(R.drawable.icon_star_normal_darkblue_30_x_30);
                 Bitmap tmpBitmap = ((BitmapDrawable) temp).getBitmap();
                 Bitmap tmpBitmap1 = ((BitmapDrawable) temp1).getBitmap();
                 if (tmpBitmap.equals(tmpBitmap1)) {
@@ -122,13 +122,13 @@ public class CheckActivity extends Activity {
                     int add_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(add_count + 1);
                     list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() + 1);
-                    check_script.setImageResource(R.drawable.star_active_darkblue);
+                    check_script.setImageResource(R.drawable.icon_star_active_darkblue_30_x_30);
                 } else {
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(false);
                     int delete_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(delete_count - 1);
                     list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() - 1);
-                    check_script.setImageResource(R.drawable.star_normal_darkblue);
+                    check_script.setImageResource(R.drawable.icon_star_normal_darkblue_30_x_30);
                 }
                 gson = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);

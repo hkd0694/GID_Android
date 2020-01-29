@@ -40,7 +40,7 @@ public class InitPopupActivity extends Activity {
     private List<ArrangeData> arrangeData = new ArrayList<>();
     private List<ScriptData> scriptData = new ArrayList<>();
     private Type listType;
-
+    private View view;
 
     private String name;
 
@@ -51,8 +51,8 @@ public class InitPopupActivity extends Activity {
         setContentView(R.layout.activity_init_popup);
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
         init();
-
-        init_imageView.setOnClickListener(new View.OnClickListener() {
+        view = findViewById(R.id.popup_init_view);
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

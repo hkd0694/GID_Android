@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -214,7 +215,8 @@ public class ProblemActivity extends AppCompatActivity {
         list = gson.fromJson(name, listType);
         seleted = 0;
         //만약 마지막 번호가 2가 아닌 다른 값이 저장되어 있을 경우 사용자가 풀었던 번호가 있다는 뜻이므로 row_first를 마지막 번호로 넣어준다.
-        if (list.get(sheet_index - 1).getIndex() != 1) {
+        //ScrapActivity에서 넘어올경우 다음 문제로 안넘어감!!! 수정 필요
+        if (list.get(sheet_index - 1).getIndex() != 1 && getIntent().getStringExtra(MainActivity.period_data).split(",").length != 3) {
             row_first = list.get(sheet_index - 1).getIndex();
         } else if (getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
             row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2]);

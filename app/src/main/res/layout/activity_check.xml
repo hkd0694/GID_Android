@@ -13,14 +13,14 @@
         android:gravity="right"
         >
         
-        <ImageButton
+        <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/check_script"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/star_active_darkblue"
+            android:src="@drawable/icon_star_active_darkblue_30_x_30"
             />
 
     </LinearLayout>
