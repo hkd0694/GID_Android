@@ -44,6 +44,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private ImageButton toolbar_cancel;
     private TextView toolbarText;
 
+
     private Button settingButton;
     private Button settingYearButton;
     private Button settingMonthButton;

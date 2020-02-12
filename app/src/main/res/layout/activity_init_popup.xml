@@ -35,8 +35,8 @@
             >
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/cancel_light"
                 android:id="@+id/initpopup_close"
                 />
@@ -47,11 +47,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:weightSum="2"
+        >
 
         <Button
-            android:layout_width="152dp"
-            android:layout_height="64dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="뒤로 가기"
             android:textSize="16sp"
             android:textColor="@color/dark_blue_grey"
@@ -62,8 +65,9 @@
             />
 
         <Button
-            android:layout_width="152dp"
-            android:layout_height="64dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="초기화 진행"
             android:textSize="16sp"
             android:background="@drawable/button_radius"
