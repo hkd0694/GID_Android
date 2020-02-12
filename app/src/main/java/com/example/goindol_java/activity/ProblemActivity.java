@@ -100,6 +100,8 @@ public class ProblemActivity extends AppCompatActivity {
     private String exam;
     private TextView toolbarText;
 
+    private boolean check  = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,7 +221,12 @@ public class ProblemActivity extends AppCompatActivity {
         if (list.get(sheet_index - 1).getIndex() != 1 && getIntent().getStringExtra(MainActivity.period_data).split(",").length != 3) {
             row_first = list.get(sheet_index - 1).getIndex();
         } else if (getIntent().getStringExtra(MainActivity.period_data).split(",").length == 3) {
-            row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2]);
+            if(check) {
+                row_first = Integer.parseInt(getIntent().getStringExtra(MainActivity.period_data).split(",")[2]);
+                check = false;
+            } else{
+                row_first = list.get(sheet_index - 1).getIndex();
+            }
         } else {
             row_first = 1;
         }
