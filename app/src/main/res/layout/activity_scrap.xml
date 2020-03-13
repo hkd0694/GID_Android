@@ -32,7 +32,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/scrap_text"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif-medium"
@@ -83,7 +83,7 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/scrap_navigation"
         android:layout_gravity="end"

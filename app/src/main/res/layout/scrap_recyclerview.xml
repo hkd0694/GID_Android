@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="331dp"
+    android:layout_width="wrap_content"
     android:id="@+id/script_relative"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
@@ -48,10 +48,10 @@
         >
 
         <TextView
-            android:layout_width="228dp"
+            android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:id="@+id/script_arrange"
-            android:textSize="16sp"
+            android:textSize="13dp"
             android:textColor="@color/dark_blue_grey"
             android:text="아 이게 뭐야"
             android:fontFamily="sans-serif-medium"

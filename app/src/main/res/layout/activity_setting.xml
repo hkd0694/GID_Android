@@ -44,25 +44,24 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="46dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:orientation="horizontal"
             android:gravity="center"
             >
 
             <Button
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:id="@+id/setting_year"
                 android:layout_marginRight="6dp"
                 android:background="@color/pale_teal"
-                android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:layout_gravity="center"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textColor="#2b2e38"
                 android:textAlignment="center"
                 android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
@@ -85,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="년"
-                android:textSize="16sp"
+                android:textSize="14dp"
                 android:fontFamily="sans-serif"
                 android:layout_marginRight="13dp"
                 android:textStyle="normal"
@@ -104,15 +103,14 @@
             </Spinner>-->
 
             <Button
-                android:layout_width="64dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginRight="6dp"
                 android:id="@+id/setting_month"
                 android:background="@color/pale_teal"
-                android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:layout_gravity="center"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textColor="#2b2e38"
                 android:textAlignment="center"
                 android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
@@ -122,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="월"
-                android:textSize="16sp"
+                android:textSize="14dp"
                 android:fontFamily="sans-serif"
                 android:layout_marginRight="13dp"
                 android:textStyle="normal"
@@ -130,12 +128,11 @@
                 />
 
             <Button
-                android:layout_width="64dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginRight="6dp"
                 android:id="@+id/setting_day"
                 android:background="@color/pale_teal"
-                android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:layout_gravity="center"
                 android:textSize="14sp"
@@ -159,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="일"
-                android:textSize="16sp"
+                android:textSize="14dp"
                 android:fontFamily="sans-serif"
                 android:layout_marginRight="13dp"
                 android:textStyle="normal"
@@ -179,7 +176,7 @@
 
             <Button
                 android:layout_width="200dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/setting_button"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"

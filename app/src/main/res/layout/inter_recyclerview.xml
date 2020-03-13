@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="331dp"
+    android:layout_width="wrap_content"
     android:id="@+id/interview_relative"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
-            android:textSize="11sp"
+            android:textSize="10dp"
             android:textColor="@color/white"
             />
 
@@ -48,7 +48,7 @@
         >
 
         <TextView
-            android:layout_width="228dp"
+            android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:id="@+id/interview_arrange"
             android:textSize="16sp"

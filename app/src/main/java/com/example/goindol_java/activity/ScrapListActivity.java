@@ -35,6 +35,7 @@ public class ScrapListActivity extends AppCompatActivity implements View.OnClick
     private NavigationView navigationView;
     private ImageButton btnShowNavigationDrawer;
     private ImageButton navi_cancel;
+
     private ImageButton navi_home;
     private ImageButton toolbar_cancel;
 
