@@ -71,6 +71,8 @@ public class InitPopupActivity extends Activity {
             public void onClick(View v) {
                 for (int i = 0; i < list.size(); i++) {
                     // 초기화 부분
+                    scriptData = new ArrayList<>();
+                    for (int j = 1; j <= 40; j++) scriptData.add(new ScriptData(String.valueOf(j), 0, false));
                     list.get(i).setPeriod_data(excelProblems);
                     list.get(i).setIndex(1);
                     list.get(i).setArrangeData(arrangeData);
@@ -78,6 +80,7 @@ public class InitPopupActivity extends Activity {
                     list.get(i).setScriptTotalCount(0);
                     list.get(i).setMiddleTotalCount(0);
                 }
+
                 Gson gson1 = new GsonBuilder().create();
                 String json = gson1.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();

@@ -104,20 +104,51 @@ public class CheckActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).isScript())
-            check_script.setImageResource(R.drawable.icon_star_active_darkblue_30_x_30);
+
+        /*if (list.get(sheet_index - 1).getScriptData().size() == 0)
+            pro_script.setImageResource(R.drawable.star_normal_darkblue);
         else {
+            if (list.get(sheet_index - 1).getScriptData().get(row_first - 1).isScript()) {
+                pro_script.setImageResource(R.drawable.star_active_darkblue);
+            } else {
+                pro_script.setImageResource(R.drawable.star_normal_darkblue);
+            }
+        }*/
+
+        if(list.get(sheet_indexs -1).getScriptData().size() == 0) {
             check_script.setImageResource(R.drawable.icon_star_normal_darkblue_30_x_30);
+        } else{
+            if (list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).isScript())
+                check_script.setImageResource(R.drawable.icon_star_active_darkblue_30_x_30);
+            else {
+                check_script.setImageResource(R.drawable.icon_star_normal_darkblue_30_x_30);
+            }
         }
+
 
         check_script.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable temp = check_script.getDrawable();
+                /*Drawable temp = check_script.getDrawable();
                 Drawable temp1 = getDrawable(R.drawable.icon_star_normal_darkblue_30_x_30);
                 Bitmap tmpBitmap = ((BitmapDrawable) temp).getBitmap();
-                Bitmap tmpBitmap1 = ((BitmapDrawable) temp1).getBitmap();
-                if (tmpBitmap.equals(tmpBitmap1)) {
+                Bitmap tmpBitmap1 = ((BitmapDrawable) temp1).getBitmap();*/
+
+                if(!list.get(sheet_indexs - 1).getScriptData().get(row_number -1).isScript()) {
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(true);
+                    int add_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(add_count + 1);
+                    list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() + 1);
+                    check_script.setImageResource(R.drawable.icon_star_active_darkblue_30_x_30);
+                } else{
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(false);
+                    int delete_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
+                    list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(delete_count - 1);
+                    list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() - 1);
+                    check_script.setImageResource(R.drawable.icon_star_normal_darkblue_30_x_30);
+                }
+
+                /*if (tmpBitmap.equals(tmpBitmap1)) {
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setScript(true);
                     int add_count = list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).getCount();
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(add_count + 1);
@@ -129,7 +160,7 @@ public class CheckActivity extends Activity {
                     list.get(sheet_indexs - 1).getScriptData().get(row_number - 1).setCount(delete_count - 1);
                     list.get(sheet_indexs - 1).setScriptTotalCount(list.get(sheet_indexs-1).getScriptTotalCount() - 1);
                     check_script.setImageResource(R.drawable.icon_star_normal_darkblue_30_x_30);
-                }
+                }*/
                 gson = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();

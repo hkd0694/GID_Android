@@ -176,7 +176,8 @@ public class ProblemActivity extends AppCompatActivity {
                 Drawable temp1 = getDrawable(R.drawable.star_normal_darkblue);
                 Bitmap tmpBitmap = ((BitmapDrawable) temp).getBitmap();
                 Bitmap tmpBitmap1 = ((BitmapDrawable) temp1).getBitmap();
-                if (tmpBitmap.equals(tmpBitmap1)) {
+
+                if(!list.get(sheet_index - 1).getScriptData().get(row_first - 1).isScript()) {
                     list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(true);
                     int add_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
                     list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(add_count + 1);
@@ -189,6 +190,20 @@ public class ProblemActivity extends AppCompatActivity {
                     list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index - 1).getScriptTotalCount() - 1);
                     pro_script.setImageResource(R.drawable.star_normal_darkblue);
                 }
+
+                /*if (tmpBitmap.equals(tmpBitmap1)) {
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(true);
+                    int add_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(add_count + 1);
+                    list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index - 1).getScriptTotalCount() + 1);
+                    pro_script.setImageResource(R.drawable.star_active_darkblue);
+                } else {
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setScript(false);
+                    int delete_count = list.get(sheet_index - 1).getScriptData().get(row_first - 1).getCount();
+                    list.get(sheet_index - 1).getScriptData().get(row_first - 1).setCount(delete_count - 1);
+                    list.get(sheet_index - 1).setScriptTotalCount(list.get(sheet_index - 1).getScriptTotalCount() - 1);
+                    pro_script.setImageResource(R.drawable.star_normal_darkblue);
+                }*/
                 gson = new GsonBuilder().create();
                 String json = gson.toJson(list, listType);
                 SharedPreferences.Editor editor = prefs.edit();
