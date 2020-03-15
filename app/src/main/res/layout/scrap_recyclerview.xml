@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:id="@+id/script_arrange"
-            android:textSize="13dp"
+            android:textSize="14dp"
             android:textColor="@color/dark_blue_grey"
             android:text="아 이게 뭐야"
             android:fontFamily="sans-serif-medium"

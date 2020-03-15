@@ -29,14 +29,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
-            android:gravity="center"
+            android:gravity="left"
             >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:id="@+id/recyclerview_arrange"
-                android:textSize="16sp"
+                android:textSize="14dp"
                 android:textColor="@color/dark_blue_grey"
                 android:text="아 이게 뭐야"
                 android:fontFamily="sans-serif-medium"

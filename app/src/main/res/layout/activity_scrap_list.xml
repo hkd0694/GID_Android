@@ -24,16 +24,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"
             >
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/scrapList_text"
-                android:textSize="18sp"
+                android:textSize="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="normal"
                 android:textColor="@color/dark_blue_grey"
@@ -50,17 +50,24 @@
             android:layout_marginLeft="50dp"
             android:layout_gravity="center"
             android:layout_marginRight="50dp"
-            android:columnCount="5"
+            android:columnCount="1"
             android:rowCount="8"
             >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="18dp"
-                android:layout_marginBottom="20dp"
                 android:id="@+id/grid_button1"
                 android:enabled="false"
+                android:layout_weight="1"
                 android:text="1"
                 android:textSize="18sp"
                 android:textColor="@color/greyblue"
@@ -68,10 +75,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="18dp"
                 android:id="@+id/grid_button2"
+                android:layout_weight="1"
                 android:text="2"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -80,10 +88,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="18dp"
                 android:id="@+id/grid_button3"
+                android:layout_weight="1"
                 android:text="3"
                 android:textSize="18sp"
                 android:enabled="false"
@@ -92,10 +101,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="18dp"
                 android:id="@+id/grid_button4"
+                android:layout_weight="1"
                 android:text="4"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -104,9 +114,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/grid_button5"
+                android:layout_weight="1"
+                android:layout_marginBottom="9dp"
                 android:text="5"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -114,11 +126,22 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button6"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:text="6"
                 android:textSize="18sp"
@@ -127,11 +150,12 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
                 android:id="@+id/grid_button7"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:text="7"
                 android:textSize="18sp"
@@ -140,10 +164,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button8"
                 android:enabled="false"
                 android:text="8"
@@ -153,12 +178,13 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
                 android:enabled="false"
                 android:id="@+id/grid_button9"
+                android:layout_weight="1"
                 android:text="9"
                 android:textSize="18sp"
                 android:textColor="@color/greyblue"
@@ -166,10 +192,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/grid_button10"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:text="10"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -177,12 +204,21 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button11"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:text="11"
                 android:textSize="18sp"
@@ -191,12 +227,13 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
                 android:enabled="false"
                 android:id="@+id/grid_button12"
+                android:layout_weight="1"
                 android:text="12"
                 android:textSize="18sp"
                 android:textColor="@color/greyblue"
@@ -204,10 +241,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:enabled="false"
+                android:layout_weight="1"
                 android:layout_marginBottom="9dp"
                 android:id="@+id/grid_button13"
                 android:text="13"
@@ -217,11 +255,12 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
                 android:enabled="false"
+                android:layout_weight="1"
                 android:id="@+id/grid_button14"
                 android:text="14"
                 android:textSize="18sp"
@@ -230,10 +269,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/grid_button15"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:text="15"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -241,11 +281,20 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button16"
                 android:enabled="false"
                 android:text="16"
@@ -255,10 +304,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button17"
                 android:enabled="false"
                 android:text="17"
@@ -268,10 +318,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button18"
                 android:enabled="false"
                 android:text="18"
@@ -281,10 +332,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button19"
                 android:enabled="false"
                 android:text="19"
@@ -294,9 +346,10 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/grid_button20"
+                android:layout_weight="1"
                 android:layout_marginBottom="9dp"
                 android:text="20"
                 android:enabled="false"
@@ -305,12 +358,21 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button21"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:text="21"
                 android:textSize="18sp"
@@ -319,11 +381,12 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
                 android:id="@+id/grid_button22"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:text="22"
                 android:textSize="18sp"
@@ -332,10 +395,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button23"
                 android:text="23"
                 android:enabled="false"
@@ -345,10 +409,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button24"
                 android:text="24"
                 android:enabled="false"
@@ -358,9 +423,10 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/grid_button25"
+                android:layout_weight="1"
                 android:layout_marginBottom="9dp"
                 android:text="25"
                 android:textSize="18sp"
@@ -369,12 +435,21 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button26"
+                android:layout_weight="1"
                 android:text="26"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -383,10 +458,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button27"
                 android:text="27"
                 android:textSize="18sp"
@@ -396,10 +472,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button28"
                 android:text="28"
                 android:enabled="false"
@@ -409,10 +486,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button29"
                 android:text="29"
                 android:textSize="18sp"
@@ -422,8 +500,9 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:id="@+id/grid_button30"
                 android:text="30"
                 android:textSize="18sp"
@@ -432,11 +511,20 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button31"
                 android:text="31"
                 android:enabled="false"
@@ -446,10 +534,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button32"
                 android:text="32"
                 android:textSize="18sp"
@@ -459,10 +548,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button33"
                 android:text="33"
                 android:enabled="false"
@@ -472,10 +562,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="9dp"
+                android:layout_weight="1"
                 android:id="@+id/grid_button34"
                 android:text="34"
                 android:textSize="18sp"
@@ -485,9 +576,10 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/grid_button35"
+                android:layout_weight="1"
                 android:layout_marginBottom="9dp"
                 android:text="35"
                 android:textSize="18sp"
@@ -496,11 +588,21 @@
                 android:background="@drawable/grid_button_radius"
                 />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                >
+
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button36"
+                android:layout_weight="1"
                 android:text="36"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -509,10 +611,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button37"
+                android:layout_weight="1"
                 android:text="37"
                 android:textSize="18sp"
                 android:textColor="@color/greyblue"
@@ -521,10 +624,11 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
                 android:id="@+id/grid_button38"
+                android:layout_weight="1"
                 android:text="38"
                 android:enabled="false"
                 android:textSize="18sp"
@@ -533,9 +637,10 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:id="@+id/grid_button39"
                 android:text="39"
@@ -545,15 +650,18 @@
                 />
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="47dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:enabled="false"
+                android:layout_weight="1"
                 android:id="@+id/grid_button40"
                 android:text="40"
                 android:textSize="18sp"
                 android:textColor="@color/greyblue"
                 android:background="@drawable/grid_button_radius"
                 />
+
+            </LinearLayout>
 
         </GridLayout>
 
@@ -584,7 +692,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="39dp"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@drawable/android"
                 />
